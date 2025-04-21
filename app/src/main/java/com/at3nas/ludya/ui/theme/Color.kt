@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 val Red700 = Color(0xFF904a49) // primary color
 val Blue700 = Color(0xFF226488) // secondary color
 val Green700 = Color(0xFF626118) // tertiary color
+val BgColor = Color(0xFFFFF5F4)
 
 // DARK //
 val Purple80 = Color(0xFFD0BCFF)
