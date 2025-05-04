@@ -1,4 +1,4 @@
-package com.at3nas.ludya.ui.theme
+package com.at3nas.ludya.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

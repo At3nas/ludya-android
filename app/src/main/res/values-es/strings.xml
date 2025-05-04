@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Ludya</string>
+    <!-- Welcome -->
+    <string name="welcome_title">¡Bienvenido a Ludya!</string>
+    <string name="welcome_description">Ludifica tu aprendizaje y crea aventuras educativas</string>
+
     <!-- Register -->
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+
+    <!-- Auth Related Words -->
+    <string name="signup">Registrarse</string>
+    <string name="register">Registrarse</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="signup_google">Registrarse con Google</string>
+
+    <string name="submit">Enviar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
 </resources>

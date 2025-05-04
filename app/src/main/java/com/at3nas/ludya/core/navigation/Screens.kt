@@ -7,3 +7,9 @@ object Welcome
 
 @Serializable
 object Register
+
+@Serializable
+object Login
+
+@Serializable
+object Home

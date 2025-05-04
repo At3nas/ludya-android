@@ -1,8 +1,6 @@
-package com.at3nas.ludya.ui.components
+package com.at3nas.ludya.presentation.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -11,18 +9,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import com.at3nas.ludya.ui.theme.BgColor
-import com.at3nas.ludya.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.theme.BgColor
+import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
 
 @Composable
 fun FormInput(
     label: String,
     value: String,
     leadingIcon: ImageVector,
-    isPassword: Boolean
+    isPassword: Boolean,
+    onValueChange: (String) -> Unit
 ) {
     // Determines if the input is a password or not //
     val inputVisualTransformation: VisualTransformation = if (isPassword) {
@@ -34,11 +32,11 @@ fun FormInput(
     // TextField //
     OutlinedTextField(
         label = { Text(label) },
-        value = TextFieldValue(value),
+        value = value,
         leadingIcon = { Icon(leadingIcon, null) },
         visualTransformation = inputVisualTransformation,
-        onValueChange = {},
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        onValueChange = onValueChange
     )
 }
 
@@ -48,7 +46,7 @@ fun FormInputPreview() {
     LudyaTheme {
         Surface(
             content = {
-                FormInput("Email", "", Icons.Filled.Email, false)
+                //FormInput("Email", "", Icons.Filled.Email, false)
             },
             color = BgColor
         )

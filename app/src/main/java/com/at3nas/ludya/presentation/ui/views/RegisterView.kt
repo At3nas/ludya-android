@@ -1,4 +1,4 @@
-package com.at3nas.ludya.ui.views
+package com.at3nas.ludya.presentation.ui.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,6 +7,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -14,18 +19,35 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.at3nas.ludya.R
-import com.at3nas.ludya.ui.components.ActionButton
-import com.at3nas.ludya.ui.components.ActionButtonIcon
-import com.at3nas.ludya.ui.components.FormInput
-import com.at3nas.ludya.ui.components.LudyaSurface
-import com.at3nas.ludya.ui.components.SplashHeader
-import com.at3nas.ludya.ui.components.Type
-import com.at3nas.ludya.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.components.ActionButton
+import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
+import com.at3nas.ludya.presentation.ui.components.FormInput
+import com.at3nas.ludya.presentation.ui.components.LudyaSurface
+import com.at3nas.ludya.presentation.ui.components.SplashHeader
+import com.at3nas.ludya.presentation.ui.components.Type
+import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.viewmodels.AuthState
+import com.at3nas.ludya.presentation.ui.viewmodels.AuthViewModel
 
 
 // View | Register //
 @Composable
-fun RegisterView() {
+fun RegisterView(authViewModel: AuthViewModel) {
+    // VARIABLES //
+    var email by remember {
+        mutableStateOf("")
+    }
+
+    var password by remember {
+        mutableStateOf("")
+    }
+
+    var confirmPassword by remember {
+        mutableStateOf("")
+    }
+
+    val authState = authViewModel.authState.observeAsState()
+
     LudyaSurface {
         Column(
             content = {
@@ -43,23 +65,32 @@ fun RegisterView() {
                     content = {
                         FormInput(
                             label = stringResource(id = R.string.email),
-                            value = "",
+                            value = email,
                             leadingIcon = Icons.Filled.Email,
-                            isPassword = false
+                            isPassword = false,
+                            onValueChange = {
+                                email = it
+                            }
                         )
 
                         FormInput(
                             label = stringResource(id = R.string.password),
-                            value = "",
+                            value = password,
                             leadingIcon = Icons.Filled.Lock,
-                            isPassword = true
+                            isPassword = true,
+                            onValueChange = {
+                                password = it
+                            }
                         )
 
                         FormInput(
                             label = stringResource(id = R.string.confirm_password),
-                            value = "",
+                            value = confirmPassword,
                             leadingIcon = Icons.Filled.Lock,
-                            isPassword = true
+                            isPassword = true,
+                            onValueChange = {
+                                confirmPassword = it
+                            }
                         )
                     }
                 )
@@ -72,7 +103,14 @@ fun RegisterView() {
                             label = stringResource(id = R.string.confirm),
                             contentDescription = stringResource(id = R.string.signup),
                             type = Type.FILLED,
-                            onClick = {}
+                            onClick = {
+                                if (password == confirmPassword) {
+                                    authViewModel.registerUser(email, password)
+                                } else {
+                                    print("Passwords are not the same")
+                                }
+                            },
+                            enabled = authState.value != AuthState.Loading
                         )
 
                         // SIGN UP WITH GOOGLE //
@@ -81,7 +119,9 @@ fun RegisterView() {
                             contentDescription = stringResource(id = R.string.signup_google),
                             type = Type.OUTLINED,
                             icon = painterResource(id = R.drawable.google_icon),
-                            onClick = {}
+                            onClick = {},
+                            enabled = authState.value != AuthState.Loading
+
                         )
                     },
                     modifier = Modifier.padding(top = 25.dp)
@@ -100,6 +140,6 @@ fun RegisterView() {
 @Composable
 fun PreviewRegisterView() {
     LudyaTheme {
-        RegisterView()
+        //RegisterView()
     }
 }

@@ -1,4 +1,4 @@
-package com.at3nas.ludya.models
+package com.at3nas.ludya.domain.models
 
 import java.util.UUID
 

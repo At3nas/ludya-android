@@ -1,12 +1,8 @@
-package com.at3nas.ludya.ui.components
+package com.at3nas.ludya.presentation.ui.components
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import com.at3nas.ludya.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+
 
 enum class Type {
     FILLED,
@@ -27,7 +24,8 @@ fun ActionButtonIcon(
     contentDescription: String,
     type: Type,
     onClick: () -> Unit,
-    icon: Painter
+    icon: Painter,
+    enabled: Boolean
 ) {
     val content: @Composable() (RowScope.() -> Unit) = {
         IconLabel(
@@ -41,12 +39,16 @@ fun ActionButtonIcon(
         Type.FILLED -> Button(
             content = content,
             modifier = Modifier.fillMaxWidth(),
-            onClick = { onClick() })
+            onClick = { onClick() },
+            enabled = enabled
+        )
 
         Type.OUTLINED -> OutlinedButton(
             content = content,
             modifier = Modifier.fillMaxWidth(),
-            onClick = { onClick() })
+            onClick = { onClick() },
+            enabled = enabled
+        )
     }
 }
 
@@ -56,7 +58,8 @@ fun ActionButtonIcon(
     contentDescription: String,
     type: Type,
     onClick: () -> Unit,
-    icon: ImageVector
+    icon: ImageVector,
+    enabled: Boolean
 ) {
     val content: @Composable() (RowScope.() -> Unit) = {
         IconLabel(
@@ -70,18 +73,22 @@ fun ActionButtonIcon(
         Type.FILLED -> Button(
             content = content,
             modifier = Modifier.fillMaxWidth(),
-            onClick = { onClick() })
+            onClick = { onClick() },
+            enabled = enabled
+        )
 
         Type.OUTLINED -> OutlinedButton(
             content = content,
             modifier = Modifier.fillMaxWidth(),
-            onClick = { onClick() })
+            onClick = { onClick() },
+            enabled = enabled
+        )
     }
 }
 
 @Composable
 fun ActionButton(
-    label: String, contentDescription: String, type: Type, onClick: () -> Unit
+    label: String, contentDescription: String, type: Type, onClick: () -> Unit, enabled: Boolean
 ) {
     when (type) {
         Type.FILLED -> {
@@ -89,6 +96,7 @@ fun ActionButton(
                 content = { Text(label) },
                 modifier = Modifier.fillMaxWidth(),
                 onClick = { onClick() },
+                enabled = enabled
             )
         }
 
@@ -97,6 +105,7 @@ fun ActionButton(
                 content = { Text(label) },
                 modifier = Modifier.fillMaxWidth(),
                 onClick = { onClick() },
+                enabled = enabled
             )
         }
     }
@@ -107,27 +116,7 @@ fun ActionButton(
 fun PreviewActionButton() {
     LudyaTheme {
         LudyaSurface {
-            Column {
-                ActionButton(
-                    label = "Click me",
-                    contentDescription = "contenido",
-                    onClick = { testFunction() },
-                    type = Type.FILLED
-                )
-                ActionButton(
-                    label = "Click me",
-                    contentDescription = "contenido",
-                    onClick = { testFunction() },
-                    type = Type.OUTLINED
-                )
-                ActionButtonIcon(
-                    label = "Like",
-                    contentDescription = "contenido",
-                    icon = Icons.Filled.Favorite,
-                    onClick = { testFunction() },
-                    type = Type.FILLED
-                )
-            }
+
         }
     }
 }
