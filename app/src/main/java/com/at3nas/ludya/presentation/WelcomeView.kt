@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.ui.views
+package com.at3nas.ludya.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

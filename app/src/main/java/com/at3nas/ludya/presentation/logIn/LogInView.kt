@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.ui.views
+package com.at3nas.ludya.presentation.logIn
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,12 +24,13 @@ import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
 import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
-import com.at3nas.ludya.presentation.ui.viewmodels.AuthState
-import com.at3nas.ludya.presentation.ui.viewmodels.AuthViewModel
+import com.at3nas.ludya.presentation.AuthState
+import com.at3nas.ludya.data.network.AuthService
+import com.at3nas.ludya.domain.usecases.auth.LogInWithEmailUseCase
 
 // View | Login //
 @Composable
-fun LoginView(navigateToHome: () -> Unit, authViewModel: AuthViewModel) {
+fun LoginView(navigateToHome: () -> Unit) {
     // VARIABLES //
     var email by remember {
         mutableStateOf("")
@@ -39,13 +40,13 @@ fun LoginView(navigateToHome: () -> Unit, authViewModel: AuthViewModel) {
         mutableStateOf("")
     }
 
-    val authState = authViewModel.authState.observeAsState()
-
-    when (authState.value) {
-        is AuthState.Authenticated -> navigateToHome()
-        is AuthState.Error -> print("")
-        else -> Unit
-    }
+//    val authState = authService.authState.observeAsState()
+//
+//    when (authState.value) {
+//        is AuthState.Authenticated -> navigateToHome()
+//        is AuthState.Error -> print("")
+//        else -> Unit
+//    }
 
     LudyaSurface {
         Column(
@@ -85,9 +86,9 @@ fun LoginView(navigateToHome: () -> Unit, authViewModel: AuthViewModel) {
                     contentDescription = stringResource(id = R.string.login),
                     type = Type.FILLED,
                     onClick = {
-                        authViewModel.loginUser(email, password)
+                        // log in view model
                     },
-                    enabled = authState.value != AuthState.Loading,
+                    enabled = true //authState.value != AuthState.Loading,
                 )
             },
             verticalArrangement = Arrangement.Center,

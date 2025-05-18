@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.ui.views
+package com.at3nas.ludya.presentation.signUp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,7 +8,6 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,13 +25,12 @@ import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
 import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
-import com.at3nas.ludya.presentation.ui.viewmodels.AuthState
-import com.at3nas.ludya.presentation.ui.viewmodels.AuthViewModel
 
 
 // View | Register //
 @Composable
-fun RegisterView(authViewModel: AuthViewModel) {
+fun SignUpView() {
+
     // VARIABLES //
     var email by remember {
         mutableStateOf("")
@@ -46,7 +44,8 @@ fun RegisterView(authViewModel: AuthViewModel) {
         mutableStateOf("")
     }
 
-    val authState = authViewModel.authState.observeAsState()
+
+    //val authState = authService.authState.observeAsState()
 
     LudyaSurface {
         Column(
@@ -105,12 +104,13 @@ fun RegisterView(authViewModel: AuthViewModel) {
                             type = Type.FILLED,
                             onClick = {
                                 if (password == confirmPassword) {
-                                    authViewModel.registerUser(email, password)
+                                    print("ok")
+
                                 } else {
                                     print("Passwords are not the same")
                                 }
                             },
-                            enabled = authState.value != AuthState.Loading
+                            enabled = true //authState.value != AuthState.Loading
                         )
 
                         // SIGN UP WITH GOOGLE //
@@ -120,8 +120,7 @@ fun RegisterView(authViewModel: AuthViewModel) {
                             type = Type.OUTLINED,
                             icon = painterResource(id = R.drawable.google_icon),
                             onClick = {},
-                            enabled = authState.value != AuthState.Loading
-
+                            enabled = false
                         )
                     },
                     modifier = Modifier.padding(top = 25.dp)

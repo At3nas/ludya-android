@@ -4,22 +4,20 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.at3nas.ludya.presentation.ui.viewmodels.AuthViewModel
-import com.at3nas.ludya.presentation.ui.views.HomeView
-import com.at3nas.ludya.presentation.ui.views.LoginView
-import com.at3nas.ludya.presentation.ui.views.RegisterView
-import com.at3nas.ludya.presentation.ui.views.WelcomeView
+import com.at3nas.ludya.presentation.HomeView
+import com.at3nas.ludya.presentation.logIn.LoginView
+import com.at3nas.ludya.presentation.signUp.SignUpView
+import com.at3nas.ludya.presentation.WelcomeView
 
 
 @Composable
 fun NavigationWrapper() {
     val navController = rememberNavController()
-    val authViewModel = AuthViewModel()
 
-    NavHost(navController, startDestination = Welcome) {
+    NavHost(navController, startDestination = Home) {
         composable<Welcome> { WelcomeView({ navController.navigate(Register) }, { navController.navigate(Login) }) }
-        composable<Register> { RegisterView(authViewModel) }
-        composable<Login> { LoginView({ navController.navigate(Home) }, authViewModel) }
+        composable<Register> { SignUpView(signUp) }
+        composable<Login> { LoginView({ navController.navigate(Home) }) }
         composable<Home> { HomeView() }
     }
 }

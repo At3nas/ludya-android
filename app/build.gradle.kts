@@ -1,9 +1,12 @@
 plugins {
+    kotlin("plugin.serialization") version "2.0.21"
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    kotlin("plugin.serialization") version "2.0.21"
     alias(libs.plugins.google.gms.google.services)
+    id("com.google.devtools.ksp")
+    // hilt //
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -62,23 +65,24 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.runtime.livedata)
 
-    // Firebase //
-    implementation(libs.firebase.auth)
-
-    // Room //
-    //implementation(libs.androidx.room.compiler)
-    //implementation(libs.androidx.room.ktx)
-
     // UI //
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+
+    // Firebase //
+    implementation(libs.firebase.auth)
+
+    // Hilt //
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 
     // Navigation //
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.navigation.dynamic.features.fragment)
+    implementation(libs.firebase.firestore)
 
     // Tests //
     testImplementation(libs.junit)

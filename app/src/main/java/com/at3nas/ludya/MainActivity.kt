@@ -4,17 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import com.at3nas.ludya.core.navigation.NavigationWrapper
 import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 
-// Main //
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    //private val authViewModel = AuthViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
@@ -23,23 +22,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
 
-// Preview //
-@Preview
-@Composable
-fun TestingPreview() {
-    LudyaTheme {
-
-    }
-}
-
-// Function | Capitalize string //
-fun capitalizeText(text: String): String {
-    if (text[0].isLowerCase()) {
-        return text.replaceFirstChar {
-            it.uppercase()
-        }
-    }
-    return text
+//    override fun onStart() {
+//        super.onStart()
+//        if (authViewModel.getCurrentUser() != null) {
+//
+//        }
+//    }
 }
