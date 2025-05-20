@@ -1,5 +1,4 @@
-package com.at3nas.ludya.data
-import com.at3nas.ludya.domain.models.User
+package com.at3nas.ludya.domain.repository
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 

@@ -14,9 +14,9 @@ import com.at3nas.ludya.presentation.WelcomeView
 fun NavigationWrapper() {
     val navController = rememberNavController()
 
-    NavHost(navController, startDestination = Home) {
+    NavHost(navController, startDestination = Welcome) {
         composable<Welcome> { WelcomeView({ navController.navigate(Register) }, { navController.navigate(Login) }) }
-        composable<Register> { SignUpView(signUp) }
+        composable<Register> { SignUpView() }
         composable<Login> { LoginView({ navController.navigate(Home) }) }
         composable<Home> { HomeView() }
     }

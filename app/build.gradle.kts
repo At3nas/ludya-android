@@ -56,7 +56,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -64,6 +63,9 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.runtime.livedata)
+    //
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
 
     // UI //
     implementation(libs.androidx.ui)
@@ -72,17 +74,19 @@ dependencies {
 
     // Firebase //
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 
     // Hilt //
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Navigation //
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.navigation.dynamic.features.fragment)
-    implementation(libs.firebase.firestore)
+
 
     // Tests //
     testImplementation(libs.junit)

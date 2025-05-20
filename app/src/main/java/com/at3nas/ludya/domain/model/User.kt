@@ -1,4 +1,4 @@
-package com.at3nas.ludya.domain.models
+package com.at3nas.ludya.domain.model
 
 
 //enum class UserRole() {

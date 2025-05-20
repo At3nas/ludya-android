@@ -7,7 +7,3 @@ plugins {
     alias(libs.plugins.google.devtools.ksp) apply false
     id("com.google.dagger.hilt.android") version "2.56.2" apply false
 }
-
-repositories {
-    google()
-}

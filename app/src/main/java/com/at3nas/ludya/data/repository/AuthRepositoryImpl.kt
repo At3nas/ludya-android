@@ -1,12 +1,13 @@
-package com.at3nas.ludya.data.implementation
+package com.at3nas.ludya.data.repository
 
-import com.at3nas.ludya.data.AuthRepository
+import com.at3nas.ludya.domain.repository.AuthRepository
 import com.at3nas.ludya.data.network.AuthService
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
-abstract class AuthRepositoryImpl @Inject constructor(
+
+class AuthRepositoryImpl @Inject constructor(
     private val firebase: AuthService
 ) : AuthRepository {
     override suspend fun signUpWithEmail(email: String, password: String): AuthResult? {

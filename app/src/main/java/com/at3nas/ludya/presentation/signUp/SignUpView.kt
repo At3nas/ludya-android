@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
@@ -29,8 +30,9 @@ import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
 
 // View | Register //
 @Composable
-fun SignUpView() {
-
+fun SignUpView(
+    signUpViewModel: SignUpViewModel = hiltViewModel()
+) {
     // VARIABLES //
     var email by remember {
         mutableStateOf("")
@@ -43,9 +45,6 @@ fun SignUpView() {
     var confirmPassword by remember {
         mutableStateOf("")
     }
-
-
-    //val authState = authService.authState.observeAsState()
 
     LudyaSurface {
         Column(
@@ -105,7 +104,7 @@ fun SignUpView() {
                             onClick = {
                                 if (password == confirmPassword) {
                                     print("ok")
-
+                                    signUpViewModel.signUpWithEmail(email, password)
                                 } else {
                                     print("Passwords are not the same")
                                 }

@@ -8,7 +8,6 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -24,13 +23,12 @@ import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
 import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
-import com.at3nas.ludya.presentation.AuthState
-import com.at3nas.ludya.data.network.AuthService
-import com.at3nas.ludya.domain.usecases.auth.LogInWithEmailUseCase
 
 // View | Login //
 @Composable
-fun LoginView(navigateToHome: () -> Unit) {
+fun LoginView(
+    navigateToHome: () -> Unit
+) {
     // VARIABLES //
     var email by remember {
         mutableStateOf("")
