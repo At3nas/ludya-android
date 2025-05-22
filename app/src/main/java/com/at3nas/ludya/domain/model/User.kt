@@ -6,9 +6,8 @@ package com.at3nas.ludya.domain.model
 //    TEACHER
 //}
 
-class User(
-    var email: String,
-    var password: String,
-) {
-
-}
+data class User(
+    val uuid: String? = null,
+    val email: String? = null,
+    val isTeacher: Boolean = false
+)

@@ -5,8 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.at3nas.ludya.core.navigation.NavigationWrapper
-import com.at3nas.ludya.presentation.signUp.SignUpViewModel
-import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.LudyaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 

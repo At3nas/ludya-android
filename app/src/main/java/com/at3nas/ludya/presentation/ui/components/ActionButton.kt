@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.LudyaTheme
 
 
 enum class Type {

@@ -11,8 +11,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import com.at3nas.ludya.presentation.ui.theme.BgColor
-import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.BgColor
+import com.at3nas.ludya.presentation.ui.LudyaTheme
 
 @Composable
 fun FormInput(

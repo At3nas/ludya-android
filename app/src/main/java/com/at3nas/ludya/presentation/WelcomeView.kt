@@ -15,7 +15,7 @@ import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
-import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.LudyaTheme
 
 
 @Composable

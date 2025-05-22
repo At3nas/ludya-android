@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.at3nas.ludya.presentation.ui.theme.BgColor
+import com.at3nas.ludya.presentation.ui.BgColor
 
 @Composable
 fun LudyaSurface(content: @Composable () -> Unit) {

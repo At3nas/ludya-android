@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.ui.theme
+package com.at3nas.ludya.presentation.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize

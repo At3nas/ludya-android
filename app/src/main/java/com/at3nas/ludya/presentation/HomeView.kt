@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.at3nas.ludya.presentation.ui.components.LudyaScaffold
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
-import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.LudyaTheme
 
 @Composable
 fun HomeView() {

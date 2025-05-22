@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.ui.theme
+package com.at3nas.ludya.presentation.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

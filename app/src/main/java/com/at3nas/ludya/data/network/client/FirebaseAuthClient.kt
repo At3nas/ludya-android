@@ -1,4 +1,4 @@
-package com.at3nas.ludya.data.network
+package com.at3nas.ludya.data.network.client
 
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject

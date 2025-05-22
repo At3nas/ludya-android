@@ -19,13 +19,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
+import com.at3nas.ludya.domain.model.NewUser
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
 import com.at3nas.ludya.presentation.ui.components.FormInput
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
-import com.at3nas.ludya.presentation.ui.theme.LudyaTheme
+import com.at3nas.ludya.presentation.ui.LudyaTheme
 
 
 // View | Register //
@@ -102,12 +103,14 @@ fun SignUpView(
                             contentDescription = stringResource(id = R.string.signup),
                             type = Type.FILLED,
                             onClick = {
-                                if (password == confirmPassword) {
-                                    print("ok")
-                                    signUpViewModel.signUpWithEmail(email, password)
-                                } else {
-                                    print("Passwords are not the same")
-                                }
+                                // Creates new user //
+                                val newUser = NewUser(
+                                    email = email,
+                                    password = password,
+                                    confirmPassword = confirmPassword
+                                )
+
+                                signUpViewModel.signUpWithEmail(newUser)
                             },
                             enabled = true //authState.value != AuthState.Loading
                         )
