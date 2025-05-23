@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
+import com.at3nas.ludya.domain.model.ExistingUser
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.FormInput
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
@@ -27,7 +29,8 @@ import com.at3nas.ludya.presentation.ui.LudyaTheme
 // View | Login //
 @Composable
 fun LoginView(
-    navigateToHome: () -> Unit
+    navigateToHome: () -> Unit,
+    logInViewModel: LogInViewModel = hiltViewModel()
 ) {
     // VARIABLES //
     var email by remember {
@@ -84,7 +87,11 @@ fun LoginView(
                     contentDescription = stringResource(id = R.string.login),
                     type = Type.FILLED,
                     onClick = {
-                        // log in view model
+                        val user = ExistingUser(
+                            email = email,
+                            password = password
+                        )
+                        logInViewModel.logInWithEmail(user, navigateToHome)
                     },
                     enabled = true //authState.value != AuthState.Loading,
                 )

@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation
+package com.at3nas.ludya.presentation.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +13,7 @@ import com.at3nas.ludya.presentation.ui.components.LudyaScaffold
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.LudyaTheme
 
+@Preview
 @Composable
 fun HomeView() {
     LudyaTheme {
@@ -25,23 +26,18 @@ fun HomeView() {
 }
 
 @Composable
-fun HomeContent() {
+fun HomeContent(
+
+) {
     LudyaSurface {
         Column(
             modifier = Modifier.padding(25.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             content = {
-                Text("Welcome back {username}!")
+                //val userName = currentUser.
+                Text("Welcome back {current}!")
             }
         )
-    }
-}
-
-@Preview
-@Composable
-fun HomePreview() {
-    LudyaTheme {
-        HomeView()
     }
 }

@@ -25,8 +25,7 @@ class AuthService @Inject constructor(
             userService.addUserToCollection(
                 User(
                     email = result.user?.email,
-                    uuid = result.user?.uid,
-                    isTeacher = false
+                    uuid = result.user?.uid
                 )
             )
             AuthResponse.Success(result.user)

@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
@@ -26,7 +25,6 @@ import com.at3nas.ludya.presentation.ui.components.FormInput
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
-import com.at3nas.ludya.presentation.ui.LudyaTheme
 
 
 // View | Register //
@@ -133,14 +131,5 @@ fun SignUpView(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(25.dp, 25.dp)
         )
-    }
-}
-
-// Preview //
-@Preview
-@Composable
-fun PreviewRegisterView() {
-    LudyaTheme {
-        //RegisterView()
     }
 }
