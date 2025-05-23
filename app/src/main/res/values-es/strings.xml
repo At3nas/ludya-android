@@ -9,6 +9,11 @@
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
 
+    <!-- Navigation -->
+    <string name="view_home">Inicio</string>
+    <string name="view_explore">Explorar</string>
+    <string name="view_profile">Perfil</string>
+
     <!-- Auth Related Words -->
     <string name="signup">Registrarse</string>
     <string name="register">Registrarse</string>

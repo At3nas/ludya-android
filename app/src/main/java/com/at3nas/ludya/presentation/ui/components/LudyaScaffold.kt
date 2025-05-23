@@ -9,10 +9,21 @@ import androidx.compose.runtime.Composable
 // Scaffold //
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun LudyaScaffold(content: @Composable (PaddingValues) -> Unit) {
+fun LudyaScaffold(
+    content: @Composable (PaddingValues) -> Unit,
+    navigateToHome: () -> Unit,
+    navigateToExplore: () -> Unit,
+    navigateToProfile: () -> Unit
+) {
     Scaffold(
         topBar = { TopBar() },
         content = content,
-        bottomBar = { BottomBar() }
+        bottomBar = {
+            BottomBar(
+                navigateToHome,
+                navigateToExplore,
+                navigateToProfile
+            )
+        }
     )
 }

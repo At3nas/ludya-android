@@ -2,9 +2,9 @@ package com.at3nas.ludya.presentation.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -17,10 +17,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import com.at3nas.ludya.R
 
-// BottomBar | Container //
 @Composable
-fun BottomBar() {
+fun BottomBar(
+    navigateToHome: () -> Unit,
+    navigateToExplore: () -> Unit,
+    navigateToProfile: () -> Unit
+) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -30,17 +35,28 @@ fun BottomBar() {
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth(),
                 content = {
-                    BottomBarItem("Home", Icons.Filled.Home)
-                    BottomBarItem("Explore", Icons.Filled.Search)
+                    BottomBarItem(
+                        stringResource(id = R.string.view_home),
+                        Icons.Filled.Home
+                    ) { navigateToHome.invoke() }
+
+                    BottomBarItem(
+                        stringResource(id = R.string.view_explore),
+                        Icons.Filled.Search
+                    ) { navigateToExplore.invoke() }
+
+                    BottomBarItem(
+                        stringResource(id = R.string.view_profile),
+                        Icons.Filled.AccountCircle
+                    ) { navigateToProfile.invoke() }
                 }
             )
         }
     )
 }
 
-// BottomBar | Nav Item //
 @Composable
-fun BottomBarItem(itemLabel: String, itemIcon: ImageVector) {
+fun BottomBarItem(itemLabel: String, itemIcon: ImageVector, navigateTo: () -> Unit) {
     NavigationRailItem(
         icon = { Icon(itemIcon, null) },
         label = { Text(itemLabel) },
@@ -54,6 +70,8 @@ fun BottomBarItem(itemLabel: String, itemIcon: ImageVector) {
             disabledIconColor = MaterialTheme.colorScheme.onPrimary,
             disabledTextColor = MaterialTheme.colorScheme.onPrimary
         ),
-        onClick = {}
+        onClick = {
+            navigateTo.invoke()
+        }
     )
 }

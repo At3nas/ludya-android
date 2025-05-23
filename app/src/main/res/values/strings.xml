@@ -10,6 +10,10 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
 
+    <!-- Navigation -->
+    <string name="view_home">Home</string>
+    <string name="view_explore">Explore</string>
+    <string name="view_profile">Profile</string>
 
     <!-- Auth Related Words -->
     <string name="login">Log In</string>

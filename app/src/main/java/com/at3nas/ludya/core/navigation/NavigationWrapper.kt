@@ -8,6 +8,8 @@ import com.at3nas.ludya.presentation.home.HomeView
 import com.at3nas.ludya.presentation.logIn.LoginView
 import com.at3nas.ludya.presentation.signUp.SignUpView
 import com.at3nas.ludya.presentation.WelcomeView
+import com.at3nas.ludya.presentation.explore.ExploreView
+import com.at3nas.ludya.presentation.profile.ProfileView
 
 
 @Composable
@@ -31,7 +33,27 @@ fun NavigationWrapper() {
         }
 
         composable<Home> {
-            HomeView()
+            HomeView(
+                { navController.navigate(Home) },
+                { navController.navigate(Explore) },
+                { navController.navigate(Profile) }
+            )
+        }
+
+        composable<Explore> {
+            ExploreView(
+                { navController.navigate(Home) },
+                { navController.navigate(Explore) },
+                { navController.navigate(Profile) }
+            )
+        }
+
+        composable<Profile> {
+            ProfileView(
+                { navController.navigate(Home) },
+                { navController.navigate(Explore) },
+                { navController.navigate(Profile) }
+            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.home
+package com.at3nas.ludya.presentation.explore
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,23 +7,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.at3nas.ludya.presentation.ui.LudyaTheme
 import com.at3nas.ludya.presentation.ui.components.LudyaScaffold
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
-import com.at3nas.ludya.presentation.ui.LudyaTheme
 
-@Preview
 @Composable
-fun HomeView(
+fun ExploreView(
     navigateToHome: () -> Unit,
     navigateToExplore: () -> Unit,
     navigateToProfile: () -> Unit
 ) {
     LudyaTheme {
         LudyaScaffold(
-            content = { HomeContent() },
+            content = { ExploreContent() },
             navigateToHome = navigateToHome,
             navigateToExplore = navigateToExplore,
             navigateToProfile = navigateToProfile
@@ -32,17 +29,14 @@ fun HomeView(
 }
 
 @Composable
-fun HomeContent(
-    homeViewModel: HomeViewModel = hiltViewModel(),
-) {
+fun ExploreContent() {
     LudyaSurface {
         Column(
             modifier = Modifier.padding(25.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             content = {
-                val userName = homeViewModel.getUsername()
-                Text("Welcome back ${userName}!")
+                Text("Explore View")
             }
         )
     }
