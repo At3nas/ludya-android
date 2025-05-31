@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.ui.components
+package com.at3nas.ludya.presentation.mainScaffold.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu

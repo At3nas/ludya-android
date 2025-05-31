@@ -2,6 +2,7 @@ package com.at3nas.ludya.core.navigation
 
 import kotlinx.serialization.Serializable
 
+// Views //
 @Serializable
 object Welcome
 
@@ -19,3 +20,7 @@ object Explore
 
 @Serializable
 object Profile
+
+// Composables //
+@Serializable
+object MainScaffold

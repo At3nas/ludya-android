@@ -1,10 +1,9 @@
 package com.at3nas.ludya.data.network.service
 
-import com.at3nas.ludya.data.network.client.FirebaseAuthClient
+import com.at3nas.ludya.data.network.client.FirebaseClient
 import com.at3nas.ludya.data.network.response.AuthResponse
+import com.at3nas.ludya.domain.model.NewUser
 import com.at3nas.ludya.domain.model.User
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -12,19 +11,20 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthService @Inject constructor(
-    private val firebase: FirebaseAuthClient,
+    private val firebase: FirebaseClient,
     private val userService: UserService
 ) {
     //private val _authState = MutableLiveData<AuthState>()
     //val authState: LiveData<AuthState> = _authState
 
     // User | Register //
-    suspend fun signUpWithEmail(email: String, password: String): AuthResponse {
+    suspend fun signUpWithEmail(user: NewUser): AuthResponse {
         return try {
-            val result = firebase.auth.createUserWithEmailAndPassword(email, password).await()
+            val result = firebase.auth.createUserWithEmailAndPassword(user.email, user.password).await()
             userService.addUserToCollection(
                 User(
                     email = result.user?.email,
+                    username = user.username,
                     uuid = result.user?.uid
                 )
             )

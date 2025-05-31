@@ -9,6 +9,6 @@ package com.at3nas.ludya.domain.model
 data class User(
     val uuid: String? = null,
     val email: String? = null,
-    val username: String? = uuid,
+    val username: String? = null,
     val isTeacher: Boolean = false
 )

@@ -6,8 +6,10 @@
     <string name="welcome_description">Ludifica tu aprendizaje y crea aventuras educativas</string>
 
     <!-- Register -->
+    <string name="username">Nombre de usuario</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
 
     <!-- Navigation -->
     <string name="view_home">Inicio</string>
@@ -18,7 +20,7 @@
     <string name="signup">Registrarse</string>
     <string name="register">Registrarse</string>
     <string name="login">Iniciar sesión</string>
-    <string name="confirm_password">Confirmar contraseña</string>
+
     <string name="signup_google">Registrarse con Google</string>
 
     <string name="submit">Enviar</string>

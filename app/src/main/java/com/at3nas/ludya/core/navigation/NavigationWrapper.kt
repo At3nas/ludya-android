@@ -1,6 +1,7 @@
 package com.at3nas.ludya.core.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -8,13 +9,20 @@ import com.at3nas.ludya.presentation.home.HomeView
 import com.at3nas.ludya.presentation.logIn.LoginView
 import com.at3nas.ludya.presentation.signUp.SignUpView
 import com.at3nas.ludya.presentation.WelcomeView
-import com.at3nas.ludya.presentation.explore.ExploreView
+import com.at3nas.ludya.presentation.exploreCourses.ExploreView
 import com.at3nas.ludya.presentation.profile.ProfileView
+import com.at3nas.ludya.presentation.mainScaffold.MainScaffold
 
 
 @Composable
-fun NavigationWrapper() {
-    val navController = rememberNavController()
+fun NavigationWrapper(
+    navController: NavHostController = rememberNavController()
+) {
+    val bottomBarNavList = listOf(
+        { navController.navigate(Home) },
+        { navController.navigate(Explore) },
+        { navController.navigate(Profile) }
+    )
 
     NavHost(navController, startDestination = Welcome) {
         composable<Welcome> {
@@ -29,31 +37,26 @@ fun NavigationWrapper() {
         }
 
         composable<Login> {
-            LoginView({ navController.navigate(Home) })
+            LoginView({ navController.navigate(MainScaffold) })
+        }
+
+        composable<MainScaffold> {
+            MainScaffold()
         }
 
         composable<Home> {
-            HomeView(
-                { navController.navigate(Home) },
-                { navController.navigate(Explore) },
-                { navController.navigate(Profile) }
-            )
+            HomeView()
         }
 
         composable<Explore> {
-            ExploreView(
-                { navController.navigate(Home) },
-                { navController.navigate(Explore) },
-                { navController.navigate(Profile) }
-            )
+            ExploreView()
         }
 
         composable<Profile> {
-            ProfileView(
-                { navController.navigate(Home) },
-                { navController.navigate(Explore) },
-                { navController.navigate(Profile) }
-            )
+            ProfileView()
         }
+
+
+
     }
 }

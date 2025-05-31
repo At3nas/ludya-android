@@ -7,43 +7,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.at3nas.ludya.presentation.ui.components.LudyaScaffold
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.LudyaTheme
 
-@Preview
-@Composable
-fun HomeView(
-    navigateToHome: () -> Unit,
-    navigateToExplore: () -> Unit,
-    navigateToProfile: () -> Unit
-) {
-    LudyaTheme {
-        LudyaScaffold(
-            content = { HomeContent() },
-            navigateToHome = navigateToHome,
-            navigateToExplore = navigateToExplore,
-            navigateToProfile = navigateToProfile
-        )
-    }
-}
 
 @Composable
-fun HomeContent(
-    homeViewModel: HomeViewModel = hiltViewModel(),
+fun HomeView(
+    homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-    LudyaSurface {
-        Column(
-            modifier = Modifier.padding(25.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            content = {
-                val userName = homeViewModel.getUsername()
-                Text("Welcome back ${userName}!")
-            }
-        )
+    LudyaTheme {
+        LudyaSurface {
+            Column(
+                modifier = Modifier.padding(25.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                content = {
+                    val username = homeViewModel.getUsername()
+                    Text("Welcome back ${username}!")
+                }
+            )
+        }
     }
 }

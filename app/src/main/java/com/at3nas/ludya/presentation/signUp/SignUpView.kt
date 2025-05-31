@@ -4,12 +4,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,15 +34,19 @@ fun SignUpView(
     signUpViewModel: SignUpViewModel = hiltViewModel()
 ) {
     // VARIABLES //
-    var email by remember {
+    var email by rememberSaveable {
         mutableStateOf("")
     }
 
-    var password by remember {
+    var username by rememberSaveable {
         mutableStateOf("")
     }
 
-    var confirmPassword by remember {
+    var password by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var confirmPassword by rememberSaveable {
         mutableStateOf("")
     }
 
@@ -60,6 +65,16 @@ fun SignUpView(
                 // FORM //
                 Column(
                     content = {
+                        FormInput(
+                            label = stringResource(id = R.string.username),
+                            value = username,
+                            leadingIcon = Icons.Filled.AccountCircle,
+                            isPassword = false,
+                            onValueChange = {
+                                username = it
+                            }
+                        )
+
                         FormInput(
                             label = stringResource(id = R.string.email),
                             value = email,
@@ -105,6 +120,7 @@ fun SignUpView(
                                 val newUser = NewUser(
                                     email = email,
                                     password = password,
+                                    username = username,
                                     confirmPassword = confirmPassword
                                 )
 

@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.profile
+package com.at3nas.ludya.presentation.exploreCourses
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,9 +11,8 @@ import androidx.compose.ui.unit.dp
 import com.at3nas.ludya.presentation.ui.LudyaTheme
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 
-
 @Composable
-fun ProfileView(
+fun ExploreView(
 ) {
     LudyaTheme {
         LudyaSurface {
@@ -22,7 +21,7 @@ fun ProfileView(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 content = {
-                    Text("Profile View")
+                    Text("Explore View")
                 }
             )
         }

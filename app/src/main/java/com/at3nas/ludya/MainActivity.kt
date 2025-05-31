@@ -10,7 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(
+) {
     //private val authViewModel = AuthViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
