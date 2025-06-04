@@ -1,5 +1,8 @@
 package com.at3nas.ludya.presentation.home
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.at3nas.ludya.domain.repository.UserRepository
@@ -12,12 +15,18 @@ class HomeViewModel @Inject constructor(
     private val userRepo: UserRepository
 ) :
     ViewModel() {
-    fun getUsername(): Any? {
-        var username: Any? = null
 
+    var username by mutableStateOf<String?>(null)
+
+    private fun setUsernameFromData() {
         viewModelScope.launch {
             username = userRepo.getUsername()
         }
+    }
+
+    fun updateUsername(): String? {
+        setUsernameFromData()
         return username
     }
+
 }

@@ -26,4 +26,8 @@
     <string name="submit">Enviar</string>
     <string name="confirm">Confirmar</string>
     <string name="cancel">Cancelar</string>
+
+    <!-- ROLES -->
+    <string name="student">Estudiante</string>
+    <string name="teacher">Docente</string>
 </resources>

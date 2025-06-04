@@ -2,7 +2,9 @@ package com.at3nas.ludya.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +26,7 @@ fun WelcomeView(navigateToRegister: () -> Unit, navigateToLogin: () -> Unit) {
         Column(
             content = {
                 SplashHeader(
-                    headerIcon = painterResource(id = R.drawable.ludya_logo),
+                    headerIcon = painterResource(id = R.drawable.logo_ludya),
                     headerTitle = stringResource(id = R.string.welcome_title),
                     headerDesc = stringResource(id = R.string.welcome_description),
                     modifier = Modifier.padding(bottom = 25.dp),

@@ -7,5 +7,8 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val userService: UserService
 ) : UserRepository {
-    override suspend fun getUsername(): Any? = userService.getUsername()
+    override suspend fun getEmail(): String? = userService.getEmail()
+    override suspend fun getRole(): String? = userService.getRole()
+    override suspend fun getUsername(): String? = userService.getUsername()
+    override suspend fun getUid(): String? = userService.getUid()
 }

@@ -1,53 +1,46 @@
 package com.at3nas.ludya.data.network.service
 
 
-import android.util.Log
 import com.at3nas.ludya.data.network.client.FirebaseClient
-import com.at3nas.ludya.domain.model.User
+import com.at3nas.ludya.domain.model.FirestoreCollections
+import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class UserService @Inject constructor(
-    private val firebase: FirebaseClient
+    private val firebase: FirebaseClient,
+    private val firestoreService: FirestoreService
 ) {
-    companion object {
-        const val COLLECTION_USER = "users"
-    }
-
-    fun addUserToCollection(user: User) = runCatching {
-        user.uuid?.let {
-            firebase.db.collection(COLLECTION_USER)
-                .document(it)
-                .set(user)
-        }
-    }
-
-    private suspend fun getUserDataFromCollection(): MutableMap<String, Any>? {
+    private suspend fun getUserData(): DocumentSnapshot? {
         val uid = firebase.auth.currentUser?.uid
-        var userData: MutableMap<String, Any>? = null
 
-        if (uid != null) {
-            firebase.db.collection(COLLECTION_USER).document(uid)
+        val userData = if (uid != null) {
+            firebase.db
+                .collection(FirestoreCollections.COLLECTION_USER)
+                .document(uid)
                 .get()
-                .addOnSuccessListener { document ->
-                    userData = document.data
-                    Log.d("getUserData()|USER DATA: ", userData.toString())
-                }
-                .addOnFailureListener { exception ->
-                    Log.e("ERROR", "the following exception occurred: ", exception)
-                }
+                .await()
+        } else {
+            null
         }
         return userData
     }
 
-    suspend fun getUsername(): Any? {
-        val userData = getUserDataFromCollection()
-        Log.d("getUsername()|USER DATA: ", userData.toString())
+    suspend fun getEmail(): String? {
+        return getUserData()?.getString("email")
+    }
 
-        val username = userData?.get("username")
-        Log.d("getUsername()|USERNAME: ", username.toString())
+    suspend fun getRole(): String? {
+        return getUserData()?.getString("role")
+    }
 
-        return username
+    suspend fun getUsername(): String? {
+        return getUserData()?.getString("username")
+    }
+
+    suspend fun getUid(): String? {
+        return getUserData()?.getString("uuid")
     }
 }

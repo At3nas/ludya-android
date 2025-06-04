@@ -2,8 +2,13 @@ package com.at3nas.ludya.data.network.service
 
 import com.at3nas.ludya.data.network.client.FirebaseClient
 import com.at3nas.ludya.data.network.response.AuthResponse
-import com.at3nas.ludya.domain.model.NewUser
-import com.at3nas.ludya.domain.model.User
+import com.at3nas.ludya.domain.model.Currency
+import com.at3nas.ludya.domain.model.FirestoreCollections
+import com.at3nas.ludya.domain.model.Level
+import com.at3nas.ludya.domain.model.Profile
+import com.at3nas.ludya.domain.model.user.User
+import com.at3nas.ludya.presentation.logIn.model.Login
+import com.at3nas.ludya.presentation.signUp.model.SignUp
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -12,22 +17,47 @@ import javax.inject.Singleton
 @Singleton
 class AuthService @Inject constructor(
     private val firebase: FirebaseClient,
-    private val userService: UserService
+    private val firestoreService: FirestoreService
 ) {
     //private val _authState = MutableLiveData<AuthState>()
     //val authState: LiveData<AuthState> = _authState
 
     // User | Register //
-    suspend fun signUpWithEmail(user: NewUser): AuthResponse {
+    suspend fun signUpWithEmail(user: SignUp): AuthResponse {
         return try {
-            val result = firebase.auth.createUserWithEmailAndPassword(user.email, user.password).await()
-            userService.addUserToCollection(
-                User(
-                    email = result.user?.email,
-                    username = user.username,
-                    uuid = result.user?.uid
-                )
+            val result =
+                firebase.auth.createUserWithEmailAndPassword(
+                    user.email, user.password
+                ).await()
+
+            val userData = User(
+                email = result.user?.email,
+                username = user.username,
+                uuid = result.user?.uid,
+                role = user.role
             )
+
+            val userProfile = Profile(
+                displayName = user.username,
+                level = Level(),
+                currency = Currency(),
+            )
+
+            result.user?.uid?.let {
+                firestoreService.addDocumentToCollection(
+                    collection = FirestoreCollections.COLLECTION_USER,
+                    docName = it,
+                    docData = userData
+                )
+
+                firestoreService.addDocumentToCollection(
+                    collection = FirestoreCollections.COLLECTION_PROFILE,
+                    docName = it,
+                    docData = userProfile
+                )
+            }
+
+
             AuthResponse.Success(result.user)
         } catch (e: Exception) {
             AuthResponse.Error(e)
@@ -35,9 +65,9 @@ class AuthService @Inject constructor(
     }
 
     // User | Log In //
-    suspend fun logInWithEmail(email: String, password: String): AuthResponse {
+    suspend fun logInWithEmail(user: Login): AuthResponse {
         return try {
-            val result = firebase.auth.signInWithEmailAndPassword(email, password).await()
+            val result = firebase.auth.signInWithEmailAndPassword(user.email, user.password).await()
             AuthResponse.Success(result.user)
         } catch (e: Exception) {
             AuthResponse.Error(e)

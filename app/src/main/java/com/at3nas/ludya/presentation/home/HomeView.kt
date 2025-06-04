@@ -17,6 +17,8 @@ import com.at3nas.ludya.presentation.ui.LudyaTheme
 fun HomeView(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
+    val username = homeViewModel.updateUsername()
+
     LudyaTheme {
         LudyaSurface {
             Column(
@@ -24,7 +26,6 @@ fun HomeView(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 content = {
-                    val username = homeViewModel.getUsername()
                     Text("Welcome back ${username}!")
                 }
             )

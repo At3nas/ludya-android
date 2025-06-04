@@ -1,8 +1,10 @@
 package com.at3nas.ludya.di
 
 import com.at3nas.ludya.data.repository.AuthRepositoryImpl
+import com.at3nas.ludya.data.repository.ProfileRepositoryImpl
 import com.at3nas.ludya.data.repository.UserRepositoryImpl
 import com.at3nas.ludya.domain.repository.AuthRepository
+import com.at3nas.ludya.domain.repository.ProfileRepository
 import com.at3nas.ludya.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -22,4 +24,9 @@ abstract class RepositoryModule {
     abstract fun bindUserRepository(
         userRepositoryImpl : UserRepositoryImpl
     ): UserRepository
+
+    @Binds
+    abstract fun bindProfileRepository(
+        profileRepositoryImpl : ProfileRepositoryImpl
+    ): ProfileRepository
 }

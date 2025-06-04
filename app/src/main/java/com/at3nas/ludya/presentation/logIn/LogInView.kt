@@ -2,7 +2,9 @@ package com.at3nas.ludya.presentation.logIn
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -14,12 +16,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
-import com.at3nas.ludya.domain.model.ExistingUser
-import com.at3nas.ludya.presentation.ui.LudyaTheme
+import com.at3nas.ludya.presentation.logIn.model.Login
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.FormInput
 import com.at3nas.ludya.presentation.ui.components.LudyaSurface
@@ -87,7 +87,7 @@ fun LoginView(
                     contentDescription = stringResource(id = R.string.login),
                     type = Type.FILLED,
                     onClick = {
-                        val user = ExistingUser(
+                        val user = Login(
                             email = email,
                             password = password
                         )
@@ -95,18 +95,42 @@ fun LoginView(
                     },
                     enabled = true //authState.value != AuthState.Loading,
                 )
+
+                // TESTING: button to directly log in for quick tests //
+                Spacer(
+                    modifier = Modifier.size(24.dp)
+                )
+                ActionButton(
+                    label = "TESTING STUDENT",
+                    contentDescription = stringResource(id = R.string.login),
+                    type = Type.FILLED,
+                    onClick = {
+                        val user = Login(
+                            email = "at3nas@student.com",
+                            password = "123abc"
+                        )
+                        logInViewModel.logInWithEmail(user, navigateToHome)
+                    },
+                    enabled = true
+                )
+
+                ActionButton(
+                    label = "TESTING TEACHER",
+                    contentDescription = stringResource(id = R.string.login),
+                    type = Type.FILLED,
+                    onClick = {
+                        val user = Login(
+                            email = "at3nas@teacher.com",
+                            password = "123abc"
+                        )
+                        logInViewModel.logInWithEmail(user, navigateToHome)
+                    },
+                    enabled = true
+                )
             },
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(25.dp)
         )
-    }
-}
-
-@Preview
-@Composable
-fun LoginViewPreview() {
-    LudyaTheme {
-        //LoginView()
     }
 }

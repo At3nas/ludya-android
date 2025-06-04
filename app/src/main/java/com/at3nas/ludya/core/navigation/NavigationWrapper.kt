@@ -33,7 +33,7 @@ fun NavigationWrapper(
         }
 
         composable<Register> {
-            SignUpView()
+            SignUpView({ navController.navigate(MainScaffold) })
         }
 
         composable<Login> {
