@@ -4,5 +4,5 @@ enum class MainScaffoldRoute {
     HOME,
     EXPLORE,
     PROFILE,
-    TESTING
+    ACADEMY,
 }

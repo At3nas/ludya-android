@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,9 +23,9 @@ import com.at3nas.ludya.R
 import com.at3nas.ludya.presentation.logIn.model.Login
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.FormInput
-import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
+import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 // View | Login //
 @Composable
@@ -49,88 +50,81 @@ fun LoginView(
 //        else -> Unit
 //    }
 
-    LudyaSurface {
-        Column(
-            content = {
-                // HEADER //
-                SplashHeader(
-                    headerIcon = null,
-                    headerTitle = stringResource(id = R.string.login),
-                    headerDesc = null,
-                    iconSize = 0.dp,
-                    modifier = Modifier
-                )
+    ColumnContainer {
+        // HEADER //
+        SplashHeader(
+            headerIcon = null,
+            headerTitle = stringResource(id = R.string.login),
+            headerDesc = null,
+            iconSize = 0.dp,
+            modifier = Modifier
+        )
 
-                // FORM //
-                FormInput(
-                    label = stringResource(id = R.string.email),
-                    leadingIcon = Icons.Filled.Email,
-                    isPassword = false,
-                    value = email,
-                    onValueChange = {
-                        email = it
-                    }
-                )
+        // FORM //
+        FormInput(
+            label = stringResource(id = R.string.email),
+            leadingIcon = { Icon(Icons.Filled.Email, null) },
+            isPassword = false,
+            value = email,
+            onValueChange = {
+                email = it
+            }
+        )
 
-                FormInput(
-                    label = stringResource(id = R.string.password),
-                    leadingIcon = Icons.Filled.Lock,
-                    isPassword = true,
-                    value = password,
-                    onValueChange = {
-                        password = it
-                    }
-                )
+        FormInput(
+            label = stringResource(id = R.string.password),
+            leadingIcon = { Icon(Icons.Filled.Lock, null) },
+            isPassword = true,
+            value = password,
+            onValueChange = {
+                password = it
+            }
+        )
 
-                ActionButton(
-                    label = stringResource(id = R.string.login),
-                    contentDescription = stringResource(id = R.string.login),
-                    type = Type.FILLED,
-                    onClick = {
-                        val user = Login(
-                            email = email,
-                            password = password
-                        )
-                        logInViewModel.logInWithEmail(user, navigateToHome)
-                    },
-                    enabled = true //authState.value != AuthState.Loading,
+        ActionButton(
+            label = stringResource(id = R.string.login),
+            contentDescription = stringResource(id = R.string.login),
+            type = Type.FILLED,
+            onClick = {
+                val user = Login(
+                    email = email,
+                    password = password
                 )
-
-                // TESTING: button to directly log in for quick tests //
-                Spacer(
-                    modifier = Modifier.size(24.dp)
-                )
-                ActionButton(
-                    label = "TESTING STUDENT",
-                    contentDescription = stringResource(id = R.string.login),
-                    type = Type.FILLED,
-                    onClick = {
-                        val user = Login(
-                            email = "at3nas@student.com",
-                            password = "123abc"
-                        )
-                        logInViewModel.logInWithEmail(user, navigateToHome)
-                    },
-                    enabled = true
-                )
-
-                ActionButton(
-                    label = "TESTING TEACHER",
-                    contentDescription = stringResource(id = R.string.login),
-                    type = Type.FILLED,
-                    onClick = {
-                        val user = Login(
-                            email = "at3nas@teacher.com",
-                            password = "123abc"
-                        )
-                        logInViewModel.logInWithEmail(user, navigateToHome)
-                    },
-                    enabled = true
-                )
+                logInViewModel.logInWithEmail(user, navigateToHome)
             },
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(25.dp)
+            enabled = true //authState.value != AuthState.Loading,
+        )
+
+        // TESTING: button to directly log in for quick tests //
+        Spacer(
+            modifier = Modifier.size(24.dp)
+        )
+        ActionButton(
+            label = "TESTING STUDENT",
+            contentDescription = stringResource(id = R.string.login),
+            type = Type.FILLED,
+            onClick = {
+                val user = Login(
+                    email = "at3nas@student.com",
+                    password = "123abc"
+                )
+                logInViewModel.logInWithEmail(user, navigateToHome)
+            },
+            enabled = true
+        )
+
+        ActionButton(
+            label = "TESTING TEACHER",
+            contentDescription = stringResource(id = R.string.login),
+            type = Type.FILLED,
+            onClick = {
+                val user = Login(
+                    email = "at3nas@teacher.com",
+                    password = "123abc"
+                )
+                logInViewModel.logInWithEmail(user, navigateToHome)
+            },
+            enabled = true
         )
     }
 }

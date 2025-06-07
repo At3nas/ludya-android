@@ -1,34 +1,64 @@
 <resources>
     <string name="app_name">Ludya</string>
 
-    <!-- Welcome -->
+    <!-- WELCOME -->
     <string name="welcome_title">Welcome to Ludya!</string>
     <string name="welcome_description">Gamify your learning and create educative quests</string>
 
-    <!-- Register -->
+    <!-- REGISTER -->
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
 
-    <!-- Navigation -->
+    <!-- NAVIGATION -->
     <string name="view_home">Home</string>
     <string name="view_explore">Explore</string>
     <string name="view_profile">Profile</string>
+    <string name="view_academy">Academy</string>
+    <string name="view_library">Library</string>
 
-    <!-- Auth Related Words -->
+    <!-- AUTH -->
     <string name="login">Log In</string>
     <string name="register">Register</string>
-    <string name="signup_google">Sign up with Google</string>
     <string name="signup">Sign Up</string>
+    <string name="signup_google">Sign up with Google</string>
 
-
-
-    <string name="submit">Submit</string>
+    <!-- ACTION BUTTONS -->
     <string name="confirm">Confirm</string>
+    <string name="submit">Submit</string>
+
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+
     <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+    <!-- PROFILE -->
+    <string name="achievements">Achievements</string>
+    <string name="coins">Coins</string>
+    <string name="gems">Gems</string>
+
+    <!-- COURSE -->
+    <string name="course">Course</string>
+    <string name="module">Module</string>
+    <string name="question">Question</string>
+
+    <string name="create_course">Create course</string>
+
+    <string name="add_module">Add module</string>
+    <string name="delete_module">Delete module</string>
+    <string name="add_question">Add question</string>
 
     <!-- ROLES -->
     <string name="student">Student</string>
     <string name="teacher">Teacher</string>
+
+    <!-- COMMON ATTRIBUTES -->
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="category">Category</string>
+
+    <!-- CONTENT DESCRIPTION -->
+    <string name="contdesc_dropdownmenu_btn">More options</string>
 </resources>

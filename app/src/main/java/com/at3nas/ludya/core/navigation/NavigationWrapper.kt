@@ -9,6 +9,7 @@ import com.at3nas.ludya.presentation.home.HomeView
 import com.at3nas.ludya.presentation.logIn.LoginView
 import com.at3nas.ludya.presentation.signUp.SignUpView
 import com.at3nas.ludya.presentation.WelcomeView
+import com.at3nas.ludya.presentation.createCourse.CreateCourse
 import com.at3nas.ludya.presentation.exploreCourses.ExploreView
 import com.at3nas.ludya.presentation.profile.ProfileView
 import com.at3nas.ludya.presentation.mainScaffold.MainScaffold
@@ -18,11 +19,11 @@ import com.at3nas.ludya.presentation.mainScaffold.MainScaffold
 fun NavigationWrapper(
     navController: NavHostController = rememberNavController()
 ) {
-    val bottomBarNavList = listOf(
-        { navController.navigate(Home) },
-        { navController.navigate(Explore) },
-        { navController.navigate(Profile) }
-    )
+//    val bottomBarNavList = listOf(
+//        {navController.navigate(Home)},
+//        {navController.navigate(Explore)},
+//        {navController.navigate(Profile)}
+//    )
 
     NavHost(navController, startDestination = Welcome) {
         composable<Welcome> {
@@ -44,19 +45,25 @@ fun NavigationWrapper(
             MainScaffold()
         }
 
-        composable<Home> {
-            HomeView()
-        }
+//        composable<Home> {
+//            HomeView()
+//        }
+//
+//        composable<Explore> {
+//            ExploreView()
+//        }
+//
+//        composable<Profile> {
+//            ProfileView()
+//        }
 
-        composable<Explore> {
-            ExploreView()
-        }
-
-        composable<Profile> {
-            ProfileView()
-        }
+        // STUDENT //
 
 
+        // TEACHER //
+//        composable<CreateCourse> {
+//            CreateCourse()
+//        }
 
     }
 }

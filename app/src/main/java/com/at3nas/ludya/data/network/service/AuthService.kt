@@ -19,9 +19,6 @@ class AuthService @Inject constructor(
     private val firebase: FirebaseClient,
     private val firestoreService: FirestoreService
 ) {
-    //private val _authState = MutableLiveData<AuthState>()
-    //val authState: LiveData<AuthState> = _authState
-
     // User | Register //
     suspend fun signUpWithEmail(user: SignUp): AuthResponse {
         return try {
@@ -56,8 +53,6 @@ class AuthService @Inject constructor(
                     docData = userProfile
                 )
             }
-
-
             AuthResponse.Success(result.user)
         } catch (e: Exception) {
             AuthResponse.Error(e)
@@ -84,13 +79,4 @@ class AuthService @Inject constructor(
     fun getCurrentUser(): FirebaseUser? {
         return firebase.auth.currentUser
     }
-
-    // Auth | Check status //
-//    fun checkAuthStatus() {
-//        if (this.getCurrentUser() != null) {
-//            _authState.value = AuthState.Authenticated
-//        } else {
-//            _authState.value = AuthState.Unauthenticated
-//        }
-//    }
 }

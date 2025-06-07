@@ -21,6 +21,17 @@ object Explore
 @Serializable
 object Profile
 
+// STUDENT //
+//@Serializable
+//object Library
+
+// TEACHER //
+//@Serializable
+//object Academy
+
+@Serializable
+object CreateCourse
+
 // Composables //
 @Serializable
 object MainScaffold

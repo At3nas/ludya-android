@@ -3,23 +3,22 @@ package com.at3nas.ludya.presentation.ui.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
-import com.at3nas.ludya.presentation.ui.BgColor
-import com.at3nas.ludya.presentation.ui.LudyaTheme
 
 @Composable
 fun FormInput(
     label: String,
     value: String,
-    leadingIcon: ImageVector,
-    isPassword: Boolean,
+    leadingIcon: @Composable() (() -> Unit)? = null,
+    trailingIcon: @Composable() (() -> Unit)? = null,
+    isPassword: Boolean = false,
+    isReadOnly: Boolean = false,
+    isEnabled: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
     // Determines if the input is a password or not //
@@ -33,22 +32,12 @@ fun FormInput(
     OutlinedTextField(
         label = { Text(label) },
         value = value,
-        leadingIcon = { Icon(leadingIcon, null) },
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
+        enabled = isEnabled,
+        readOnly = isReadOnly,
         visualTransformation = inputVisualTransformation,
         modifier = Modifier.fillMaxWidth(),
         onValueChange = onValueChange
     )
-}
-
-@Preview
-@Composable
-fun FormInputPreview() {
-    LudyaTheme {
-        Surface(
-            content = {
-                //FormInput("Email", "", Icons.Filled.Email, false)
-            },
-            color = BgColor
-        )
-    }
 }

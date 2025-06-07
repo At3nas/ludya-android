@@ -15,8 +15,6 @@ class ProfileViewModel @Inject constructor(
     private val profileRepository: ProfileRepository
 ) :
     ViewModel() {
-
-
     // VARIABLES //
     var username by mutableStateOf<String?>(null)
         private set
@@ -26,7 +24,6 @@ class ProfileViewModel @Inject constructor(
         private set
     var gems by mutableStateOf<Long?>(0)
         private set
-
 
     init {
         loadProfileData()

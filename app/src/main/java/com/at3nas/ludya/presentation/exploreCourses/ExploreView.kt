@@ -1,29 +1,19 @@
 package com.at3nas.ludya.presentation.exploreCourses
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.at3nas.ludya.presentation.ui.LudyaTheme
-import com.at3nas.ludya.presentation.ui.components.LudyaSurface
+import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 @Composable
 fun ExploreView(
+    innerPadding: PaddingValues,
 ) {
-    LudyaTheme {
-        LudyaSurface {
-            Column(
-                modifier = Modifier.padding(25.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                content = {
-                    Text("Explore View")
-                }
-            )
-        }
+    ColumnContainer(
+        modifier = Modifier.padding(innerPadding)
+    ) {
+        Text("Explore View")
     }
 }

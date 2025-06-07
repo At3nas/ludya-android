@@ -18,43 +18,36 @@ import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
 import com.at3nas.ludya.presentation.ui.LudyaTheme
+import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
 @Composable
 fun WelcomeView(navigateToRegister: () -> Unit, navigateToLogin: () -> Unit) {
-    LudyaSurface {
-        Column(
-            content = {
-                SplashHeader(
-                    headerIcon = painterResource(id = R.drawable.logo_ludya),
-                    headerTitle = stringResource(id = R.string.welcome_title),
-                    headerDesc = stringResource(id = R.string.welcome_description),
-                    modifier = Modifier.padding(bottom = 25.dp),
-                    iconSize = 150.dp
-                )
-
-                Column {
-                    ActionButton(
-                        label = stringResource(id = R.string.signup),
-                        contentDescription = stringResource(id = R.string.signup),
-                        type = Type.FILLED,
-                        onClick = navigateToRegister,
-                        enabled = true
-                    )
-                    ActionButton(
-                        label = stringResource(id = R.string.login),
-                        contentDescription = stringResource(id = R.string.login),
-                        type = Type.OUTLINED,
-                        onClick = navigateToLogin,
-                        enabled = true
-                    )
-                }
-
-            },
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(25.dp, 25.dp)
+    ColumnContainer {
+        SplashHeader(
+            headerIcon = painterResource(id = R.drawable.logo_ludya),
+            headerTitle = stringResource(id = R.string.welcome_title),
+            headerDesc = stringResource(id = R.string.welcome_description),
+            modifier = Modifier.padding(bottom = 25.dp),
+            iconSize = 150.dp
         )
+
+        Column {
+            ActionButton(
+                label = stringResource(id = R.string.signup),
+                contentDescription = stringResource(id = R.string.signup),
+                type = Type.FILLED,
+                onClick = navigateToRegister,
+                enabled = true
+            )
+            ActionButton(
+                label = stringResource(id = R.string.login),
+                contentDescription = stringResource(id = R.string.login),
+                type = Type.OUTLINED,
+                onClick = navigateToLogin,
+                enabled = true
+            )
+        }
     }
 }
 

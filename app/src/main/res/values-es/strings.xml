@@ -1,33 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ludya</string>
-    <!-- Welcome -->
+    <!-- WELCOME -->
     <string name="welcome_title">¡Bienvenido a Ludya!</string>
     <string name="welcome_description">Ludifica tu aprendizaje y crea aventuras educativas</string>
 
-    <!-- Register -->
+    <!-- REGISTER -->
     <string name="username">Nombre de usuario</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
     <string name="confirm_password">Confirmar contraseña</string>
 
-    <!-- Navigation -->
+    <!-- NAVIGATION -->
     <string name="view_home">Inicio</string>
     <string name="view_explore">Explorar</string>
     <string name="view_profile">Perfil</string>
+    <string name="view_academy">Academia</string>
+    <string name="view_library">Biblioteca</string>
 
-    <!-- Auth Related Words -->
-    <string name="signup">Registrarse</string>
-    <string name="register">Registrarse</string>
+    <!-- AUTH -->
     <string name="login">Iniciar sesión</string>
-
+    <string name="register">Registrarse</string>
+    <string name="signup">Registrarse</string>
     <string name="signup_google">Registrarse con Google</string>
 
-    <string name="submit">Enviar</string>
+    <!-- ACTION BUTTONS -->
     <string name="confirm">Confirmar</string>
+    <string name="submit">Enviar</string>
+
+    <string name="edit">Editar</string>
+    <string name="add">Añadir</string>
+
     <string name="cancel">Cancelar</string>
+    <string name="delete">Eliminar</string>
 
     <!-- ROLES -->
     <string name="student">Estudiante</string>
     <string name="teacher">Docente</string>
+
+    <!-- PROFILE -->
+    <string name="achievements">Logros</string>
+    <string name="coins">Monedas</string>
+    <string name="gems">Gemas</string>
+
+    <!-- COURSE -->
+    <string name="course">Curso</string>
+    <string name="module">Módulo</string>
+    <string name="question">Pregunta</string>
+
+    <string name="create_course">Crear curso</string>
+
+
+    <string name="add_module">Añadir módulo</string>
+    <string name="delete_module">Eliminar módulo</string>
+
+    <string name="add_question">Añadir pregunta</string>
+
+    <!-- COMMON ATTRIBUTES -->
+    <string name="name">Nombre</string>
+    <string name="description">Descripción</string>
+    <string name="category">Categoría</string>
+
+    <!-- CONTENT DESCRIPTION -->
+    <string name="contdesc_dropdownmenu_btn">Más opciones</string>
 </resources>
