@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -46,10 +45,8 @@ import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.course.CourseCategory
 import com.at3nas.ludya.domain.model.course.CourseModule
 import com.at3nas.ludya.domain.model.course.Question
-import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
 import com.at3nas.ludya.presentation.ui.components.FormInput
 import com.at3nas.ludya.presentation.ui.components.IconLabel
-import com.at3nas.ludya.presentation.ui.components.Type
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
@@ -78,7 +75,7 @@ fun CreateCourse(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             //.padding(innerPadding)
-            .padding(vertical = 200.dp)
+            //.padding(vertical = 200.dp)
             .padding(horizontal = 25.dp)
 
     ) {
@@ -91,9 +88,8 @@ fun CreateCourse(
             )
             FormInput(
                 value = courseName,
-                label = stringResource(id = R.string.name),
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
+                label = stringResource(id = R.string.course_name),
+                placeholder = { Text(stringResource(id = R.string.course_name_placeholder)) },
                 onValueChange = {
                     courseName = it
                 }
@@ -101,9 +97,8 @@ fun CreateCourse(
 
             FormInput(
                 value = courseDescription,
-                label = stringResource(id = R.string.description),
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
+                label = stringResource(id = R.string.course_description),
+                placeholder = { Text(stringResource(id = R.string.course_description_placeholder)) },
                 onValueChange = {
                     courseDescription = it
                 }
@@ -128,11 +123,8 @@ fun CreateCourse(
             }
         }
 
-
-
-
         AddNewElement(
-            label = stringResource(id = R.string.add_module),
+            label = stringResource(id = R.string.module_add),
             onClick = {
                 listOfModules.add(
                     CourseModule(
@@ -170,8 +162,30 @@ fun QuestionCreationAccordion(
     listOfQuestions: SnapshotStateList<Question>
 ) {
     var expanded by rememberSaveable {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
+
+    var questionValue by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var answer1 by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var answer2 by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var answer3 by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var answer4 by rememberSaveable {
+        mutableStateOf("")
+    }
+
+    var listOfAnswers = listOf(answer1, answer2, answer3, answer4)
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -192,7 +206,10 @@ fun QuestionCreationAccordion(
                     Icon(Icons.Filled.KeyboardArrowDown, "")
                 }
             }
-            Text(stringResource(id = R.string.question) + " ${question.questionNumber}")
+            Text(
+                text = stringResource(id = R.string.question) + " ${question.questionNumber}",
+                style = MaterialTheme.typography.bodyLarge
+            )
         }
 
         IconButton(
@@ -201,7 +218,7 @@ fun QuestionCreationAccordion(
                 listOfQuestions.remove(question)
             }
         ) {
-            Icon(Icons.Filled.Delete, stringResource(id = R.string.delete_module))
+            Icon(Icons.Filled.Delete, stringResource(id = R.string.module_delete))
         }
     }
 
@@ -209,59 +226,69 @@ fun QuestionCreationAccordion(
         Column(
             modifier = Modifier.padding(start = 25.dp)
         ) {
-            FormInput(
-                value = "",
-                label = stringResource(id = R.string.question),
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
-                onValueChange = {
-                }
-            )
+            Column {
+                FormInput(
+                    value = questionValue,
+                    label = stringResource(id = R.string.question),
+                    placeholder = { Text(stringResource(id = R.string.question_placeholder)) },
+                    onValueChange = {
+                        questionValue = it
+                    }
+                )
 
-            FormInput(
-                value = "",
-                label = "Answer 1",
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
-                onValueChange = {
-                }
-            )
+                FormInput(
+                    value = answer1,
+                    label = stringResource(id = R.string.answer) + " 1",
+                    onValueChange = {
+                        answer1 = it
+                    }
+                )
 
-            FormInput(
-                value = "",
-                label = "Answer 2",
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
-                onValueChange = {
-                }
-            )
+                FormInput(
+                    value = answer2,
+                    label = stringResource(id = R.string.answer) + " 2",
+                    onValueChange = {
+                        answer2 = it
+                    }
+                )
 
-            FormInput(
-                value = "",
-                label = "Answer 3",
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
-                onValueChange = {
-                }
-            )
+                FormInput(
+                    value = answer3,
+                    label = stringResource(id = R.string.answer) + " 3",
+                    onValueChange = {
+                        answer3 = it
+                    }
+                )
 
-            FormInput(
-                value = "",
-                label = "Answer 4",
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
-                onValueChange = {
-                }
-            )
+                FormInput(
+                    value = answer4,
+                    label = stringResource(id = R.string.answer) + " 4",
+                    onValueChange = {
+                        answer4 = it
+                    }
+                )
 
-            FormInput(
-                value = "",
-                label = "Right answer",
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
-                onValueChange = {
-                }
-            )
+                TestDropdownMenu(
+                    listOfItems = listOfAnswers,
+                    menuLabel = stringResource(id = R.string.correct_answer)
+                )
+            }
+
+            Column {
+                Text(
+                    text = "Reward",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+
+                FormInput(
+                    value = answer4,
+                    label = stringResource(id = R.string.answer) + " 4",
+                    onValueChange = {
+                        answer4 = it
+                    }
+                )
+
+            }
         }
     }
 }
@@ -296,7 +323,7 @@ fun ModuleCreationCard(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = stringResource(id = R.string.module) + " ${module.moduleNumber}",
+                    text = stringResource(id = R.string.module) + " ${module.moduleNumber}: ${moduleName}",
                     style = MaterialTheme.typography.bodyLarge
                 )
 
@@ -306,15 +333,14 @@ fun ModuleCreationCard(
                         listOfModules.remove(module)
                     }
                 ) {
-                    Icon(Icons.Filled.Delete, stringResource(id = R.string.delete_module))
+                    Icon(Icons.Filled.Delete, stringResource(id = R.string.module_delete))
                 }
             }
 
             FormInput(
                 value = moduleName,
-                label = stringResource(id = R.string.name),
-                leadingIcon = { Icon(Icons.Filled.Info, null) },
-                isPassword = false,
+                label = stringResource(id = R.string.module_name),
+                placeholder = { Text(stringResource(id = R.string.module_name_placeholder)) },
                 onValueChange = {
                     moduleName = it
                 }
@@ -343,14 +369,15 @@ fun ModuleCreationCard(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TestDropdownMenu() {
-    val category = stringResource(id = R.string.category)
-
+fun TestDropdownMenu(
+    listOfItems: List<Any>,
+    menuLabel: String
+) {
     var expanded by remember {
         mutableStateOf(false)
     }
 
-    var categoryValue by rememberSaveable {
+    var itemValue by rememberSaveable {
         mutableStateOf("")
     }
 
@@ -359,8 +386,8 @@ fun TestDropdownMenu() {
         onExpandedChange = { expanded = it },
     ) {
         OutlinedTextField(
-            label = { Text(category) },
-            value = categoryValue,
+            label = { Text(menuLabel) },
+            value = itemValue,
             leadingIcon = {
                 Icon(
                     Icons.Filled.ArrowDropDown,
@@ -381,11 +408,12 @@ fun TestDropdownMenu() {
             expanded = expanded,
             onDismissRequest = { expanded = false },
         ) {
-            CourseCategory.entries.forEach { c ->
+
+            listOfItems.forEach { item ->
                 DropdownMenuItem(
-                    text = { Text(c.toString()) },
+                    text = { Text(item.toString()) },
                     onClick = {
-                        categoryValue = c.toString()
+                        itemValue = item.toString()
                         expanded = false
                     }
                 )

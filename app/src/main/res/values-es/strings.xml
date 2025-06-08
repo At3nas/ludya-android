@@ -45,16 +45,32 @@
 
     <!-- COURSE -->
     <string name="course">Curso</string>
-    <string name="module">Módulo</string>
-    <string name="question">Pregunta</string>
+
+    <string name="course_name">Nombre del curso</string>
+    <string name="course_name_placeholder">Biología I</string>
+
+    <string name="course_description">Descripción del curso</string>
+    <string name="course_description_placeholder">Aprende los fundamentos de la Biología</string>
 
     <string name="create_course">Crear curso</string>
 
+    <!-- MODULE -->
+    <string name="module">Módulo</string>
 
-    <string name="add_module">Añadir módulo</string>
-    <string name="delete_module">Eliminar módulo</string>
+    <string name="module_name">Nombre del módulo</string>
+    <string name="module_name_placeholder">Biología celular</string>
 
+    <string name="module_add">Añadir módulo</string>
+    <string name="module_delete">Eliminar módulo</string>
+
+    <!-- QUESTION -->
+    <string name="question">Pregunta</string>
     <string name="add_question">Añadir pregunta</string>
+
+    <string name="question_placeholder">¿Cómo se llaman los organismos compuestos por más de una célula?</string>
+
+    <string name="answer">Respuesta</string>
+    <string name="correct_answer">Respuesta correcta</string>
 
     <!-- COMMON ATTRIBUTES -->
     <string name="name">Nombre</string>

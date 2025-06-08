@@ -41,14 +41,32 @@
 
     <!-- COURSE -->
     <string name="course">Course</string>
-    <string name="module">Module</string>
-    <string name="question">Question</string>
+
+    <string name="course_name">Course name</string>
+    <string name="course_name_placeholder">Biology I</string>
+
+    <string name="course_description">Course description</string>
+    <string name="course_description_placeholder">Learn the basics of Biology</string>
 
     <string name="create_course">Create course</string>
 
-    <string name="add_module">Add module</string>
-    <string name="delete_module">Delete module</string>
+    <!-- MODULE -->
+    <string name="module">Module</string>
+
+    <string name="module_name">Module name</string>
+    <string name="module_name_placeholder">Cell biology</string>
+
+    <string name="module_add">Add module</string>
+    <string name="module_delete">Delete module</string>
+
+    <!-- QUESTION -->
+    <string name="question">Question</string>
     <string name="add_question">Add question</string>
+
+    <string name="question_placeholder">What are organisms composed of more than one cell called?</string>
+
+    <string name="answer">Answer</string>
+    <string name="correct_answer">Correct answer</string>
 
     <!-- ROLES -->
     <string name="student">Student</string>

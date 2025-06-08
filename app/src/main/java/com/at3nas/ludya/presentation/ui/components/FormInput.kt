@@ -12,8 +12,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
 fun FormInput(
-    label: String,
+    label: String? = null,
     value: String,
+    placeholder: @Composable() (() -> Unit)? = null,
     leadingIcon: @Composable() (() -> Unit)? = null,
     trailingIcon: @Composable() (() -> Unit)? = null,
     isPassword: Boolean = false,
@@ -30,8 +31,13 @@ fun FormInput(
 
     // TextField //
     OutlinedTextField(
-        label = { Text(label) },
+        label = if (label != null) {
+            { Text(label) }
+        } else {
+            null
+        },
         value = value,
+        placeholder = placeholder,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         enabled = isEnabled,
