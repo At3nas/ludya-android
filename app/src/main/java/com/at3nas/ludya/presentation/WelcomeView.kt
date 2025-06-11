@@ -1,23 +1,18 @@
 package com.at3nas.ludya.presentation
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.at3nas.ludya.R
+import com.at3nas.ludya.presentation.ui.LudyaTheme
 import com.at3nas.ludya.presentation.ui.components.ActionButton
-import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
-import com.at3nas.ludya.presentation.ui.LudyaTheme
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
@@ -35,14 +30,12 @@ fun WelcomeView(navigateToRegister: () -> Unit, navigateToLogin: () -> Unit) {
         Column {
             ActionButton(
                 label = stringResource(id = R.string.signup),
-                contentDescription = stringResource(id = R.string.signup),
                 type = Type.FILLED,
                 onClick = navigateToRegister,
                 enabled = true
             )
             ActionButton(
                 label = stringResource(id = R.string.login),
-                contentDescription = stringResource(id = R.string.login),
                 type = Type.OUTLINED,
                 onClick = navigateToLogin,
                 enabled = true

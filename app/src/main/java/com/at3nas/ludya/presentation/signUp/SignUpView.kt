@@ -30,7 +30,7 @@ import com.at3nas.ludya.presentation.signUp.model.SignUp
 import com.at3nas.ludya.presentation.ui.BgColor
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
-import com.at3nas.ludya.presentation.ui.components.FormInput
+import com.at3nas.ludya.presentation.ui.components.form.FormInput
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
@@ -151,7 +151,6 @@ fun SignUpView(
                 // REGISTER //
                 ActionButton(
                     label = stringResource(id = R.string.confirm),
-                    contentDescription = stringResource(id = R.string.signup),
                     type = Type.FILLED,
                     onClick = {
                         // Creates new user //

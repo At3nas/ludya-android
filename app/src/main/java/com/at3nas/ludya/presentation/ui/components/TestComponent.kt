@@ -26,8 +26,12 @@ import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 @Composable
 fun TestContainer() {
     ColumnContainer {
-        NewButton()
+        RewardInput()
     }
+}
+
+fun RewardInput() {
+
 }
 
 @Composable

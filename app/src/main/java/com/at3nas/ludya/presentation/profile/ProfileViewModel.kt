@@ -18,13 +18,17 @@ class ProfileViewModel @Inject constructor(
     // VARIABLES //
     var username by mutableStateOf<String?>(null)
         private set
+
     var displayName by mutableStateOf<String?>(null)
         private set
+
     var coins by mutableStateOf<Long?>(0)
         private set
+
     var gems by mutableStateOf<Long?>(0)
         private set
 
+    // FUNCTIONS //
     init {
         loadProfileData()
     }

@@ -1,9 +1,6 @@
 package com.at3nas.ludya.presentation.logIn
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -14,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -22,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.presentation.logIn.model.Login
 import com.at3nas.ludya.presentation.ui.components.ActionButton
-import com.at3nas.ludya.presentation.ui.components.FormInput
+import com.at3nas.ludya.presentation.ui.components.form.FormInput
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.Type
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
@@ -83,7 +79,6 @@ fun LoginView(
 
         ActionButton(
             label = stringResource(id = R.string.login),
-            contentDescription = stringResource(id = R.string.login),
             type = Type.FILLED,
             onClick = {
                 val user = Login(
@@ -101,7 +96,6 @@ fun LoginView(
         )
         ActionButton(
             label = "TESTING STUDENT",
-            contentDescription = stringResource(id = R.string.login),
             type = Type.FILLED,
             onClick = {
                 val user = Login(
@@ -115,7 +109,6 @@ fun LoginView(
 
         ActionButton(
             label = "TESTING TEACHER",
-            contentDescription = stringResource(id = R.string.login),
             type = Type.FILLED,
             onClick = {
                 val user = Login(

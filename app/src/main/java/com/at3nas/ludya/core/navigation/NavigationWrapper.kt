@@ -5,14 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.at3nas.ludya.presentation.home.HomeView
-import com.at3nas.ludya.presentation.logIn.LoginView
-import com.at3nas.ludya.presentation.signUp.SignUpView
 import com.at3nas.ludya.presentation.WelcomeView
-import com.at3nas.ludya.presentation.createCourse.CreateCourse
-import com.at3nas.ludya.presentation.exploreCourses.ExploreView
-import com.at3nas.ludya.presentation.profile.ProfileView
+import com.at3nas.ludya.presentation.logIn.LoginView
 import com.at3nas.ludya.presentation.mainScaffold.MainScaffold
+import com.at3nas.ludya.presentation.signUp.SignUpView
 
 
 @Composable

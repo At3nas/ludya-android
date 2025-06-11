@@ -100,7 +100,9 @@ fun ActionButtonIcon(
 
 @Composable
 fun ActionButton(
-    label: String, contentDescription: String, type: Type, onClick: () -> Unit, enabled: Boolean
+    label: String,
+    type: Type, onClick: () -> Unit,
+    enabled: Boolean = true
 ) {
     when (type) {
         Type.FILLED -> {

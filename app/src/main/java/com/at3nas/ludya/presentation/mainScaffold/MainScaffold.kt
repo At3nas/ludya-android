@@ -1,6 +1,5 @@
 package com.at3nas.ludya.presentation.mainScaffold
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,8 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
-import com.at3nas.ludya.presentation.createCourse.CreateCourse
-import com.at3nas.ludya.presentation.exploreCourses.ExploreView
+import com.at3nas.ludya.presentation.createCourse.CreateCourseView
 import com.at3nas.ludya.presentation.home.HomeView
 import com.at3nas.ludya.presentation.mainScaffold.components.TopBar
 import com.at3nas.ludya.presentation.profile.ProfileView
@@ -50,9 +48,8 @@ fun MainScaffold(
         content = { innerPadding ->
             when (scaffoldContent) {
                 MainScaffoldRoute.HOME -> HomeView(innerPadding)
-                MainScaffoldRoute.EXPLORE -> ExploreView(innerPadding)
                 MainScaffoldRoute.PROFILE -> ProfileView(innerPadding)
-                MainScaffoldRoute.ACADEMY -> CreateCourse()
+                MainScaffoldRoute.ACADEMY -> CreateCourseView(innerPadding)
             }
         },
         bottomBar = {
@@ -69,11 +66,6 @@ fun MainScaffold(
                                 stringResource(id = R.string.view_home),
                                 painterResource(id = R.drawable.icon_house)
                             ) { scaffoldContent = MainScaffoldRoute.HOME }
-
-                            BottomBarItem(
-                                stringResource(id = R.string.view_explore),
-                                painterResource(id = R.drawable.icon_search)
-                            ) { scaffoldContent = MainScaffoldRoute.EXPLORE }
 
                             if (isUserTeacher) {
                                 BottomBarItem(

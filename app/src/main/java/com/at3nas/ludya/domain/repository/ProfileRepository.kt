@@ -6,11 +6,12 @@ interface ProfileRepository {
     suspend fun getCoins(): Long?
     suspend fun getGems(): Long?
     suspend fun getLevel(): Long?
-    suspend fun getXp(): Long?
+    suspend fun getExp(): Long?
+
     // UPDATE //
     suspend fun updateDisplayName(newDisplayName: String)
     suspend fun updateCoins(newCoins: Long)
     suspend fun updateGems(newGems: Long)
     suspend fun updateLevel(newLevel: Long)
-    suspend fun updateXp(newXp: Double)
+    suspend fun updateExp(newExp: Double)
 }

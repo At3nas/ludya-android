@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ProfileService @Inject constructor(
-    private val firebase: FirebaseClient,
+    firebase: FirebaseClient,
     private val userService: UserService
 ) {
     private val profileCollection = firebase.db.collection(FirestoreCollections.COLLECTION_PROFILE)
@@ -43,8 +43,8 @@ class ProfileService @Inject constructor(
         return getProfileData()?.getLong("level.level")
     }
 
-    suspend fun getXp(): Long? {
-        return getProfileData()?.getLong("level.xp")
+    suspend fun getExp(): Long? {
+        return getProfileData()?.getLong("level.exp")
     }
 
     // SET FIELDS //
@@ -72,9 +72,9 @@ class ProfileService @Inject constructor(
             .update("level.level", newLevel)
     }
 
-    suspend fun updateXp(newXp: Double) {
+    suspend fun updateExp(newExp: Double) {
         profileCollection
             .document(userService.getUid().toString())
-            .update("level.xp", newXp)
+            .update("level.xp", newExp)
     }
 }

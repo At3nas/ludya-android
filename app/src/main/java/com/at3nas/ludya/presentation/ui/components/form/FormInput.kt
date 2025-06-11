@@ -1,12 +1,10 @@
-package com.at3nas.ludya.presentation.ui.components
+package com.at3nas.ludya.presentation.ui.components.form
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 
@@ -20,6 +18,7 @@ fun FormInput(
     isPassword: Boolean = false,
     isReadOnly: Boolean = false,
     isEnabled: Boolean = true,
+    singleLine: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
     // Determines if the input is a password or not //
@@ -42,6 +41,7 @@ fun FormInput(
         trailingIcon = trailingIcon,
         enabled = isEnabled,
         readOnly = isReadOnly,
+        singleLine = singleLine,
         visualTransformation = inputVisualTransformation,
         modifier = Modifier.fillMaxWidth(),
         onValueChange = onValueChange

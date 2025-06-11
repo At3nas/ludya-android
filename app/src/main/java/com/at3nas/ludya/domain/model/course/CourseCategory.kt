@@ -1,6 +1,7 @@
 package com.at3nas.ludya.domain.model.course
 
 enum class CourseCategory {
+    NONE,
     LANGUAGE,
     HISTORY,
     ART,

@@ -1,7 +1,10 @@
 package com.at3nas.ludya.domain.model.course
 
-data class CourseModule (
-    val moduleNumber: Int? = null,
-    val name: String? = "",
+import java.util.UUID
+
+data class CourseModule(
+    val moduleId: String = UUID.randomUUID().toString(),
+    val moduleName: String = "",
+    val moduleNumber: Int = 1,
     val listOfQuestions: MutableList<Question>? = null
 )
