@@ -24,7 +24,8 @@ import com.at3nas.ludya.R
 @Composable
 fun FormSelect(
     listOfItems: List<Any>,
-    menuLabel: String
+    menuLabel: String,
+    onValueChange: (String) -> Unit = {}
 ) {
     var expanded by remember {
         mutableStateOf(false)
@@ -54,7 +55,7 @@ fun FormSelect(
             modifier = Modifier
                 .menuAnchor(MenuAnchorType.PrimaryNotEditable)
                 .fillMaxWidth(),
-            onValueChange = {}
+            onValueChange = onValueChange
         )
 
         ExposedDropdownMenu(

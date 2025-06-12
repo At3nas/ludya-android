@@ -6,5 +6,5 @@ data class CourseModule(
     val moduleId: String = UUID.randomUUID().toString(),
     val moduleName: String = "",
     val moduleNumber: Int = 1,
-    val listOfQuestions: MutableList<Question>? = null
+    val listOfQuestions: MutableList<Question>
 )

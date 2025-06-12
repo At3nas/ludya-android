@@ -1,14 +1,13 @@
 package com.at3nas.ludya.presentation.createCourse
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -21,7 +20,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,12 +39,12 @@ import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.course.CourseCategory
 import com.at3nas.ludya.domain.model.course.CourseModule
 import com.at3nas.ludya.domain.model.course.Question
+import com.at3nas.ludya.domain.model.course.localizeCourseCategory
 import com.at3nas.ludya.presentation.ui.components.ActionButton
-import com.at3nas.ludya.presentation.ui.components.IconLabel
 import com.at3nas.ludya.presentation.ui.components.Type
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
+import com.at3nas.ludya.presentation.ui.components.form.AddNewElement
 import com.at3nas.ludya.presentation.ui.components.form.FormInput
-import com.at3nas.ludya.presentation.ui.components.form.FormSelect
 
 
 @Composable
@@ -54,16 +52,24 @@ fun CreateCourseView(
     innerPadding: PaddingValues,
     createCourseViewModel: CreateCourseViewModel = hiltViewModel()
 ) {
-
     ColumnContainer(
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .padding(innerPadding)
             .padding(horizontal = 25.dp)
-
     ) {
         Column {
+            // TESTING //
+            ActionButton(
+                label = "listOfModules",
+                type = Type.FILLED,
+                onClick = {
+                    Log.d("listOfModules: ", "${createCourseViewModel.listOfModules}")
+                }
+            )
+            // END TESTING //
+
             Text(
                 text = stringResource(id = R.string.course),
                 fontWeight = FontWeight.Bold,
@@ -88,7 +94,7 @@ fun CreateCourseView(
             )
         }
 
-        FormSelect(CourseCategory.entries, stringResource(id = R.string.category))
+        CourseCategoryFormSelect(createCourseViewModel)
 
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -125,83 +131,78 @@ fun CreateCourseView(
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CourseCategoryFormSelect(
-    listOfItems: List<Any>,
-    menuLabel: String
+fun ModuleCreationCard(
+    module: CourseModule,
+    createCourseViewModel: CreateCourseViewModel
 ) {
-    var expanded by remember {
-        mutableStateOf(false)
-    }
+    val listOfQuestions = remember { mutableStateListOf<Question>() }
 
-    var itemValue by rememberSaveable {
-        mutableStateOf("")
-    }
-
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = it },
+    Card(
     ) {
-        OutlinedTextField(
-            label = { Text(menuLabel) },
-            value = itemValue,
-            leadingIcon = {
-                Icon(
-                    Icons.Filled.ArrowDropDown,
-                    contentDescription = stringResource(
-                        id = R.string.contdesc_dropdownmenu_btn
-                    )
-                )
-            },
-            enabled = true,
-            readOnly = true,
-            modifier = Modifier
-                .menuAnchor(MenuAnchorType.PrimaryNotEditable)
-                .fillMaxWidth(),
-            onValueChange = {}
-        )
-
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
+        Column(
+            modifier = Modifier.padding(16.dp)
         ) {
-            listOfItems.forEach { item ->
-                DropdownMenuItem(
-                    text = { Text(item.toString()) },
+            // MODULE CARD HEADER //
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.module) + " ${module.moduleNumber}: ${module.moduleName}",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+
+                IconButton(
+                    enabled = true,
                     onClick = {
-                        itemValue = item.toString()
-                        expanded = false
+                        createCourseViewModel.removeModule(module.moduleId)
+                    }
+                ) {
+                    Icon(Icons.Filled.Delete, stringResource(id = R.string.module_delete))
+                }
+            }
+
+            FormInput(
+                value = module.moduleName,
+                label = stringResource(id = R.string.module_name),
+                placeholder = { Text(stringResource(id = R.string.module_name_placeholder)) },
+                onValueChange = {
+                    createCourseViewModel.updateModuleName(module.moduleId, it)
+                }
+            )
+
+            module.listOfQuestions.forEach { question ->
+                QuestionCreationAccordion(
+                    createCourseViewModel = createCourseViewModel,
+                    moduleId = module.moduleId,
+                    question = question,
+                    onRemove = {
+                        createCourseViewModel.removeQuestion(module.moduleId, question.questionId)
                     }
                 )
             }
+
+            AddNewElement(
+                label = stringResource(id = R.string.add_question),
+                onClick = {
+                    listOfQuestions.add(
+                        Question(
+                            questionNumber = listOfQuestions.size + 1
+                        )
+                    )
+                    createCourseViewModel.addQuestions(module.moduleId, listOfQuestions)
+                }
+            )
         }
     }
 }
 
 @Composable
-fun AddNewElement(
-    label: String,
-    onClick: () -> Unit
-) {
-    OutlinedButton(
-        shape = RoundedCornerShape(5.dp),
-        modifier = Modifier.fillMaxWidth(),
-        onClick = onClick
-    ) {
-        IconLabel(
-            icon = Icons.Filled.Add,
-            label = label,
-            contentDescription = label,
-            iconSize = 25.dp,
-            space = 8.dp
-        )
-    }
-}
-
-@Composable
 fun QuestionCreationAccordion(
+    createCourseViewModel: CreateCourseViewModel,
+    moduleId: String,
     question: Question,
     onRemove: () -> Unit
 ) {
@@ -275,6 +276,11 @@ fun QuestionCreationAccordion(
                     placeholder = { Text(stringResource(id = R.string.question_placeholder)) },
                     onValueChange = {
                         questionValue = it
+                        createCourseViewModel.updateQuestionValue(
+                            moduleId,
+                            question.questionId,
+                            questionValue
+                        )
                     }
                 )
 
@@ -283,6 +289,11 @@ fun QuestionCreationAccordion(
                     label = stringResource(id = R.string.answer) + " 1",
                     onValueChange = {
                         answer1 = it
+                        createCourseViewModel.updateQuestionAnswer1(
+                            moduleId,
+                            question.questionId,
+                            answer1
+                        )
                     }
                 )
 
@@ -291,6 +302,11 @@ fun QuestionCreationAccordion(
                     label = stringResource(id = R.string.answer) + " 2",
                     onValueChange = {
                         answer2 = it
+                        createCourseViewModel.updateQuestionAnswer2(
+                            moduleId,
+                            question.questionId,
+                            answer2
+                        )
                     }
                 )
 
@@ -299,6 +315,11 @@ fun QuestionCreationAccordion(
                     label = stringResource(id = R.string.answer) + " 3",
                     onValueChange = {
                         answer3 = it
+                        createCourseViewModel.updateQuestionAnswer3(
+                            moduleId,
+                            question.questionId,
+                            answer3
+                        )
                     }
                 )
 
@@ -307,12 +328,19 @@ fun QuestionCreationAccordion(
                     label = stringResource(id = R.string.answer) + " 4",
                     onValueChange = {
                         answer4 = it
+                        createCourseViewModel.updateQuestionAnswer4(
+                            moduleId,
+                            question.questionId,
+                            answer4
+                        )
                     }
                 )
 
-                FormSelect(
-                    listOfItems = listOfAnswers,
-                    menuLabel = stringResource(id = R.string.correct_answer)
+                CorrectAnswerFormSelect(
+                    createCourseViewModel,
+                    question.questionId,
+                    moduleId,
+                    listOfAnswers
                 )
             }
 
@@ -320,68 +348,123 @@ fun QuestionCreationAccordion(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ModuleCreationCard(
-    module: CourseModule,
+fun CourseCategoryFormSelect(
     createCourseViewModel: CreateCourseViewModel
 ) {
+    // VARIABLES //
+    val listOfCategories = CourseCategory.entries
 
-    var listOfQuestions = remember { mutableStateListOf<Question>() }
+    val menuLabel: String = stringResource(id = R.string.category)
 
-    Card(
+    // STATES //
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+
+    // COMPOSABLES //
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = it },
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            // MODULE CARD HEADER //
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.module) + " ${module.moduleNumber}: ${module.moduleName}",
-                    style = MaterialTheme.typography.bodyLarge
-                )
-
-                IconButton(
-                    enabled = true,
-                    onClick = {
-                        createCourseViewModel.removeModule(module)
-                    }
-                ) {
-                    Icon(Icons.Filled.Delete, stringResource(id = R.string.module_delete))
-                }
-            }
-
-            FormInput(
-                value = module.moduleName,
-                label = stringResource(id = R.string.module_name),
-                placeholder = { Text(stringResource(id = R.string.module_name_placeholder)) },
-                onValueChange = {
-                    createCourseViewModel.updateModuleName(module.moduleId, it)
-                }
-            )
-
-            module.listOfQuestions?.forEach { question ->
-                QuestionCreationAccordion(
-                    question = question,
-                    onRemove = {
-                        module.listOfQuestions.remove(question)
-                    }
-                )
-            }
-
-            AddNewElement(
-                label = stringResource(id = R.string.add_question),
-                onClick = {
-                    module.listOfQuestions?.add(
-                        Question(
-                            questionNumber = listOfQuestions.size + 1
-                        )
+        OutlinedTextField(
+            label = { Text(menuLabel) },
+            value = stringResource(localizeCourseCategory(createCourseViewModel.courseCategory)),
+            leadingIcon = {
+                Icon(
+                    Icons.Filled.ArrowDropDown,
+                    contentDescription = stringResource(
+                        id = R.string.contdesc_dropdownmenu_btn
                     )
-                }
-            )
+                )
+            },
+            enabled = true,
+            readOnly = true,
+            modifier = Modifier
+                .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                .fillMaxWidth(),
+            onValueChange = {}
+        )
+
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            listOfCategories.forEach { item ->
+                DropdownMenuItem(
+                    text = { Text(stringResource(localizeCourseCategory(item))) },
+                    onClick = {
+                        createCourseViewModel.updateCourseCategory(item)
+                        expanded = false
+                    }
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CorrectAnswerFormSelect(
+    createCourseViewModel: CreateCourseViewModel,
+    questionId: String,
+    moduleId: String,
+    listOfAnswers: List<String>
+) {
+    val menuLabel: String = stringResource(id = R.string.correct_answer)
+
+    var menuValue by remember {
+        mutableStateOf("")
+    }
+
+    // STATES //
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+
+    // COMPOSABLES //
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = it },
+    ) {
+        OutlinedTextField(
+            label = { Text(menuLabel) },
+            value = menuValue,
+            leadingIcon = {
+                Icon(
+                    Icons.Filled.ArrowDropDown,
+                    contentDescription = stringResource(
+                        id = R.string.contdesc_dropdownmenu_btn
+                    )
+                )
+            },
+            enabled = true,
+            readOnly = true,
+            modifier = Modifier
+                .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                .fillMaxWidth(),
+            onValueChange = {}
+        )
+
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            listOfAnswers.forEach { item ->
+                DropdownMenuItem(
+                    text = { Text(item) },
+                    onClick = {
+                        createCourseViewModel.updateQuestionCorrectAnswer(
+                            moduleId,
+                            questionId,
+                            item
+                        )
+                        menuValue = item
+                        expanded = false
+                    }
+                )
+            }
         }
     }
 }

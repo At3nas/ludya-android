@@ -35,6 +35,15 @@
     <string name="cancel">Cancelar</string>
     <string name="delete">Eliminar</string>
 
+    <!-- CATEGORIES -->
+    <string name="category_tech">Ingeniería y Tecnología</string>
+    <string name="category_exact_sci">Ciencias Exactas y Naturales</string>
+    <string name="category_medical_sci">Ciencias Médicas y de la Salud</string>
+    <string name="category_social_sci">Ciencias Sociales</string>
+    <string name="category_arts_humanities">Artes y Humanidades</string>
+    <string name="category_languages">Idiomas</string>
+    <string name="category_other">Otra</string>
+
     <!-- ROLES -->
     <string name="student">Estudiante</string>
     <string name="teacher">Docente</string>

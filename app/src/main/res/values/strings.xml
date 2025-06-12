@@ -70,6 +70,15 @@
     <string name="answer">Answer</string>
     <string name="correct_answer">Correct answer</string>
 
+    <!-- CATEGORIES -->
+    <string name="category_tech">Engineering and Technology</string>
+    <string name="category_exact_sci">Exact and Natural Sciences</string>
+    <string name="category_medical_sci">Medical and Health Sciences</string>
+    <string name="category_social_sci">Social Sciences</string>
+    <string name="category_arts_humanities">Arts and Humanities</string>
+    <string name="category_languages">Languages</string>
+    <string name="category_other">Other</string>
+
     <!-- ROLES -->
     <string name="student">Student</string>
     <string name="teacher">Teacher</string>
