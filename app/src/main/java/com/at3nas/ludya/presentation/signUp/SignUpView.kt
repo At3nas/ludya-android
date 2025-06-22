@@ -27,7 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.user.UserRole
 import com.at3nas.ludya.presentation.signUp.model.SignUp
-import com.at3nas.ludya.presentation.ui.BgColor
+import com.at3nas.ludya.presentation.ui.AlmostWhite
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
 import com.at3nas.ludya.presentation.ui.components.form.FormInput
@@ -177,7 +177,7 @@ fun SignUpView(
                     contentDescription = stringResource(id = R.string.signup_google),
                     type = Type.OUTLINED,
                     icon = painterResource(id = R.drawable.icon_google),
-                    iconColor = BgColor,
+                    iconColor = AlmostWhite,
                     iconSize = 20.dp,
                     space = 5.dp,
                     onClick = {},

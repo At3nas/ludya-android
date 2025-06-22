@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.Achievement
-import com.at3nas.ludya.presentation.ui.Blue700
-import com.at3nas.ludya.presentation.ui.Green700
+import com.at3nas.ludya.presentation.ui.SecondaryLight
+import com.at3nas.ludya.presentation.ui.TertiaryLight
 import com.at3nas.ludya.presentation.ui.Yellow700
 import com.at3nas.ludya.presentation.ui.components.IconLabel
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
@@ -59,7 +59,7 @@ fun ProfileView(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            ProfileAvatar(Green700, painterResource(id = R.drawable.face_female_1))
+            ProfileAvatar(TertiaryLight, painterResource(id = R.drawable.face_female_1))
             Text(
                 text = "$displayName",
                 fontSize = 18.sp,
@@ -85,7 +85,7 @@ fun ProfileView(
                 label = gems.toString(),
                 contentDesc = "Gems",
                 icon = painterResource(id = R.drawable.icon_gem),
-                iconColor = Blue700
+                iconColor = SecondaryLight
             )
         }
 

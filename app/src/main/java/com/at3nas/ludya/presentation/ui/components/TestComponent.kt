@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.at3nas.ludya.presentation.ui.BgColor
+import com.at3nas.ludya.presentation.ui.AlmostWhite
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
@@ -46,7 +46,7 @@ fun NewButton() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         content = {
-            Text(text = "CLICK ME", color = BgColor)
+            Text(text = "CLICK ME", color = AlmostWhite)
         },
         modifier = Modifier
             .clip(buttonShape)

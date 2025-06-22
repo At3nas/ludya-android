@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.painter.Painter
-import com.at3nas.ludya.presentation.ui.Red700
+import com.at3nas.ludya.presentation.ui.PrimaryLight
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,7 +25,7 @@ fun SplashHeader(headerIcon: Painter?, headerTitle: String?, headerDesc: String?
                     painter = headerIcon,
                     contentDescription = null,
                     modifier = Modifier.size(iconSize),
-                    tint = Red700
+                    tint = PrimaryLight
                 )
             }
 
@@ -33,7 +33,7 @@ fun SplashHeader(headerIcon: Painter?, headerTitle: String?, headerDesc: String?
                 Text(text = headerTitle,
                     fontSize = 25.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Red700,
+                    color = PrimaryLight,
                     textAlign = TextAlign.Center)
             }
 

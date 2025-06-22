@@ -8,29 +8,76 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+// DARK THEME SCHEME //
+val DarkColorScheme = darkColorScheme(
+    // Primary
+    primary = PrimaryDark,
+    onPrimary = OnPrimaryDark,
+    primaryContainer = PrimaryContainerDark,
+    onPrimaryContainer = PrimaryContainerLight,
+
+    // Secondary
+    secondary = SecondaryDark,
+    onSecondary = OnSecondaryDark,
+    secondaryContainer = SecondaryContainerDark,
+    onSecondaryContainer = SecondaryContainerLight,
+
+    // Tertiary
+    tertiary = TertiaryDark,
+    onTertiary = OnTertiaryDark,
+    tertiaryContainer = TertiaryContainerDark,
+    onTertiaryContainer = TertiaryContainerLight,
+
+    // Background
+    background = AlmostBlack,
+    onBackground = AlmostWhite,
+
+    surface = AlmostBlack,
+    onSurface = AlmostWhite,
+
+    // Error
+    error = Color(0xFFF2B8B5),
+    onError = Color(0xFF601410),
+    errorContainer = Color(0xFF8C1D18),
+    onErrorContainer = ErrorContainerLight
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Red700,
-    secondary = Blue700,
-    tertiary = Green700,
-    surface = Red700
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
+// LIGHT THEME SCHEME //
+val LightColorScheme = lightColorScheme(
+    // Primary
+    primary = PrimaryLight,
     onPrimary = Color.White,
+    primaryContainer = PrimaryContainerLight,
+    onPrimaryContainer = OnPrimaryContainerLight,
+
+    // Secondary
+    secondary = SecondaryLight,
     onSecondary = Color.White,
+    secondaryContainer = SecondaryContainerLight,
+    onSecondaryContainer = OnSecondaryContainerLight,
+
+    // Tertiary
+    tertiary = TertiaryLight,
     onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    tertiaryContainer = TertiaryContainerLight,
+    onTertiaryContainer = OnTertiaryContainerLight,
+
+    // Background
+    background = AlmostWhite,
+    onBackground = AlmostBlack,
+
+    surface = AlmostWhite,
+    onSurface = AlmostBlack,
+
+    // Error
+    error = Color(0xFFB3261E),
+    onError = Color.White,
+    errorContainer = ErrorContainerLight,
+    onErrorContainer = Color(0xFF410E0B)
 )
 
 @Composable

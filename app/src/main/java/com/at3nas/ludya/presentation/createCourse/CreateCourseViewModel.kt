@@ -1,5 +1,6 @@
 package com.at3nas.ludya.presentation.createCourse
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -127,11 +128,12 @@ class CreateCourseViewModel @Inject constructor(
         val listOfQuestions = getModuleQuestions(moduleId)
         val questionIndex = listOfQuestions?.indexOfFirst { it.questionId == questionId }
 
-        if (questionIndex != null && questionIndex != -1) {
+        if (listOfQuestions != null && questionIndex != null && questionIndex != -1) {
+            Log.d("REMOVING QUESTION:", "${listOfQuestions[questionIndex]}")
             listOfQuestions.removeAt(questionIndex)
 
-            listOfQuestions.forEachIndexed { index, element ->
-                listOfQuestions[index] = element.copy(
+            listOfQuestions.forEachIndexed { index, question ->
+                listOfQuestions[index] = question.copy(
                     questionNumber = index + 1
                 )
             }
