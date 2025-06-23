@@ -41,7 +41,7 @@ import com.at3nas.ludya.domain.model.course.CourseModule
 import com.at3nas.ludya.domain.model.course.Question
 import com.at3nas.ludya.domain.model.course.localizeCourseCategory
 import com.at3nas.ludya.presentation.ui.components.ActionButton
-import com.at3nas.ludya.presentation.ui.components.Type
+import com.at3nas.ludya.presentation.ui.components.ButtonType
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 import com.at3nas.ludya.presentation.ui.components.form.AddNewElement
 import com.at3nas.ludya.presentation.ui.components.form.FormInput
@@ -63,7 +63,7 @@ fun CreateCourseView(
             // TESTING //
             ActionButton(
                 label = "listOfModules",
-                type = Type.FILLED,
+                type = ButtonType.FILLED,
                 onClick = {
                     Log.d("listOfModules: ", "${createCourseViewModel.listOfModules}")
                 }
@@ -123,7 +123,7 @@ fun CreateCourseView(
 
         ActionButton(
             label = stringResource(id = R.string.create),
-            type = Type.FILLED,
+            type = ButtonType.FILLED,
             onClick = {
                 createCourseViewModel.createCourse()
             }

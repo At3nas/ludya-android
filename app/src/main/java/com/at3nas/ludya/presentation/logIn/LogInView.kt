@@ -20,7 +20,7 @@ import com.at3nas.ludya.presentation.logIn.model.Login
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.form.FormInput
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
-import com.at3nas.ludya.presentation.ui.components.Type
+import com.at3nas.ludya.presentation.ui.components.ButtonType
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 // View | Login //
@@ -79,7 +79,7 @@ fun LoginView(
 
         ActionButton(
             label = stringResource(id = R.string.login),
-            type = Type.FILLED,
+            type = ButtonType.FILLED,
             onClick = {
                 val user = Login(
                     email = email,
@@ -96,7 +96,7 @@ fun LoginView(
         )
         ActionButton(
             label = "TESTING STUDENT",
-            type = Type.FILLED,
+            type = ButtonType.FILLED,
             onClick = {
                 val user = Login(
                     email = "at3nas@student.com",
@@ -109,7 +109,7 @@ fun LoginView(
 
         ActionButton(
             label = "TESTING TEACHER",
-            type = Type.FILLED,
+            type = ButtonType.FILLED,
             onClick = {
                 val user = Login(
                     email = "at3nas@teacher.com",

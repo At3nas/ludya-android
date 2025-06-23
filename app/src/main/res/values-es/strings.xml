@@ -63,6 +63,7 @@
     <string name="course_description_placeholder">Aprende los fundamentos de la Biología</string>
 
     <string name="create_course">Crear curso</string>
+    <string name="search_course">Buscar un curso</string>
 
     <!-- MODULE -->
     <string name="module">Módulo</string>

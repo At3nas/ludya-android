@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.at3nas.ludya.presentation.ui.LudyaTheme
 
 
-enum class Type {
+enum class ButtonType {
     FILLED,
     OUTLINED
 }
@@ -26,7 +26,7 @@ enum class Type {
 fun ActionButtonIcon(
     label: String,
     contentDescription: String,
-    type: Type,
+    buttonType: ButtonType,
     onClick: () -> Unit,
     icon: Painter,
     iconColor: Color,
@@ -45,15 +45,15 @@ fun ActionButtonIcon(
         )
     }
 
-    when (type) {
-        Type.FILLED -> Button(
+    when (buttonType) {
+        ButtonType.FILLED -> Button(
             content = content,
             modifier = Modifier.fillMaxWidth(),
             onClick = { onClick() },
             enabled = enabled
         )
 
-        Type.OUTLINED -> OutlinedButton(
+        ButtonType.OUTLINED -> OutlinedButton(
             content = content,
             modifier = Modifier.fillMaxWidth(),
             onClick = { onClick() },
@@ -66,7 +66,7 @@ fun ActionButtonIcon(
 fun ActionButtonIcon(
     label: String,
     contentDescription: String,
-    type: Type,
+    buttonType: ButtonType,
     onClick: () -> Unit,
     icon: ImageVector,
     enabled: Boolean
@@ -81,15 +81,15 @@ fun ActionButtonIcon(
         )
     }
 
-    when (type) {
-        Type.FILLED -> Button(
+    when (buttonType) {
+        ButtonType.FILLED -> Button(
             content = content,
             modifier = Modifier.fillMaxWidth(),
             onClick = { onClick() },
             enabled = enabled
         )
 
-        Type.OUTLINED -> OutlinedButton(
+        ButtonType.OUTLINED -> OutlinedButton(
             content = content,
             modifier = Modifier.fillMaxWidth(),
             onClick = { onClick() },
@@ -101,11 +101,11 @@ fun ActionButtonIcon(
 @Composable
 fun ActionButton(
     label: String,
-    type: Type, onClick: () -> Unit,
+    type: ButtonType, onClick: () -> Unit,
     enabled: Boolean = true
 ) {
     when (type) {
-        Type.FILLED -> {
+        ButtonType.FILLED -> {
             Button(
                 content = { Text(label) },
                 modifier = Modifier.fillMaxWidth(),
@@ -114,7 +114,7 @@ fun ActionButton(
             )
         }
 
-        Type.OUTLINED -> {
+        ButtonType.OUTLINED -> {
             OutlinedButton(
                 content = { Text(label) },
                 modifier = Modifier.fillMaxWidth(),

@@ -12,7 +12,7 @@ import com.at3nas.ludya.R
 import com.at3nas.ludya.presentation.ui.LudyaTheme
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
-import com.at3nas.ludya.presentation.ui.components.Type
+import com.at3nas.ludya.presentation.ui.components.ButtonType
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
@@ -30,13 +30,13 @@ fun WelcomeView(navigateToRegister: () -> Unit, navigateToLogin: () -> Unit) {
         Column {
             ActionButton(
                 label = stringResource(id = R.string.signup),
-                type = Type.FILLED,
+                type = ButtonType.FILLED,
                 onClick = navigateToRegister,
                 enabled = true
             )
             ActionButton(
                 label = stringResource(id = R.string.login),
-                type = Type.OUTLINED,
+                type = ButtonType.OUTLINED,
                 onClick = navigateToLogin,
                 enabled = true
             )

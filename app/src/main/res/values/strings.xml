@@ -51,6 +51,7 @@
     <string name="course_description_placeholder">Learn the basics of Biology</string>
 
     <string name="create_course">Create course</string>
+    <string name="search_course">Search a course</string>
 
     <!-- MODULE -->
     <string name="module">Module</string>

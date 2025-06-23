@@ -32,7 +32,7 @@ import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
 import com.at3nas.ludya.presentation.ui.components.form.FormInput
 import com.at3nas.ludya.presentation.ui.components.SplashHeader
-import com.at3nas.ludya.presentation.ui.components.Type
+import com.at3nas.ludya.presentation.ui.components.ButtonType
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
@@ -151,7 +151,7 @@ fun SignUpView(
                 // REGISTER //
                 ActionButton(
                     label = stringResource(id = R.string.confirm),
-                    type = Type.FILLED,
+                    type = ButtonType.FILLED,
                     onClick = {
                         // Creates new user //
                         val newUser = SignUp(
@@ -175,7 +175,7 @@ fun SignUpView(
                 ActionButtonIcon(
                     label = stringResource(id = R.string.signup_google),
                     contentDescription = stringResource(id = R.string.signup_google),
-                    type = Type.OUTLINED,
+                    buttonType = ButtonType.OUTLINED,
                     icon = painterResource(id = R.drawable.icon_google),
                     iconColor = AlmostWhite,
                     iconSize = 20.dp,
