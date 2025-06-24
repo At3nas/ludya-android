@@ -17,6 +17,7 @@ firebaseAuth = "23.2.0"
 runtimeLivedataVersion = "1.8.1"
 firebaseFirestore = "25.1.4"
 ksp = "2.1.21-2.0.1"
+uiTextGoogleFonts = "1.8.3"
 
 
 [libraries]
@@ -53,6 +54,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
 
 [plugins]

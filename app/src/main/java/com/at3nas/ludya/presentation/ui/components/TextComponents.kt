@@ -6,10 +6,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ScreenTitle(text: String) {
+fun ScreenTitle(
+    text: String,
+    color: Color = MaterialTheme.colorScheme.onSurface
+) {
     Text(
         text = text,
         style = MaterialTheme.typography.titleLarge
@@ -17,7 +21,10 @@ fun ScreenTitle(text: String) {
 }
 
 @Composable
-fun SectionTitle(text: String) {
+fun SectionTitle(
+    text: String,
+    color: Color = MaterialTheme.colorScheme.onSurface
+) {
     Text(
         text = text,
         style = MaterialTheme.typography.titleMedium
@@ -26,9 +33,13 @@ fun SectionTitle(text: String) {
 }
 
 @Composable
-fun CardTitle(text: String) {
+fun CardTitle(
+    text: String,
+    color: Color = MaterialTheme.colorScheme.onSurface
+) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodyLarge
     )
+    Spacer(Modifier.height(8.dp))
 }

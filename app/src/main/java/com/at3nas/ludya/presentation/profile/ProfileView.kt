@@ -1,7 +1,5 @@
 package com.at3nas.ludya.presentation.profile
 
-import androidx.hilt.navigation.compose.hiltViewModel
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +16,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,11 +30,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.Achievement
-import com.at3nas.ludya.presentation.ui.SecondaryLight
-import com.at3nas.ludya.presentation.ui.TertiaryLight
-import com.at3nas.ludya.presentation.ui.Yellow700
 import com.at3nas.ludya.presentation.ui.components.IconLabel
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
@@ -59,7 +56,10 @@ fun ProfileView(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            ProfileAvatar(TertiaryLight, painterResource(id = R.drawable.face_female_1))
+            ProfileAvatar(
+                MaterialTheme.colorScheme.tertiary,
+                painterResource(id = R.drawable.face_female_1)
+            )
             Text(
                 text = "$displayName",
                 fontSize = 18.sp,
@@ -78,14 +78,14 @@ fun ProfileView(
                 label = coins.toString(),
                 contentDesc = "Coins",
                 icon = painterResource(id = R.drawable.icon_coin),
-                iconColor = Yellow700
+                iconColor = MaterialTheme.colorScheme.primary
             )
             Spacer(Modifier.size(20.dp))
             CurrencyInfo(
                 label = gems.toString(),
                 contentDesc = "Gems",
                 icon = painterResource(id = R.drawable.icon_gem),
-                iconColor = SecondaryLight
+                iconColor = MaterialTheme.colorScheme.primary
             )
         }
 

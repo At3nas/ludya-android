@@ -26,13 +26,6 @@ fun TopBar() {
                 content = { Icon(Icons.Filled.Menu, null) },
                 onClick = {}
             )
-        },
-        colors = TopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            scrolledContainerColor = MaterialTheme.colorScheme.primary,
-            actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
-            titleContentColor = MaterialTheme.colorScheme.onPrimary,
-            navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
-        )
+        }
     )
 }

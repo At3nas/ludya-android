@@ -11,6 +11,10 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
 
+    <!-- HOME -->
+    <string name="home_welcome">Welcome back,</string>
+    <string name="home_welcome_subtitle">What do you want to learn today?</string>
+
     <!-- NAVIGATION -->
     <string name="view_home">Home</string>
     <string name="view_explore">Explore</string>
@@ -52,6 +56,8 @@
 
     <string name="create_course">Create course</string>
     <string name="search_course">Search a course</string>
+
+    <string name="created_by">Created by</string>
 
     <!-- MODULE -->
     <string name="module">Module</string>

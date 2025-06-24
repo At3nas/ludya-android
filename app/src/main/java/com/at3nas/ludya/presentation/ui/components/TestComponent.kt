@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.at3nas.ludya.presentation.ui.AlmostWhite
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
@@ -46,7 +46,11 @@ fun NewButton() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         content = {
-            Text(text = "CLICK ME", color = AlmostWhite)
+            Text(
+                text = "CLICK ME",
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+
         },
         modifier = Modifier
             .clip(buttonShape)

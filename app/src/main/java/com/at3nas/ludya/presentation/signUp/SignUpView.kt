@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +28,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.user.UserRole
 import com.at3nas.ludya.presentation.signUp.model.SignUp
-import com.at3nas.ludya.presentation.ui.AlmostWhite
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
 import com.at3nas.ludya.presentation.ui.components.form.FormInput
@@ -177,7 +177,7 @@ fun SignUpView(
                     contentDescription = stringResource(id = R.string.signup_google),
                     buttonType = ButtonType.OUTLINED,
                     icon = painterResource(id = R.drawable.icon_google),
-                    iconColor = AlmostWhite,
+                    iconColor = MaterialTheme.colorScheme.surface,
                     iconSize = 20.dp,
                     space = 5.dp,
                     onClick = {},
