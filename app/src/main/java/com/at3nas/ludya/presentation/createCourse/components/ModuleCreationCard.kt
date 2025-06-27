@@ -84,10 +84,11 @@ fun ModuleCreationCard(
                 onClick = {
                     listOfQuestions.add(
                         Question(
-                            questionNumber = listOfQuestions.size + 1
+                            questionNumber = listOfQuestions.size + 1,
+                            listOfAnswers = mutableStateListOf()
                         )
                     )
-                    createCourseViewModel.addQuestions(module.moduleId, listOfQuestions)
+                    createCourseViewModel.addQuestion(module.moduleId, listOfQuestions)
                 }
             )
         }

@@ -26,6 +26,7 @@ import com.at3nas.ludya.R
 import com.at3nas.ludya.presentation.createCourse.CreateCourseView
 import com.at3nas.ludya.presentation.home.HomeView
 import com.at3nas.ludya.presentation.profile.ProfileView
+import com.at3nas.ludya.presentation.ui.components.TestContainer
 
 //@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -47,6 +48,7 @@ fun MainScaffold(
                 MainScaffoldRoute.HOME -> HomeView(innerPadding)
                 MainScaffoldRoute.PROFILE -> ProfileView(innerPadding)
                 MainScaffoldRoute.ACADEMY -> CreateCourseView(innerPadding)
+                MainScaffoldRoute.TESTING -> TestContainer(innerPadding)
             }
         },
         bottomBar = {
@@ -80,6 +82,13 @@ fun MainScaffold(
                                 stringResource(id = R.string.view_profile),
                                 painterResource(id = R.drawable.icon_user)
                             ) { scaffoldContent = MainScaffoldRoute.PROFILE }
+
+                            // TESTING //
+                            BottomBarItem(
+                                stringResource(id = R.string.view_profile),
+                                painterResource(id = R.drawable.icon_search)
+                            ) { scaffoldContent = MainScaffoldRoute.TESTING }
+                            // END TESTING //
                         }
                     )
                 }

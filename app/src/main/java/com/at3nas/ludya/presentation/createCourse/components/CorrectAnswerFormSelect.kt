@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.at3nas.ludya.R
+import com.at3nas.ludya.domain.model.course.Answer
 import com.at3nas.ludya.presentation.createCourse.CreateCourseViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,7 +27,7 @@ fun CorrectAnswerFormSelect(
     createCourseViewModel: CreateCourseViewModel,
     questionId: String,
     moduleId: String,
-    listOfAnswers: List<String>
+    listOfAnswers: MutableList<Answer>
 ) {
     val menuLabel: String = stringResource(id = R.string.correct_answer)
 
@@ -69,14 +70,14 @@ fun CorrectAnswerFormSelect(
         ) {
             listOfAnswers.forEach { item ->
                 DropdownMenuItem(
-                    text = { Text(item) },
+                    text = { Text("${item.answerNumber}) ${item.answerValue}") },
                     onClick = {
-                        createCourseViewModel.updateQuestionCorrectAnswer(
+                        createCourseViewModel.updateCorrectAnswer(
                             moduleId,
                             questionId,
-                            item
+                            item.answerValue
                         )
-                        menuValue = item
+                        menuValue = item.answerValue
                         expanded = false
                     }
                 )

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,14 +25,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.Achievement
-import com.at3nas.ludya.presentation.ui.components.IconLabel
+import com.at3nas.ludya.presentation.profile.components.CurrencyInfo
+import com.at3nas.ludya.presentation.profile.components.LevelInfo
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
@@ -46,6 +45,8 @@ fun ProfileView(
     val username = profileViewModel.username
     val coins = profileViewModel.coins
     val gems = profileViewModel.gems
+    val level = profileViewModel.level
+    val exp = profileViewModel.exp
 
     ColumnContainer(
         modifier = Modifier
@@ -72,24 +73,19 @@ fun ProfileView(
             )
         }
 
-        Row(
-        ) {
-            CurrencyInfo(
-                label = coins.toString(),
-                contentDesc = "Coins",
-                icon = painterResource(id = R.drawable.icon_coin),
-                iconColor = MaterialTheme.colorScheme.primary
-            )
-            Spacer(Modifier.size(20.dp))
-            CurrencyInfo(
-                label = gems.toString(),
-                contentDesc = "Gems",
-                icon = painterResource(id = R.drawable.icon_gem),
-                iconColor = MaterialTheme.colorScheme.primary
+        CurrencyInfo(
+            gems = gems.toString(),
+            coins = coins.toString()
+        )
+
+        if (level != null && exp != null) {
+            LevelInfo(
+                level = 50,
+                exp = 20
             )
         }
 
-        ProfileSection(stringResource(id = R.string.achievements))
+//        ProfileSection(stringResource(id = R.string.achievements))
 
     }
 }
@@ -113,18 +109,6 @@ fun ProfileAvatar(bgColor: Color, avatar: Painter) {
             modifier = Modifier.wrapContentSize()
         )
     }
-}
-
-@Composable
-fun CurrencyInfo(label: String, contentDesc: String, icon: Painter, iconColor: Color) {
-    IconLabel(
-        label = label,
-        icon = icon,
-        contentDescription = contentDesc,
-        iconColor = iconColor,
-        iconSize = 20.dp,
-        space = 5.dp
-    )
 }
 
 @Composable

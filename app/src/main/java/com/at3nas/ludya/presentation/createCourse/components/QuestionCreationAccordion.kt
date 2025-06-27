@@ -15,7 +15,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -23,8 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.at3nas.ludya.R
+import com.at3nas.ludya.domain.model.course.Answer
 import com.at3nas.ludya.domain.model.course.Question
 import com.at3nas.ludya.presentation.createCourse.CreateCourseViewModel
+import com.at3nas.ludya.presentation.ui.components.form.AddNewElement
 import com.at3nas.ludya.presentation.ui.components.form.FormInput
 
 @Composable
@@ -42,23 +46,7 @@ fun QuestionCreationAccordion(
         mutableStateOf("")
     }
 
-    var answer1 by rememberSaveable {
-        mutableStateOf("")
-    }
-
-    var answer2 by rememberSaveable {
-        mutableStateOf("")
-    }
-
-    var answer3 by rememberSaveable {
-        mutableStateOf("")
-    }
-
-    var answer4 by rememberSaveable {
-        mutableStateOf("")
-    }
-
-    val listOfAnswers = listOf(answer1, answer2, answer3, answer4)
+    val listOfAnswers = remember { mutableStateListOf<Answer>() }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -112,54 +100,29 @@ fun QuestionCreationAccordion(
                     }
                 )
 
-                FormInput(
-                    value = answer1,
-                    label = stringResource(id = R.string.answer) + " 1",
-                    onValueChange = {
-                        answer1 = it
-                        createCourseViewModel.updateQuestionAnswer1(
-                            moduleId,
-                            question.questionId,
-                            answer1
-                        )
-                    }
-                )
+                listOfAnswers.forEach { answer ->
+                    AnswerFormInput(
+                        createCourseViewModel,
+                        moduleId,
+                        question.questionId,
+                        answer
+                    )
+                }
 
-                FormInput(
-                    value = answer2,
-                    label = stringResource(id = R.string.answer) + " 2",
-                    onValueChange = {
-                        answer2 = it
-                        createCourseViewModel.updateQuestionAnswer2(
-                            moduleId,
-                            question.questionId,
-                            answer2
+                AddNewElement(
+                    label = "New answer",
+                    onClick = {
+                        listOfAnswers.add(
+                            Answer(
+                                answerNumber = listOfAnswers.size+1,
+                                answerValue = ""
+                            )
                         )
-                    }
-                )
 
-                FormInput(
-                    value = answer3,
-                    label = stringResource(id = R.string.answer) + " 3",
-                    onValueChange = {
-                        answer3 = it
-                        createCourseViewModel.updateQuestionAnswer3(
+                        createCourseViewModel.addAnswer(
                             moduleId,
                             question.questionId,
-                            answer3
-                        )
-                    }
-                )
-
-                FormInput(
-                    value = answer4,
-                    label = stringResource(id = R.string.answer) + " 4",
-                    onValueChange = {
-                        answer4 = it
-                        createCourseViewModel.updateQuestionAnswer4(
-                            moduleId,
-                            question.questionId,
-                            answer4
+                            listOfAnswers
                         )
                     }
                 )
@@ -171,7 +134,6 @@ fun QuestionCreationAccordion(
                     listOfAnswers
                 )
             }
-
         }
     }
 }

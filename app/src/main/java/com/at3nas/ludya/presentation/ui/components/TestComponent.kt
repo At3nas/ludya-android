@@ -4,11 +4,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,14 +39,9 @@ import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 // TESTING IMPLEMENTATION OF NEW DESIGNS //
 @Preview
 @Composable
-fun TestContainer() {
-    ColumnContainer {
-        RewardInput()
-    }
-}
-
-fun RewardInput() {
-
+fun TestContainer(
+    innerPadding: PaddingValues = PaddingValues(vertical = 200.dp)
+) {
 }
 
 @Composable
@@ -86,4 +96,61 @@ fun NewButton() {
 //        ),
 //        onClick = {}
 //    )
+}
+
+
+@Composable
+fun QuizScreen(
+    innerPadding: PaddingValues,
+    question: String,
+    options: List<String>,
+    correctAnswerIndex: Int,
+    onAnswerSelected: (isCorrect: Boolean) -> Unit
+) {
+    var selectedAnswer by rememberSaveable { mutableStateOf<Int?>(null) }
+    var containerColor = MaterialTheme.colorScheme.primary
+
+    ColumnContainer(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        ScreenTitle(
+            text = question
+        )
+
+        options.forEachIndexed { index, option ->
+            val isSelected = selectedAnswer == index
+            val isCorrect = index == correctAnswerIndex
+
+            Button(
+                onClick = {
+                    if (selectedAnswer == null) {
+                        selectedAnswer = index
+                        onAnswerSelected(index == correctAnswerIndex)
+
+                        containerColor = when {
+                            selectedAnswer == null -> containerColor
+                            isSelected && isCorrect -> Color(0xFF4CAF50)
+                            isSelected && !isCorrect -> Color(0xFFF44336)
+                            else -> containerColor
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .size(width = 150.dp, height = 40.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = containerColor,
+                    disabledContainerColor = containerColor,
+                    contentColor = Color.White
+                ),
+                enabled = selectedAnswer == null
+            ) {
+                Text(option)
+            }
+        }
+    }
 }

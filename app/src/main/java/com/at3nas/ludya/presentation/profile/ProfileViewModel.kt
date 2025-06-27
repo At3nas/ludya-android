@@ -28,6 +28,12 @@ class ProfileViewModel @Inject constructor(
     var gems by mutableStateOf<Long?>(0)
         private set
 
+    var level by mutableStateOf<Long?>(0)
+        private set
+
+    var exp by mutableStateOf<Long?>(0)
+        private set
+
     // FUNCTIONS //
     init {
         loadProfileData()
@@ -39,6 +45,8 @@ class ProfileViewModel @Inject constructor(
             displayName = profileRepository.getDisplayName()
             coins = profileRepository.getCoins()
             gems = profileRepository.getGems()
+            level = profileRepository.getLevel()
+            exp = profileRepository.getExp()
         }
     }
 

@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.at3nas.ludya.domain.model.course.Answer
 import com.at3nas.ludya.domain.model.course.Course
 import com.at3nas.ludya.domain.model.course.CourseCategory
 import com.at3nas.ludya.domain.model.course.CourseModule
@@ -55,7 +56,44 @@ class CreateCourseViewModel @Inject constructor(
         }
     }
 
-    // UPDATE | COURSE //
+    // ADD //
+    // Module
+    fun addNewModule() {
+        listOfModules.add(
+            CourseModule(
+                moduleNumber = listOfModules.size + 1,
+                listOfQuestions = mutableStateListOf()
+            )
+        )
+    }
+
+    // Question
+    fun addQuestion(moduleId: String, listOfQuestions: MutableList<Question>) {
+        val index = getModuleIndex(moduleId)
+
+        if (index != -1) {
+            listOfModules[index] = listOfModules[index].copy(
+                listOfQuestions = listOfQuestions
+            )
+        }
+    }
+
+    fun addAnswer(moduleId: String, questionId: String, listOfAnswers: MutableList<Answer>) {
+        // Indexes //
+        val moduleIndex = getModuleIndex(moduleId)
+        val questionIndex = getQuestionIndex(moduleId, questionId)
+
+        val listOfQuestions = getModuleQuestions(moduleIndex)
+
+        if (questionIndex != -1) {
+            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
+                listOfAnswers = listOfAnswers
+            )
+        }
+    }
+
+    // UPDATE //
+    // Course
     fun updateCourseName(newName: String) {
         courseName = newName
     }
@@ -68,7 +106,7 @@ class CreateCourseViewModel @Inject constructor(
         courseCategory = newCategory
     }
 
-    // UPDATE | MODULE //
+    // Module
     fun updateModuleName(moduleId: String, newName: String) {
         val index = getModuleIndex(moduleId)
 
@@ -79,32 +117,49 @@ class CreateCourseViewModel @Inject constructor(
         }
     }
 
-    // UPDATE | QUESTION //
+    // Question
+    fun updateQuestionValue(moduleId: String, questionId: String, newQuestionValue: String) {
+        val listOfQuestions = getModuleQuestions(getModuleIndex(moduleId))
+        val questionIndex = getQuestionIndex(moduleId, questionId)
 
-
-    // GET | MODULE //
-    private fun getModuleIndex(moduleId: String): Int {
-        return listOfModules.indexOfFirst { it.moduleId == moduleId }
-    }
-
-    // GET | QUESTIONS //
-
-    // ADD //
-    fun addNewModule() {
-        listOfModules.add(
-            CourseModule(
-                moduleNumber = listOfModules.size + 1,
-                listOfQuestions = mutableStateListOf()
+        if (questionIndex != -1) {
+            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
+                question = newQuestionValue
             )
-        )
+        }
     }
 
-    fun addQuestions(moduleId: String, listOfQuestions: MutableList<Question>) {
-        val index = getModuleIndex(moduleId)
+    fun updateCorrectAnswer(
+        moduleId: String,
+        questionId: String,
+        newCorrectAnswer: String
+    ) {
+        val listOfQuestions = getModuleQuestions(getModuleIndex(moduleId))
+        val questionIndex = getQuestionIndex(moduleId, questionId)
 
-        if (index != -1) {
-            listOfModules[index] = listOfModules[index].copy(
-                listOfQuestions = listOfQuestions
+        if (questionIndex != -1) {
+            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
+                correctAnswer = newCorrectAnswer
+            )
+        }
+    }
+
+    // Answer
+    fun updateAnswerValue(
+        moduleId: String,
+        questionId: String,
+        answerId: String,
+        newAnswerValue: String
+    ) {
+        val listOfAnswers = getQuestionAnswers(
+            getModuleIndex(moduleId),
+            getQuestionIndex(moduleId, questionId)
+        )
+        val answerIndex = getAnswerIndex(moduleId, questionId, answerId)
+
+        if (answerIndex != -1) {
+            listOfAnswers[answerIndex] = listOfAnswers[answerIndex].copy(
+                answerValue = newAnswerValue
             )
         }
     }
@@ -113,7 +168,7 @@ class CreateCourseViewModel @Inject constructor(
     fun removeModule(moduleId: String) {
         listOfModules.removeAt(getModuleIndex(moduleId))
 
-        listOfModules.forEachIndexed { index, element ->
+        listOfModules.forEachIndexed { index, module ->
             if (index != -1) {
                 listOfModules[index] = listOfModules[index].copy(
                     moduleNumber = index + 1
@@ -122,101 +177,66 @@ class CreateCourseViewModel @Inject constructor(
         }
     }
 
-
-    // TESTING FUNCTIONS //
     fun removeQuestion(moduleId: String, questionId: String) {
-        val listOfQuestions = getModuleQuestions(moduleId)
-        val questionIndex = listOfQuestions?.indexOfFirst { it.questionId == questionId }
+        val listOfQuestions = getModuleQuestions(getModuleIndex(moduleId))
+        val questionIndex = getQuestionIndex(moduleId, questionId)
 
-        if (listOfQuestions != null && questionIndex != null && questionIndex != -1) {
+        if (questionIndex != -1) {
             Log.d("REMOVING QUESTION:", "${listOfQuestions[questionIndex]}")
             listOfQuestions.removeAt(questionIndex)
 
             listOfQuestions.forEachIndexed { index, question ->
-                listOfQuestions[index] = question.copy(
-                    questionNumber = index + 1
+                if (index != -1) {
+                    listOfQuestions[index] = question.copy(
+                        questionNumber = index + 1
+                    )
+                }
+            }
+        }
+    }
+
+    fun removeAnswer(moduleId: String, questionId: String, answerId: String) {
+        // Indexes //
+        val moduleIndex = getModuleIndex(moduleId)
+        val questionIndex = getQuestionIndex(moduleId, questionId)
+        val answerIndex = getAnswerIndex(moduleId, questionId, answerId)
+
+        // Lists //
+        val listOfAnswers = getQuestionAnswers(moduleIndex, questionIndex)
+
+        listOfAnswers.removeAt(answerIndex)
+        listOfAnswers.forEachIndexed { index, answer ->
+            if (index != -1) {
+                listOfAnswers[index] = answer.copy(
+                    answerNumber = index + 1
                 )
             }
         }
     }
 
-    fun getModuleQuestions(moduleId: String): MutableList<Question>? {
-        val index = getModuleIndex(moduleId)
-
-        return if (index != -1) {
-            listOfModules[index].listOfQuestions
-        } else {
-            null
-        }
+    // GET LISTS //
+    fun getModuleQuestions(moduleIndex: Int): MutableList<Question> {
+        return listOfModules[moduleIndex].listOfQuestions
     }
 
-    fun updateQuestionValue(moduleId: String, questionId: String, newQuestionValue: String) {
-        val listOfQuestions = getModuleQuestions(moduleId)
-        val questionIndex = listOfQuestions?.indexOfFirst { it.questionId == questionId }
-
-        if (questionIndex != null && questionIndex != -1) {
-            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
-                question = newQuestionValue
-            )
-        }
+    private fun getQuestionAnswers(moduleIndex: Int, questionIndex: Int): MutableList<Answer> {
+        val listOfQuestions = getModuleQuestions(moduleIndex)
+        return listOfQuestions[questionIndex].listOfAnswers
     }
 
-    fun updateQuestionAnswer1(moduleId: String, questionId: String, newAnswer1: String) {
-        val listOfQuestions = getModuleQuestions(moduleId)
-        val questionIndex = listOfQuestions?.indexOfFirst { it.questionId == questionId }
-
-        if (questionIndex != null && questionIndex != -1) {
-            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
-                answer1 = newAnswer1
-            )
-        }
+    // GET INDEX //
+    private fun getModuleIndex(moduleId: String): Int {
+        return listOfModules.indexOfFirst { it.moduleId == moduleId }
     }
 
-    fun updateQuestionAnswer2(moduleId: String, questionId: String, newAnswer2: String) {
-        val listOfQuestions = getModuleQuestions(moduleId)
-        val questionIndex = listOfQuestions?.indexOfFirst { it.questionId == questionId }
-
-        if (questionIndex != null && questionIndex != -1) {
-            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
-                answer2 = newAnswer2
-            )
-        }
+    private fun getQuestionIndex(moduleId: String, questionId: String): Int {
+        val listOfQuestions = getModuleQuestions(getModuleIndex(moduleId))
+        return listOfQuestions.indexOfFirst { it.questionId == questionId }
     }
 
-    fun updateQuestionAnswer3(moduleId: String, questionId: String, newAnswer3: String) {
-        val listOfQuestions = getModuleQuestions(moduleId)
-        val questionIndex = listOfQuestions?.indexOfFirst { it.questionId == questionId }
-
-        if (questionIndex != null && questionIndex != -1) {
-            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
-                answer3 = newAnswer3
-            )
-        }
-    }
-
-    fun updateQuestionAnswer4(moduleId: String, questionId: String, newAnswer4: String) {
-        val listOfQuestions = getModuleQuestions(moduleId)
-        val questionIndex = listOfQuestions?.indexOfFirst { it.questionId == questionId }
-
-        if (questionIndex != null && questionIndex != -1) {
-            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
-                answer4 = newAnswer4
-            )
-        }
-    }
-
-    fun updateQuestionCorrectAnswer(
-        moduleId: String,
-        questionId: String,
-        newCorrectAnswer: String
-    ) {
-        val listOfQuestions = getModuleQuestions(moduleId)
-        val questionIndex = listOfQuestions?.indexOfFirst { it.questionId == questionId }
-
-        if (questionIndex != null && questionIndex != -1) {
-            listOfQuestions[questionIndex] = listOfQuestions[questionIndex].copy(
-                correctAnswer = newCorrectAnswer
-            )
-        }
+    private fun getAnswerIndex(moduleId: String, questionId: String, answerId: String): Int {
+        val listOfAnswers =
+            getQuestionAnswers(getModuleIndex(moduleId), getQuestionIndex(moduleId, questionId))
+        return listOfAnswers.indexOfFirst { it.answerId == answerId }
     }
 }
