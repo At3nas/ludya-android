@@ -79,7 +79,7 @@ fun LoginView(
 
         ActionButton(
             label = stringResource(id = R.string.login),
-            type = ButtonType.FILLED,
+            buttonType = ButtonType.FILLED,
             onClick = {
                 val user = Login(
                     email = email,
@@ -96,7 +96,7 @@ fun LoginView(
         )
         ActionButton(
             label = "TESTING STUDENT",
-            type = ButtonType.FILLED,
+            buttonType = ButtonType.FILLED,
             onClick = {
                 val user = Login(
                     email = "at3nas@student.com",
@@ -109,7 +109,7 @@ fun LoginView(
 
         ActionButton(
             label = "TESTING TEACHER",
-            type = ButtonType.FILLED,
+            buttonType = ButtonType.FILLED,
             onClick = {
                 val user = Login(
                     email = "at3nas@teacher.com",

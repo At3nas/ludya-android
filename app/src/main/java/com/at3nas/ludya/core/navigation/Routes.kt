@@ -21,6 +21,12 @@ object Explore
 @Serializable
 object Profile
 
+@Serializable
+object ExploreCourses
+
+@Serializable
+object CourseView
+
 // STUDENT //
 //@Serializable
 //object Library

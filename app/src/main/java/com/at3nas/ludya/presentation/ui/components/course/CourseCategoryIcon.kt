@@ -3,9 +3,10 @@ package com.at3nas.ludya.presentation.ui.components.course
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -27,12 +28,13 @@ import com.at3nas.ludya.domain.model.course.localizeCourseCategory
 @Preview
 @Composable
 fun CourseCategoryIcon(
+    containerModifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.primary,
     containerSize: Dp = 20.dp,
     containerPadding: Dp = 2.dp,
     containerShape: Shape = MaterialTheme.shapes.extraSmall,
     iconColor: Color = MaterialTheme.colorScheme.onPrimary,
-    iconSize: Dp = 20.dp,
     courseCategory: CourseCategory = CourseCategory.OTHER
 ) {
     val categoryIcon: Painter = painterResource(id = getCourseCategoryIcon(courseCategory))
@@ -51,7 +53,7 @@ fun CourseCategoryIcon(
             painter = categoryIcon,
             contentDescription = categoryName,
             tint = iconColor,
-            modifier = Modifier.size(iconSize)
+            modifier = Modifier.fillMaxSize()
         )
     }
 }

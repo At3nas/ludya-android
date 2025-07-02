@@ -151,7 +151,7 @@ fun SignUpView(
                 // REGISTER //
                 ActionButton(
                     label = stringResource(id = R.string.confirm),
-                    type = ButtonType.FILLED,
+                    buttonType = ButtonType.FILLED,
                     onClick = {
                         // Creates new user //
                         val newUser = SignUp(
@@ -178,8 +178,6 @@ fun SignUpView(
                     buttonType = ButtonType.OUTLINED,
                     icon = painterResource(id = R.drawable.icon_google),
                     iconColor = MaterialTheme.colorScheme.surface,
-                    iconSize = 20.dp,
-                    space = 5.dp,
                     onClick = {},
                     enabled = false
                 )

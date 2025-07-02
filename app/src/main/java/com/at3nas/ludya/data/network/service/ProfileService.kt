@@ -44,8 +44,11 @@ class ProfileService @Inject constructor(
     }
 
     suspend fun getExp(): Long? {
-        return getProfileData()?.getLong("level.exp")
+        // cambiar a: level.currentExp
+        return getProfileData()?.getLong("level.xp")
     }
+
+    // agregar: getTotalExp() y updateTotalExp()
 
     // SET FIELDS //
     suspend fun updateDisplayName(newDisplayName: String) {
@@ -75,6 +78,6 @@ class ProfileService @Inject constructor(
     suspend fun updateExp(newExp: Double) {
         profileCollection
             .document(userService.getUid().toString())
-            .update("level.xp", newExp)
+            .update("level.xp", newExp) // cambiar a: level.currentExp
     }
 }

@@ -47,6 +47,7 @@
 
     <!-- COURSE -->
     <string name="course">Course</string>
+    <string name="courses">Courses</string>
 
     <string name="course_name">Course name</string>
     <string name="course_name_placeholder">Biology I</string>
@@ -57,10 +58,14 @@
     <string name="create_course">Create course</string>
     <string name="search_course">Search a course</string>
 
+    <string name="about_course">About this course</string>
+
     <string name="created_by">Created by</string>
+    <string name="enroll">Enroll</string>
 
     <!-- MODULE -->
     <string name="module">Module</string>
+    <string name="modules">Modules</string>
 
     <string name="module_name">Module name</string>
     <string name="module_name_placeholder">Cell biology</string>
@@ -70,6 +75,8 @@
 
     <!-- QUESTION -->
     <string name="question">Question</string>
+    <string name="questions">Questions</string>
+
     <string name="add_question">Add question</string>
 
     <string name="question_placeholder">What are organisms composed of more than one cell called?</string>

@@ -5,19 +5,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,11 +36,14 @@ import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 fun TestContainer(
     innerPadding: PaddingValues = PaddingValues(vertical = 200.dp)
 ) {
+    ColumnContainer {
+
+    }
 }
 
 @Composable
 fun NewButton() {
-    val buttonShape: Shape = CutCornerShape(10.dp)
+    val buttonShape: Shape = CutCornerShape(8.dp)
     val colorStops = arrayOf(
         0.0F to Color(0xFFD9DCDE),
         0.85F to Color(0xFF51585B)
@@ -77,8 +74,8 @@ fun NewButton() {
             .background(
                 Brush.radialGradient(
                     colors = listOf(
-                        Color(0xFF9C746A),
-                        Color(0xFF422C1D)
+                        MaterialTheme.colorScheme.primary,
+                        MaterialTheme.colorScheme.primaryContainer
                     ),
                     center = Offset.Unspecified,
                     radius = 900F
@@ -87,15 +84,6 @@ fun NewButton() {
 
 
     )
-//    Button(
-//        content = { Text("Log In") },
-//        enabled = true,
-//        shape = CutCornerShape(10.dp),
-//        colors = ButtonDefaults.buttonColors(
-//            containerColor = Color
-//        ),
-//        onClick = {}
-//    )
 }
 
 
@@ -118,8 +106,9 @@ fun QuizScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ScreenTitle(
-            text = question
+        CustomTitle(
+            text = question,
+            titleType = TitleType.SCREEN_TITLE
         )
 
         options.forEachIndexed { index, option ->

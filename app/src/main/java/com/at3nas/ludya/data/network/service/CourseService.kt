@@ -23,14 +23,19 @@ class CourseService @Inject constructor(
 
     suspend fun addCourse(course: Course) {
         courseCollection
-            .document()
+            .document(course.courseId)
             .set(course)
     }
 
-    suspend fun getAllCourses(): QuerySnapshot? {
-        return courseCollection
-            .get()
-            .await()
+    suspend fun getAllCourses(): List<Course> {
+        return try {
+            courseCollection
+                .get()
+                .await()
+                .toObjects(Course::class.java)
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 
     suspend fun getCoursesByCurrentUser(): QuerySnapshot? {
@@ -38,5 +43,13 @@ class CourseService @Inject constructor(
             .whereEqualTo("createdBy", userService.getUid())
             .get()
             .await()
+    }
+
+    suspend fun getCourseById(courseId: String): Course? {
+        return courseCollection
+            .document(courseId)
+            .get()
+            .await()
+            .toObject(Course::class.java)
     }
 }

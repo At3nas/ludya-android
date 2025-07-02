@@ -9,6 +9,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -26,25 +27,31 @@ fun LevelInfo(
     val color = MaterialTheme.colorScheme.tertiary
     val trackColor = MaterialTheme.colorScheme.tertiaryContainer
 
+    val progress = remember(exp, totalExp) {
+        if (totalExp > 0) {
+            exp.toFloat() / totalExp
+        } else 0f
+    }.coerceIn(0f, 1f)
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.size(80.dp)
     ) {
         CircularProgressIndicator(
-            progress = { exp / totalExp.toFloat() },
+            progress = { progress },
             strokeWidth = 8.dp,
             color = color,
             trackColor = trackColor,
             gapSize = 0.dp,
             modifier = Modifier.fillMaxSize()
         )
-        Spacer(Modifier.height(16.dp))
         Text(
             text = "$level",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold
         )
     }
+    Spacer(Modifier.height(8.dp))
     Text("$exp / $totalExp XP", style = MaterialTheme.typography.bodySmall)
 }
 

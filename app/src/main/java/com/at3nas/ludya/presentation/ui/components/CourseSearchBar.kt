@@ -25,7 +25,8 @@ import com.at3nas.ludya.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CourseSearchBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onSearch: () -> Unit = {}
 ) {
     var expanded by rememberSaveable { mutableStateOf(false) }
     val textFieldState = TextFieldState()

@@ -1,6 +1,9 @@
 package com.at3nas.ludya.domain.model.course
 
+import androidx.annotation.Keep
+
+@Keep
 data class Reward(
-    val gainedXp: Double = 0.0,
+    val gainedExp: Int = 0,
     val gainedCoins: Int = 0,
 )

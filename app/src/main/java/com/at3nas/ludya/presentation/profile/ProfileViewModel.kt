@@ -28,10 +28,10 @@ class ProfileViewModel @Inject constructor(
     var gems by mutableStateOf<Long?>(0)
         private set
 
-    var level by mutableStateOf<Long?>(0)
+    var level by mutableStateOf<Long?>(1)
         private set
 
-    var exp by mutableStateOf<Long?>(0)
+    var exp by mutableStateOf<Long?>(10)
         private set
 
     // FUNCTIONS //

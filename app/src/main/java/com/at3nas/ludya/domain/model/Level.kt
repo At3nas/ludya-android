@@ -3,7 +3,7 @@ package com.at3nas.ludya.domain.model
 class Level(
     var level: Int = 1,
     var currentExp: Double = 0.0,
-    var totalExp: Double = 0.5 * level
+    val totalExp: Double = 0.5 * level
 ) {
     fun levelUp() {
         if (currentExp > totalExp) {

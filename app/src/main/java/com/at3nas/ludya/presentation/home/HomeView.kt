@@ -26,11 +26,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.course.CourseCategory
 import com.at3nas.ludya.domain.model.course.localizeCourseCategory
 import com.at3nas.ludya.presentation.ui.components.CourseSearchBar
-import com.at3nas.ludya.presentation.ui.components.SectionTitle
+import com.at3nas.ludya.presentation.ui.components.CustomTitle
+import com.at3nas.ludya.presentation.ui.components.TitleType
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 import com.at3nas.ludya.presentation.ui.components.course.CourseCategoryIcon
 
@@ -38,7 +40,9 @@ import com.at3nas.ludya.presentation.ui.components.course.CourseCategoryIcon
 @Composable
 fun HomeView(
     innerPadding: PaddingValues = PaddingValues(vertical = 200.dp),
-//    homeViewModel: HomeViewModel = hiltViewModel(),
+    homeViewModel: HomeViewModel = hiltViewModel(),
+//    navigateToExploreCourses: () -> Unit = {},
+
 ) {
     val testUsername = "At3nas"
     val homeWelcome = stringResource(id = R.string.home_welcome)
@@ -61,7 +65,7 @@ fun HomeView(
                 text = buildAnnotatedString {
                     append(homeWelcome)
                     withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-                        append(" $testUsername")
+                        append(" ${homeViewModel.username}")
                     }
                 },
                 style = MaterialTheme.typography.headlineMedium,
@@ -82,7 +86,10 @@ fun HomeView(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            SectionTitle("Explora cursos por categoría")
+            CustomTitle(
+                text = "Explora cursos por categoría",
+                titleType = TitleType.SECTION_TITLE
+            )
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 contentPadding = PaddingValues(horizontal = 16.dp),
@@ -92,8 +99,7 @@ fun HomeView(
                     item(it) {
                         CourseCategoryButton(
                             courseCategory = it,
-                            onClick = {
-                            }
+                            onClick = {}
                         )
                     }
                 }

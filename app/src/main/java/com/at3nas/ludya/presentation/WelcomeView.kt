@@ -30,13 +30,13 @@ fun WelcomeView(navigateToRegister: () -> Unit, navigateToLogin: () -> Unit) {
         Column {
             ActionButton(
                 label = stringResource(id = R.string.signup),
-                type = ButtonType.FILLED,
+                buttonType = ButtonType.FILLED,
                 onClick = navigateToRegister,
                 enabled = true
             )
             ActionButton(
                 label = stringResource(id = R.string.login),
-                type = ButtonType.OUTLINED,
+                buttonType = ButtonType.OUTLINED,
                 onClick = navigateToLogin,
                 enabled = true
             )

@@ -59,6 +59,7 @@
 
     <!-- COURSE -->
     <string name="course">Curso</string>
+    <string name="courses">Cursos</string>
 
     <string name="course_name">Nombre del curso</string>
     <string name="course_name_placeholder">Biología I</string>
@@ -69,10 +70,14 @@
     <string name="create_course">Crear curso</string>
     <string name="search_course">Buscar un curso</string>
 
+    <string name="about_course">Acerca del curso</string>
+
     <string name="created_by">Creado por</string>
+    <string name="enroll">Inscribirse</string>
 
     <!-- MODULE -->
     <string name="module">Módulo</string>
+    <string name="modules">Módulos</string>
 
     <string name="module_name">Nombre del módulo</string>
     <string name="module_name_placeholder">Biología celular</string>
@@ -82,6 +87,8 @@
 
     <!-- QUESTION -->
     <string name="question">Pregunta</string>
+    <string name="questions">Preguntas</string>
+
     <string name="add_question">Añadir pregunta</string>
 
     <string name="question_placeholder">¿Cómo se llaman los organismos compuestos por más de una célula?</string>

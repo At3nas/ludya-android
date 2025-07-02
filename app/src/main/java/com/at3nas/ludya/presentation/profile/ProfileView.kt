@@ -3,10 +3,13 @@ package com.at3nas.ludya.presentation.profile
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,10 +17,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -47,6 +52,16 @@ fun ProfileView(
     val gems = profileViewModel.gems
     val level = profileViewModel.level
     val exp = profileViewModel.exp
+    val totalExp = 100
+
+    val color = MaterialTheme.colorScheme.tertiary
+    val trackColor = MaterialTheme.colorScheme.tertiaryContainer
+
+    val progress = remember(exp, totalExp) {
+        if (totalExp > 0 && exp != null) {
+            exp.toFloat() / totalExp
+        } else 0f
+    }.coerceIn(0f, 1f)
 
     ColumnContainer(
         modifier = Modifier
@@ -78,14 +93,29 @@ fun ProfileView(
             coins = coins.toString()
         )
 
-        if (level != null && exp != null) {
-            LevelInfo(
-                level = 50,
-                exp = 20
-            )
+        Spacer(Modifier.height(32.dp))
+        Column {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.size(80.dp)
+            ) {
+                CircularProgressIndicator(
+                    progress = { progress },
+                    strokeWidth = 8.dp,
+                    color = color,
+                    trackColor = trackColor,
+                    gapSize = 0.dp,
+                    modifier = Modifier.fillMaxSize()
+                )
+                Text(
+                    text = "$level",
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Spacer(Modifier.height(8.dp))
+            Text("$exp / $totalExp XP", style = MaterialTheme.typography.bodySmall)
         }
-
-//        ProfileSection(stringResource(id = R.string.achievements))
 
     }
 }

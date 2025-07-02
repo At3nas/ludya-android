@@ -16,7 +16,11 @@ class HomeViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    var username by mutableStateOf<String?>(null)
+    var username by mutableStateOf<String?>("user")
+
+    init {
+        updateUsername()
+    }
 
     private fun setUsernameFromData() {
         viewModelScope.launch {
@@ -24,7 +28,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun updateUsername(): String? {
+    private fun updateUsername(): String? {
         setUsernameFromData()
         return username
     }

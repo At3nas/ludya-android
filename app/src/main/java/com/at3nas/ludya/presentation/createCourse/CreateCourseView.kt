@@ -1,7 +1,5 @@
 package com.at3nas.ludya.presentation.createCourse
 
-import android.util.Log
-import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -42,13 +40,13 @@ fun CreateCourseView(
     ) {
         Column {
             // TESTING //
-            ActionButton(
-                label = "listOfModules",
-                type = ButtonType.FILLED,
-                onClick = {
-                    Log.d("listOfModules: ", "${createCourseViewModel.listOfModules}")
-                }
-            )
+//            ActionButton(
+//                label = "listOfModules",
+//                type = ButtonType.FILLED,
+//                onClick = {
+//                    Log.d("listOfModules: ", "${createCourseViewModel.listOfModules}")
+//                }
+//            )
             // END TESTING //
 
             Text(
@@ -104,7 +102,7 @@ fun CreateCourseView(
 
         ActionButton(
             label = stringResource(id = R.string.create),
-            type = ButtonType.FILLED,
+            buttonType = ButtonType.FILLED,
             onClick = {
                 createCourseViewModel.createCourse()
             }

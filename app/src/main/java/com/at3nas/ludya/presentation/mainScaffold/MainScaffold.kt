@@ -23,7 +23,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
+import com.at3nas.ludya.domain.model.course.Course
+import com.at3nas.ludya.domain.model.course.CourseCategory
 import com.at3nas.ludya.presentation.createCourse.CreateCourseView
+import com.at3nas.ludya.presentation.exploreCourses.ExploreCoursesView
 import com.at3nas.ludya.presentation.home.HomeView
 import com.at3nas.ludya.presentation.profile.ProfileView
 import com.at3nas.ludya.presentation.ui.components.TestContainer
@@ -31,6 +34,7 @@ import com.at3nas.ludya.presentation.ui.components.TestContainer
 //@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScaffold(
+    navigateToCourseView: (course: Course?) -> Unit = {},
     mainScaffoldViewModel: MainScaffoldViewModel = hiltViewModel()
 ) {
     var scaffoldContent by rememberSaveable {
@@ -48,7 +52,7 @@ fun MainScaffold(
                 MainScaffoldRoute.HOME -> HomeView(innerPadding)
                 MainScaffoldRoute.PROFILE -> ProfileView(innerPadding)
                 MainScaffoldRoute.ACADEMY -> CreateCourseView(innerPadding)
-                MainScaffoldRoute.TESTING -> TestContainer(innerPadding)
+                MainScaffoldRoute.EXPLORE -> ExploreCoursesView(navigateToCourseView, innerPadding)
             }
         },
         bottomBar = {
@@ -66,6 +70,11 @@ fun MainScaffold(
                                 painterResource(id = R.drawable.icon_house)
                             ) { scaffoldContent = MainScaffoldRoute.HOME }
 
+                            BottomBarItem(
+                                stringResource(id = R.string.view_explore),
+                                painterResource(id = R.drawable.icon_search)
+                            ) { scaffoldContent = MainScaffoldRoute.EXPLORE }
+
                             if (isUserTeacher) {
                                 BottomBarItem(
                                     stringResource(id = R.string.view_academy),
@@ -82,13 +91,6 @@ fun MainScaffold(
                                 stringResource(id = R.string.view_profile),
                                 painterResource(id = R.drawable.icon_user)
                             ) { scaffoldContent = MainScaffoldRoute.PROFILE }
-
-                            // TESTING //
-                            BottomBarItem(
-                                stringResource(id = R.string.view_profile),
-                                painterResource(id = R.drawable.icon_search)
-                            ) { scaffoldContent = MainScaffoldRoute.TESTING }
-                            // END TESTING //
                         }
                     )
                 }

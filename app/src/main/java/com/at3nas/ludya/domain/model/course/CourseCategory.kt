@@ -12,6 +12,21 @@ enum class CourseCategory {
     OTHER,
 }
 
+fun stringToCourseCategory(string: String?): CourseCategory {
+    return when (string) {
+        "ENGINEERING_TECH" -> CourseCategory.ENGINEERING_TECH
+        "EXACT_SCI" -> CourseCategory.EXACT_SCI
+        "MEDICAL_SCI" -> CourseCategory.MEDICAL_SCI
+        "SOCIAL_SCI" -> CourseCategory.SOCIAL_SCI
+        "ARTS_HUM" -> CourseCategory.ARTS_HUM
+        "LANGUAGES" -> CourseCategory.LANGUAGES
+        "OTHER" -> CourseCategory.OTHER
+        else -> {
+            CourseCategory.OTHER
+        }
+    }
+}
+
 fun localizeCourseCategory(category: CourseCategory): Int {
     return when (category) {
         CourseCategory.OTHER -> R.string.category_other

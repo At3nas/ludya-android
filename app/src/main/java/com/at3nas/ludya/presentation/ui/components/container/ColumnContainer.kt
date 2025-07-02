@@ -15,9 +15,9 @@ import com.at3nas.ludya.presentation.ui.components.LudyaSurface
 
 @Composable
 fun ColumnContainer(
+    modifier: Modifier = Modifier.padding(horizontal = 16.dp),
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     verticalArrangement: Arrangement.Vertical = Arrangement.Center,
-    modifier: Modifier = Modifier.padding(horizontal = 16.dp),
     content: @Composable() (ColumnScope.() -> Unit)
 ) {
     LudyaTheme {
