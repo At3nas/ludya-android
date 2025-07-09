@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.courseView
+package com.at3nas.ludya.presentation.course
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -33,13 +32,11 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
-import com.at3nas.ludya.domain.model.course.Course
 import com.at3nas.ludya.domain.model.course.CourseCategory
 import com.at3nas.ludya.domain.model.course.CourseModule
-import com.at3nas.ludya.domain.model.course.Question
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
 import com.at3nas.ludya.presentation.ui.components.ButtonType
@@ -48,49 +45,13 @@ import com.at3nas.ludya.presentation.ui.components.TitleType
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 import com.at3nas.ludya.presentation.ui.components.course.CourseCategoryIcon
 
-@Preview
 @Composable
 fun CourseView(
     courseId: String = "",
-    //courseViewModel: CourseViewModel = hiltViewModel(),
-    innerPadding: PaddingValues = PaddingValues(vertical = 8.dp)
+    navigateToQuizView: (courseId: String, moduleId: String) -> Unit,
+    innerPadding: PaddingValues = PaddingValues(vertical = 200.dp),
+    courseViewModel: CourseViewModel = hiltViewModel(),
 ) {
-    val course: Course = Course(
-        courseName = "Biología básica",
-        courseDescription =
-            "Aprende fundamentos de Biología",
-        courseCategory = CourseCategory.EXACT_SCI,
-        createdBy = "CoolTeacher",
-        courseModules = mutableListOf(
-            CourseModule(
-                moduleName = "Biología celular",
-                moduleNumber = 1,
-                listOfQuestions = mutableListOf(
-                    Question(
-                        questionNumber = 1
-                    ),
-                    Question(
-                        questionNumber = 2
-                    ),
-                    Question(
-                        questionNumber = 3
-                    )
-                )
-            ),
-            CourseModule(
-                moduleName = "Genética",
-                moduleNumber = 2,
-                listOfQuestions = mutableListOf(
-                    Question(
-                        questionNumber = 1
-                    ),
-                    Question(
-                        questionNumber = 2
-                    )
-                )
-            )
-        )
-    )
 
     ColumnContainer(
         verticalArrangement = Arrangement.Top,
@@ -112,7 +73,7 @@ fun CourseView(
                 CourseCategoryIcon(
                     iconColor = MaterialTheme.colorScheme.surfaceDim,
                     containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                    courseCategory = course.courseCategory,
+                    courseCategory = courseViewModel.getCourseCategory() ?: CourseCategory.OTHER,
                     containerSize = 140.dp,
                     containerPadding = 16.dp
                 )
@@ -122,12 +83,11 @@ fun CourseView(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = course.courseName,
+                        text = courseViewModel.getCourseName() ?: "",
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Bold
                     )
-                    Spacer(Modifier.height(4.dp))
                     Spacer(Modifier.height(8.dp))
                     Text(
                         text = buildAnnotatedString {
@@ -135,7 +95,7 @@ fun CourseView(
                                 append("${stringResource(id = R.string.created_by)}:")
                             }
                             withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.onPrimaryContainer)) {
-                                append(" ${course.createdBy}")
+                                append(" ${courseViewModel.getCourseAuthor() ?: ""}")
                             }
                         },
                         style = MaterialTheme.typography.labelSmall,
@@ -158,7 +118,7 @@ fun CourseView(
                 titleType = TitleType.SECTION_TITLE
             )
             Text(
-                text = course.courseDescription,
+                text = courseViewModel.getCourseDescription() ?: "",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -174,8 +134,10 @@ fun CourseView(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(course.courseModules) { module ->
-                ModuleAccordion(module)
+            if (courseViewModel.getCourseModules() != null) {
+                items(courseViewModel.getCourseModules()!!) { module ->
+                    ModuleAccordion(courseId, module, navigateToQuizView)
+                }
             }
         }
     }
@@ -183,10 +145,12 @@ fun CourseView(
 
 @Composable
 fun ModuleAccordion(
-    module: CourseModule = CourseModule()
+    courseId: String,
+    module: CourseModule,
+    navigateToQuizView: (courseId: String, moduleId: String) -> Unit,
 ) {
     var expanded by rememberSaveable {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
 
     Card {
@@ -232,8 +196,11 @@ fun ModuleAccordion(
                             label = "${stringResource(R.string.question)} ${question.questionNumber}",
                             contentDescription = "",
                             icon = Icons.Default.PlayArrow,
-                            enabled = true,
-                            onClick = {},
+                            enabled = question.questionNumber == 1,
+                            onClick = {
+                                // NAVIGATE TO QUIZ
+                                navigateToQuizView(courseId, module.moduleId)
+                            },
                             buttonType = ButtonType.OUTLINED,
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -275,11 +242,3 @@ fun ModuleAccordion(
 //
 //    }
 //}
-
-
-@Composable
-fun CourseTesting() {
-    ColumnContainer {
-        ModuleAccordion()
-    }
-}

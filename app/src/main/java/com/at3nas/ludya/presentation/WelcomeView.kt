@@ -1,6 +1,7 @@
 package com.at3nas.ludya.presentation
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,12 +33,14 @@ fun WelcomeView(navigateToRegister: () -> Unit, navigateToLogin: () -> Unit) {
                 label = stringResource(id = R.string.signup),
                 buttonType = ButtonType.FILLED,
                 onClick = navigateToRegister,
+                modifier = Modifier.fillMaxWidth(),
                 enabled = true
             )
             ActionButton(
                 label = stringResource(id = R.string.login),
                 buttonType = ButtonType.OUTLINED,
                 onClick = navigateToLogin,
+                modifier = Modifier.fillMaxWidth(),
                 enabled = true
             )
         }

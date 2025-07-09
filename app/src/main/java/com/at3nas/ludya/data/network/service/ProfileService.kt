@@ -1,6 +1,5 @@
 package com.at3nas.ludya.data.network.service
 
-import android.util.Log
 import com.at3nas.ludya.data.network.client.FirebaseClient
 import com.at3nas.ludya.domain.model.FirestoreCollections
 import com.google.firebase.firestore.DocumentSnapshot
@@ -44,11 +43,12 @@ class ProfileService @Inject constructor(
     }
 
     suspend fun getExp(): Long? {
-        // cambiar a: level.currentExp
-        return getProfileData()?.getLong("level.xp")
+        return getProfileData()?.getLong("level.currentExp")
     }
 
-    // agregar: getTotalExp() y updateTotalExp()
+    suspend fun getTotalExp(): Long? {
+        return getProfileData()?.getLong("level.totalExp")
+    }
 
     // SET FIELDS //
     suspend fun updateDisplayName(newDisplayName: String) {
@@ -78,6 +78,12 @@ class ProfileService @Inject constructor(
     suspend fun updateExp(newExp: Double) {
         profileCollection
             .document(userService.getUid().toString())
-            .update("level.xp", newExp) // cambiar a: level.currentExp
+            .update("level.currentExp", newExp)
+    }
+
+    suspend fun updateTotalExp(newExp: Double) {
+        profileCollection
+            .document(userService.getUid().toString())
+            .update("level.totalExp", newExp)
     }
 }

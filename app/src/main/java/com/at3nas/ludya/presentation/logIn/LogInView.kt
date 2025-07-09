@@ -1,6 +1,7 @@
 package com.at3nas.ludya.presentation.logIn
 
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -18,10 +19,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.presentation.logIn.model.Login
 import com.at3nas.ludya.presentation.ui.components.ActionButton
-import com.at3nas.ludya.presentation.ui.components.form.FormInput
-import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.ButtonType
+import com.at3nas.ludya.presentation.ui.components.SplashHeader
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
+import com.at3nas.ludya.presentation.ui.components.form.FormInput
 
 // View | Login //
 @Composable
@@ -87,6 +88,7 @@ fun LoginView(
                 )
                 logInViewModel.logInWithEmail(user, navigateToHome)
             },
+            modifier = Modifier.fillMaxWidth(),
             enabled = true //authState.value != AuthState.Loading,
         )
 
@@ -104,6 +106,7 @@ fun LoginView(
                 )
                 logInViewModel.logInWithEmail(user, navigateToHome)
             },
+            modifier = Modifier.fillMaxWidth(),
             enabled = true
         )
 
@@ -117,6 +120,7 @@ fun LoginView(
                 )
                 logInViewModel.logInWithEmail(user, navigateToHome)
             },
+            modifier = Modifier.fillMaxWidth(),
             enabled = true
         )
     }

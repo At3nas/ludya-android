@@ -1,4 +1,4 @@
-package com.at3nas.ludya.domain.model
+package com.at3nas.ludya.domain.model.profile
 
 class Level(
     var level: Int = 1,

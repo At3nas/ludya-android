@@ -24,17 +24,18 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.course.Course
-import com.at3nas.ludya.domain.model.course.CourseCategory
+import com.at3nas.ludya.domain.model.course.CourseModule
 import com.at3nas.ludya.presentation.createCourse.CreateCourseView
 import com.at3nas.ludya.presentation.exploreCourses.ExploreCoursesView
 import com.at3nas.ludya.presentation.home.HomeView
 import com.at3nas.ludya.presentation.profile.ProfileView
-import com.at3nas.ludya.presentation.ui.components.TestContainer
+import com.at3nas.ludya.presentation.quiz.QuizView
 
 //@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScaffold(
-    navigateToCourseView: (course: Course?) -> Unit = {},
+    navigateToCourseView: (courseId: String) -> Unit,
+    navigateToQuizView: (courseId: String, moduleId: String) -> Unit,
     mainScaffoldViewModel: MainScaffoldViewModel = hiltViewModel()
 ) {
     var scaffoldContent by rememberSaveable {
@@ -52,7 +53,12 @@ fun MainScaffold(
                 MainScaffoldRoute.HOME -> HomeView(innerPadding)
                 MainScaffoldRoute.PROFILE -> ProfileView(innerPadding)
                 MainScaffoldRoute.ACADEMY -> CreateCourseView(innerPadding)
-                MainScaffoldRoute.EXPLORE -> ExploreCoursesView(navigateToCourseView, innerPadding)
+                MainScaffoldRoute.EXPLORE -> ExploreCoursesView(
+                    navigateToCourseView,
+                    navigateToQuizView,
+                    innerPadding
+                )
+//                MainScaffoldRoute.TESTING -> QuizView("", innerPadding)
             }
         },
         bottomBar = {
@@ -91,6 +97,11 @@ fun MainScaffold(
                                 stringResource(id = R.string.view_profile),
                                 painterResource(id = R.drawable.icon_user)
                             ) { scaffoldContent = MainScaffoldRoute.PROFILE }
+
+//                            BottomBarItem(
+//                                "Testing",
+//                                painterResource(id = R.drawable.icon_google)
+//                            ) { scaffoldContent = MainScaffoldRoute.TESTING }
                         }
                     )
                 }

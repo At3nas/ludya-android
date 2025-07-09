@@ -38,6 +38,8 @@ import com.at3nas.ludya.R
 import com.at3nas.ludya.domain.model.Achievement
 import com.at3nas.ludya.presentation.profile.components.CurrencyInfo
 import com.at3nas.ludya.presentation.profile.components.LevelInfo
+import com.at3nas.ludya.presentation.ui.components.ActionButton
+import com.at3nas.ludya.presentation.ui.components.ActionButtonIcon
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 
 
@@ -117,6 +119,16 @@ fun ProfileView(
             Text("$exp / $totalExp XP", style = MaterialTheme.typography.bodySmall)
         }
 
+        ActionButton(
+            label = "Cerrar sesión",
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { profileViewModel.logOut() }
+        )
+        ActionButton(
+            label = "Eliminar cuenta",
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { profileViewModel.deleteAccount() }
+        )
     }
 }
 

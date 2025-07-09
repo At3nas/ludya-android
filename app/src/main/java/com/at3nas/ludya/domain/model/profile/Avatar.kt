@@ -1,4 +1,4 @@
-package com.at3nas.ludya.domain.model
+package com.at3nas.ludya.domain.model.profile
 
 import androidx.compose.ui.graphics.Color
 import com.at3nas.ludya.R

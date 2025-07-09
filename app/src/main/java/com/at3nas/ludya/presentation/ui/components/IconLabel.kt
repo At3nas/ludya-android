@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 
@@ -44,6 +45,7 @@ fun IconLabel(
 fun IconLabel(
     label: String,
     contentDescription: String?,
+    fontWeight: FontWeight = FontWeight.Normal,
     icon: ImageVector,
     iconSize: Dp,
     space: Dp
@@ -55,7 +57,10 @@ fun IconLabel(
                 contentDescription = contentDescription,
                 modifier = Modifier.size(iconSize)
             )
-            Text(label)
+            Text(
+                text = label,
+                fontWeight = fontWeight
+            )
         },
         horizontalArrangement = Arrangement.spacedBy(space),
         verticalAlignment = Alignment.CenterVertically

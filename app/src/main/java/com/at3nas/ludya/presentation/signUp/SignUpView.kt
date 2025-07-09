@@ -2,6 +2,7 @@ package com.at3nas.ludya.presentation.signUp
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
@@ -168,6 +169,7 @@ fun SignUpView(
 
                         signUpViewModel.signUpWithEmail(newUser, navigateToHome)
                     },
+                    modifier = Modifier.fillMaxWidth(),
                     enabled = true //authState.value != AuthState.Loading
                 )
 
@@ -179,6 +181,7 @@ fun SignUpView(
                     icon = painterResource(id = R.drawable.icon_google),
                     iconColor = MaterialTheme.colorScheme.surface,
                     onClick = {},
+                    modifier = Modifier.fillMaxWidth(),
                     enabled = false
                 )
             },

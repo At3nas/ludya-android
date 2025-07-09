@@ -5,14 +5,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.at3nas.ludya.domain.repository.AccountDeletionRepository
 import com.at3nas.ludya.domain.repository.ProfileRepository
+import com.at3nas.ludya.domain.usecase.auth.LogOutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository
+    private val profileRepository: ProfileRepository,
+    private val accountDeletionRepository: AccountDeletionRepository,
+    private val logOutUseCase: LogOutUseCase
 ) :
     ViewModel() {
     // VARIABLES //
@@ -56,6 +60,17 @@ class ProfileViewModel @Inject constructor(
             val newName = "Atenas Student"
             profileRepository.updateDisplayName(newName)
             displayName = newName
+        }
+    }
+
+    // DELETE //
+    fun deleteAccount() {
+        accountDeletionRepository.deleteAccount()
+    }
+
+    fun logOut() {
+        viewModelScope.launch {
+            logOutUseCase.invoke()
         }
     }
 }

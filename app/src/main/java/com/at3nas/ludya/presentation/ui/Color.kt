@@ -2,6 +2,11 @@ package com.at3nas.ludya.presentation.ui
 
 import androidx.compose.ui.graphics.Color
 
+// COLORS | CUSTOM //
+val correctAnswer = Color(0xFFA5C18C)
+val incorrectAnswer = Color(0xFFC18C8C)
+
+// COLORS | THEME //
 val primaryLight = Color(0xFF904B3E)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFFFDAD3)

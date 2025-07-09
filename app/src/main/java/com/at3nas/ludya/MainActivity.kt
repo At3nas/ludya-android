@@ -4,7 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.at3nas.ludya.core.navigation.MainScaffold
 import com.at3nas.ludya.core.navigation.NavigationWrapper
+import com.at3nas.ludya.core.navigation.Welcome
 import com.at3nas.ludya.presentation.ui.LudyaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -12,14 +15,19 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity(
 ) {
-    //private val authViewModel = AuthViewModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val mainViewModel: MainViewModel = hiltViewModel()
+
             LudyaTheme {
-                NavigationWrapper()
+//                if (mainViewModel.isUserAuthenticated) {
+//                    NavigationWrapper(startDestination = MainScaffold)
+//                } else {
+//                    NavigationWrapper(startDestination = Welcome)
+//                }
+                NavigationWrapper(startDestination = Welcome)
             }
         }
     }

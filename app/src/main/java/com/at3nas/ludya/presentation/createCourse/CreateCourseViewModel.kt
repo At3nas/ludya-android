@@ -40,7 +40,9 @@ class CreateCourseViewModel @Inject constructor(
     // FUNCTIONS //
     fun createCourse() {
         viewModelScope.launch {
-            val course = userRepository.getUid()?.let {
+            val username = userRepository.getUsername()
+
+            val course = username?.let {
                 Course(
                     courseName = courseName,
                     courseDescription = courseDescription,

@@ -1,4 +1,4 @@
-package com.at3nas.ludya.presentation.courseView
+package com.at3nas.ludya.presentation.course
 
 import android.util.Log
 import androidx.compose.runtime.getValue
@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.at3nas.ludya.domain.model.course.Course
 import com.at3nas.ludya.domain.model.course.CourseCategory
 import com.at3nas.ludya.domain.model.course.CourseModule
+import com.at3nas.ludya.domain.model.course.Question
 import com.at3nas.ludya.domain.repository.CourseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -52,8 +53,18 @@ class CourseViewModel @Inject constructor(
         return course?.createdBy
     }
 
-    fun getCourseModules(): MutableList<CourseModule>? {
+    fun getCourseModules(): List<CourseModule>? {
         return course?.courseModules
+    }
+
+    fun getModulesListOfQuestions(moduleId: String): MutableList<Question>? {
+        val moduleIndex = getCourseModules()?.indexOfFirst { module -> module.moduleId == moduleId }
+
+        return if (moduleIndex != null) {
+            getCourseModules()?.get(moduleIndex)?.listOfQuestions
+        } else {
+            null
+        }
     }
 
 }

@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.dp
 enum class TitleType {
     SCREEN_TITLE,
     SECTION_TITLE,
-    CARD_TITLE
+    CARD_TITLE,
+    DIALOG_TITLE
 }
 
 @Composable
@@ -34,6 +35,7 @@ fun CustomTitle(
         TitleType.SCREEN_TITLE -> MaterialTheme.typography.headlineMedium
         TitleType.SECTION_TITLE -> MaterialTheme.typography.titleLarge
         TitleType.CARD_TITLE -> MaterialTheme.typography.bodyLarge
+        TitleType.DIALOG_TITLE -> MaterialTheme.typography.headlineSmall
     }
 
     Text(

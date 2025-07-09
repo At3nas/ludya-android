@@ -3,13 +3,14 @@ package com.at3nas.ludya.data.network.service
 import com.at3nas.ludya.data.network.client.FirebaseClient
 import com.at3nas.ludya.domain.model.FirestoreCollections
 import com.at3nas.ludya.domain.model.course.Course
+import com.at3nas.ludya.domain.model.course.CourseModule
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class CourseService @Inject constructor(
-    private val firebase: FirebaseClient,
+    firebase: FirebaseClient,
     private val userService: UserService
 ) {
     private val courseCollection = firebase.db.collection(FirestoreCollections.COLLECTION_COURSE)
@@ -21,7 +22,7 @@ class CourseService @Inject constructor(
             .await()
     }
 
-    suspend fun addCourse(course: Course) {
+    fun addCourse(course: Course) {
         courseCollection
             .document(course.courseId)
             .set(course)

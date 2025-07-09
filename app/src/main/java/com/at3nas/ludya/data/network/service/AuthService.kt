@@ -2,11 +2,12 @@ package com.at3nas.ludya.data.network.service
 
 import com.at3nas.ludya.data.network.client.FirebaseClient
 import com.at3nas.ludya.data.network.response.AuthResponse
-import com.at3nas.ludya.domain.model.Currency
+import com.at3nas.ludya.domain.model.profile.Currency
 import com.at3nas.ludya.domain.model.FirestoreCollections
-import com.at3nas.ludya.domain.model.Level
-import com.at3nas.ludya.domain.model.Profile
+import com.at3nas.ludya.domain.model.profile.Level
+import com.at3nas.ludya.domain.model.profile.Profile
 import com.at3nas.ludya.domain.model.user.User
+import com.at3nas.ludya.domain.model.userLibrary.Library
 import com.at3nas.ludya.presentation.logIn.model.Login
 import com.at3nas.ludya.presentation.signUp.model.SignUp
 import com.google.firebase.auth.FirebaseUser
@@ -40,6 +41,8 @@ class AuthService @Inject constructor(
                 currency = Currency(),
             )
 
+            val userLibrary = Library()
+
             result.user?.uid?.let {
                 firestoreService.addDocumentToCollection(
                     collection = FirestoreCollections.COLLECTION_USER,
@@ -51,6 +54,12 @@ class AuthService @Inject constructor(
                     collection = FirestoreCollections.COLLECTION_PROFILE,
                     docName = it,
                     docData = userProfile
+                )
+
+                firestoreService.addDocumentToCollection(
+                    collection = FirestoreCollections.COLLECTION_LIBRARY,
+                    docName = it,
+                    docData = userLibrary
                 )
             }
             AuthResponse.Success(result.user)

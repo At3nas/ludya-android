@@ -22,42 +22,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.domain.model.course.Course
-import com.at3nas.ludya.domain.model.course.CourseCategory
 import com.at3nas.ludya.domain.model.course.localizeCourseCategory
 import com.at3nas.ludya.presentation.ui.components.CustomTitle
 import com.at3nas.ludya.presentation.ui.components.TitleType
 import com.at3nas.ludya.presentation.ui.components.container.ColumnContainer
 import com.at3nas.ludya.presentation.ui.components.course.CourseCategoryIcon
 
-@Preview
+//@Preview
 @Composable
 fun ExploreCoursesView(
-    navigateToCourseView: (course: Course?) -> Unit = {},
+    navigateToCourseView: (courseId: String) -> Unit = {},
+    navigateToQuizView: (courseId: String, moduleId: String) -> Unit = { _, _ -> },
     innerPadding: PaddingValues = PaddingValues(vertical = 200.dp),
-    listOfCourses: List<Course> = listOf(
-        Course(
-            courseName = "Inglés básico",
-            courseDescription = "Aprende vocabulario básico de Inglés",
-            courseCategory = CourseCategory.LANGUAGES,
-            createdBy = "Teacher123",
-            courseModules = mutableListOf()
-        ),
-        Course(
-            courseName = "Capitales de América",
-            courseDescription = "Aprende las capitales del continente americano",
-            courseCategory = CourseCategory.ARTS_HUM,
-            createdBy = "Teacher124",
-            courseModules = mutableListOf()
-        )
-    ),
-    onCourseClick: () -> Unit = {},
     exploreCoursesViewModel: ExploreCoursesViewModel = hiltViewModel()
 ) {
-    ColumnContainer {
+    ColumnContainer(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .padding(innerPadding)
+    ) {
         CustomTitle(
             text = "Todos los cursos",
             titleType = TitleType.SCREEN_TITLE
@@ -68,7 +54,7 @@ fun ExploreCoursesView(
         ) {
             items(exploreCoursesViewModel.listOfCourses) { course ->
                 CourseCard(course = course, onClick = {
-                    navigateToCourseView(course)
+                    navigateToCourseView(course.courseId)
                 })
             }
         }
@@ -115,11 +101,6 @@ fun CourseCard(course: Course, onClick: () -> Unit) {
                         )
                     }
                 )
-//                Text(
-//                    text = "3 módulos",
-//                    style = MaterialTheme.typography.labelMedium,
-//                    color = MaterialTheme.colorScheme.primary
-//                )
             }
         }
     }

@@ -32,7 +32,6 @@ class ExploreCoursesViewModel @Inject constructor(
     private fun loadListOfCourses() {
         viewModelScope.launch {
             listOfCourses = courseRepo.getAllCourses()
-            Log.d("COURSES: ", listOfCourses.toString())
         }
     }
 }

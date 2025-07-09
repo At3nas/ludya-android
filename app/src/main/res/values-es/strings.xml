@@ -39,6 +39,24 @@
     <string name="cancel">Cancelar</string>
     <string name="delete">Eliminar</string>
 
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+
+    <!-- QUIZ -->
+    <string name="good_job">¡Buen trabajo!</string>
+    <string name="quiz_passed">Has superado este quiz</string>
+
+    <string name="try_again">Vuelve a intentarlo</string>
+    <string name="can_improve">¡No te preocupes! Siempre puedes mejorar</string>
+
+    <string name="final_score">Puntaje final</string>
+    <string name="correct_answers">Respuestas correctas</string>
+    <string name="incorrect_answers">Respuestas incorrectas</string>
+
+    <string name="reward">Recompensa</string>
+    <string name="needed_score">Necesitas un puntaje mínimo del 60% para pasar este quiz</string>
+
+
     <!-- CATEGORIES -->
     <string name="category_tech">Ingeniería y Tecnología</string>
     <string name="category_exact_sci">Ciencias Exactas y Naturales</string>
@@ -56,6 +74,7 @@
     <string name="achievements">Logros</string>
     <string name="coins">Monedas</string>
     <string name="gems">Gemas</string>
+    <string name="exp">Exp</string>
 
     <!-- COURSE -->
     <string name="course">Curso</string>
