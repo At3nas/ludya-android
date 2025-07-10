@@ -36,6 +36,7 @@ import com.at3nas.ludya.presentation.quiz.QuizView
 fun MainScaffold(
     navigateToCourseView: (courseId: String) -> Unit,
     navigateToQuizView: (courseId: String, moduleId: String) -> Unit,
+    navigateBack: () -> Unit,
     mainScaffoldViewModel: MainScaffoldViewModel = hiltViewModel()
 ) {
     var scaffoldContent by rememberSaveable {
@@ -52,7 +53,10 @@ fun MainScaffold(
             when (scaffoldContent) {
                 MainScaffoldRoute.HOME -> HomeView(innerPadding)
                 MainScaffoldRoute.PROFILE -> ProfileView(innerPadding)
-                MainScaffoldRoute.ACADEMY -> CreateCourseView(innerPadding)
+                MainScaffoldRoute.ACADEMY -> CreateCourseView(
+                    innerPadding,
+                    navigateBack
+                )
                 MainScaffoldRoute.EXPLORE -> ExploreCoursesView(
                     navigateToCourseView,
                     navigateToQuizView,

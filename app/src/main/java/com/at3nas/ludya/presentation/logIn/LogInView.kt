@@ -1,7 +1,9 @@
 package com.at3nas.ludya.presentation.logIn
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -27,7 +29,7 @@ import com.at3nas.ludya.presentation.ui.components.form.FormInput
 // View | Login //
 @Composable
 fun LoginView(
-    navigateToHome: () -> Unit,
+    navigateToHome: () -> Unit = {},
     logInViewModel: LogInViewModel = hiltViewModel()
 ) {
     // VARIABLES //
@@ -38,15 +40,6 @@ fun LoginView(
     var password by remember {
         mutableStateOf("")
     }
-
-//    val authState = authService.authState.observeAsState()
-//
-//    when (authState.value) {
-//        is AuthState.Authenticated -> navigateToHome()
-//        is AuthState.Error -> print("")
-//        else -> Unit
-//    }
-
     ColumnContainer {
         // HEADER //
         SplashHeader(
@@ -56,28 +49,29 @@ fun LoginView(
             iconSize = 0.dp,
             modifier = Modifier
         )
+        Column() {
+            // FORM //
+            FormInput(
+                label = stringResource(id = R.string.email),
+                leadingIcon = { Icon(Icons.Filled.Email, null) },
+                isPassword = false,
+                value = email,
+                onValueChange = {
+                    email = it
+                }
+            )
 
-        // FORM //
-        FormInput(
-            label = stringResource(id = R.string.email),
-            leadingIcon = { Icon(Icons.Filled.Email, null) },
-            isPassword = false,
-            value = email,
-            onValueChange = {
-                email = it
-            }
-        )
-
-        FormInput(
-            label = stringResource(id = R.string.password),
-            leadingIcon = { Icon(Icons.Filled.Lock, null) },
-            isPassword = true,
-            value = password,
-            onValueChange = {
-                password = it
-            }
-        )
-
+            FormInput(
+                label = stringResource(id = R.string.password),
+                leadingIcon = { Icon(Icons.Filled.Lock, null) },
+                isPassword = true,
+                value = password,
+                onValueChange = {
+                    password = it
+                }
+            )
+        }
+        Spacer(Modifier.height(16.dp))
         ActionButton(
             label = stringResource(id = R.string.login),
             buttonType = ButtonType.FILLED,
@@ -97,7 +91,7 @@ fun LoginView(
             modifier = Modifier.size(24.dp)
         )
         ActionButton(
-            label = "TESTING STUDENT",
+            label = "TESTING - STUDENT",
             buttonType = ButtonType.FILLED,
             onClick = {
                 val user = Login(
@@ -111,7 +105,7 @@ fun LoginView(
         )
 
         ActionButton(
-            label = "TESTING TEACHER",
+            label = "TESTING - TEACHER",
             buttonType = ButtonType.FILLED,
             onClick = {
                 val user = Login(

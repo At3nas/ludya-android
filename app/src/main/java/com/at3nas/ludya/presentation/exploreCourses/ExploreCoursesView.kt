@@ -18,6 +18,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -39,6 +41,12 @@ fun ExploreCoursesView(
     innerPadding: PaddingValues = PaddingValues(vertical = 200.dp),
     exploreCoursesViewModel: ExploreCoursesViewModel = hiltViewModel()
 ) {
+    val listOfCourses = exploreCoursesViewModel.listOfCourses.observeAsState().value
+
+    LaunchedEffect(Unit) {
+        exploreCoursesViewModel.loadListOfCourses()
+    }
+
     ColumnContainer(
         modifier = Modifier
             .padding(horizontal = 16.dp)
@@ -52,11 +60,14 @@ fun ExploreCoursesView(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(exploreCoursesViewModel.listOfCourses) { course ->
-                CourseCard(course = course, onClick = {
-                    navigateToCourseView(course.courseId)
-                })
+            listOfCourses?.let {
+                items(it) { course ->
+                    CourseCard(course = course, onClick = {
+                        navigateToCourseView(course.courseId)
+                    })
+                }
             }
+
         }
     }
 }

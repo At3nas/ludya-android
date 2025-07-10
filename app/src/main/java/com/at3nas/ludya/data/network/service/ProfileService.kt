@@ -2,6 +2,8 @@ package com.at3nas.ludya.data.network.service
 
 import com.at3nas.ludya.data.network.client.FirebaseClient
 import com.at3nas.ludya.domain.model.FirestoreCollections
+import com.at3nas.ludya.domain.model.course.Course
+import com.at3nas.ludya.domain.model.profile.Profile
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -19,6 +21,14 @@ class ProfileService @Inject constructor(
             .document(userService.getUid().toString())
             .get()
             .await()
+    }
+
+    suspend fun getProfileById(userId: String): Profile? {
+        return profileCollection
+            .document(userId)
+            .get()
+            .await()
+            .toObject(Profile::class.java)
     }
 
     // GET FIELDS //

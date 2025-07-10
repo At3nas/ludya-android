@@ -3,74 +3,66 @@ package com.at3nas.ludya.presentation.profile
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.at3nas.ludya.domain.model.course.Course
+import com.at3nas.ludya.domain.model.profile.Profile
 import com.at3nas.ludya.domain.repository.AccountDeletionRepository
 import com.at3nas.ludya.domain.repository.ProfileRepository
+import com.at3nas.ludya.domain.repository.UserRepository
+import com.at3nas.ludya.domain.usecase.auth.GetCurrentUserUseCase
 import com.at3nas.ludya.domain.usecase.auth.LogOutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
+    private val userRepository: UserRepository,
     private val profileRepository: ProfileRepository,
     private val accountDeletionRepository: AccountDeletionRepository,
     private val logOutUseCase: LogOutUseCase
 ) :
     ViewModel() {
-    // VARIABLES //
-    var username by mutableStateOf<String?>(null)
-        private set
+    private val _username = MutableStateFlow<String>("User")
+    val username: StateFlow<String>
+        get() = _username
 
-    var displayName by mutableStateOf<String?>(null)
-        private set
-
-    var coins by mutableStateOf<Long?>(0)
-        private set
-
-    var gems by mutableStateOf<Long?>(0)
-        private set
-
-    var level by mutableStateOf<Long?>(1)
-        private set
-
-    var exp by mutableStateOf<Long?>(10)
-        private set
+    private val _profile = MutableStateFlow<Profile>(Profile())
+    val profile: StateFlow<Profile>
+        get() = _profile
 
     // FUNCTIONS //
-    init {
-        loadProfileData()
-    }
-
-    private fun loadProfileData() {
+    fun loadProfileData() {
         viewModelScope.launch {
-            username = profileRepository.getUsername()
-            displayName = profileRepository.getDisplayName()
-            coins = profileRepository.getCoins()
-            gems = profileRepository.getGems()
-            level = profileRepository.getLevel()
-            exp = profileRepository.getExp()
+            val userId = userRepository.getUid()
+
+            if (userId != null) {
+                _profile.value = profileRepository.getProfileById(userId)!!
+                _username.value = profileRepository.getUsername().toString()
+            }
         }
     }
 
     // UPDATE //
-    fun updateDisplayName() {
+    fun updateDisplayName(newName: String) {
         viewModelScope.launch {
-            val newName = "Atenas Student"
             profileRepository.updateDisplayName(newName)
-            displayName = newName
         }
     }
 
     // DELETE //
-    fun deleteAccount() {
-        accountDeletionRepository.deleteAccount()
-    }
-
-    fun logOut() {
-        viewModelScope.launch {
-            logOutUseCase.invoke()
-        }
-    }
+//    fun deleteAccount() {
+//        accountDeletionRepository.deleteAccount()
+//    }
+//
+//    fun logOut() {
+//        viewModelScope.launch {
+//            logOutUseCase.invoke()
+//        }
+//    }
 }

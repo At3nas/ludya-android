@@ -22,6 +22,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,20 +51,22 @@ fun ProfileView(
     innerPadding: PaddingValues,
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
-    val displayName = profileViewModel.displayName
-    val username = profileViewModel.username
-    val coins = profileViewModel.coins
-    val gems = profileViewModel.gems
-    val level = profileViewModel.level
-    val exp = profileViewModel.exp
+
+    LaunchedEffect(Unit) {
+        profileViewModel.loadProfileData()
+    }
+
+    val profile by profileViewModel.profile.collectAsState()
+    val username by profileViewModel.username.collectAsState()
+
     val totalExp = 100
 
     val color = MaterialTheme.colorScheme.tertiary
     val trackColor = MaterialTheme.colorScheme.tertiaryContainer
 
-    val progress = remember(exp, totalExp) {
-        if (totalExp > 0 && exp != null) {
-            exp.toFloat() / totalExp
+    val progress = remember(profile.level.currentExp, totalExp) {
+        if (totalExp > 0 && profile.level.currentExp != null) {
+            profile.level.currentExp.toFloat() / totalExp
         } else 0f
     }.coerceIn(0f, 1f)
 
@@ -75,24 +80,24 @@ fun ProfileView(
             verticalArrangement = Arrangement.Center,
         ) {
             ProfileAvatar(
-                MaterialTheme.colorScheme.tertiary,
-                painterResource(id = R.drawable.face_female_1)
+                bgColor = MaterialTheme.colorScheme.tertiary,
+                userInitial = username[0]
             )
             Text(
-                text = "$displayName",
+                text = profile.displayName,
                 fontSize = 18.sp,
                 modifier = Modifier.padding(top = 5.dp)
             )
             Text(
-                text = "@$username",
+                text = "@${username}",
                 fontSize = 12.sp,
                 modifier = Modifier.padding(top = 5.dp)
             )
         }
 
         CurrencyInfo(
-            gems = gems.toString(),
-            coins = coins.toString()
+            gems = profile.currency.gems.toString(),
+            coins = profile.currency.coins.toString()
         )
 
         Spacer(Modifier.height(32.dp))
@@ -110,31 +115,37 @@ fun ProfileView(
                     modifier = Modifier.fillMaxSize()
                 )
                 Text(
-                    text = "$level",
+                    text = "${profile.level.level}",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold
                 )
             }
             Spacer(Modifier.height(8.dp))
-            Text("$exp / $totalExp XP", style = MaterialTheme.typography.bodySmall)
+            Text(
+                "${profile.level.currentExp} / $totalExp XP",
+                style = MaterialTheme.typography.bodySmall
+            )
         }
 
-        ActionButton(
-            label = "Cerrar sesión",
-            modifier = Modifier.fillMaxWidth(),
-            onClick = { profileViewModel.logOut() }
-        )
-        ActionButton(
-            label = "Eliminar cuenta",
-            modifier = Modifier.fillMaxWidth(),
-            onClick = { profileViewModel.deleteAccount() }
-        )
+//        ActionButton(
+//            label = "Cerrar sesión",
+//            modifier = Modifier.fillMaxWidth(),
+//            onClick = { profileViewModel.logOut() }
+//        )
+//        ActionButton(
+//            label = "Eliminar cuenta",
+//            modifier = Modifier.fillMaxWidth(),
+//            onClick = { profileViewModel.deleteAccount() }
+//        )
     }
 }
 
 
 @Composable
-fun ProfileAvatar(bgColor: Color, avatar: Painter) {
+fun ProfileAvatar(
+    bgColor: Color,
+    userInitial: Char = 'U',
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -142,14 +153,18 @@ fun ProfileAvatar(bgColor: Color, avatar: Painter) {
             .clip(CircleShape)
             .background(bgColor)
             .padding(4.dp)
-            .size(100.dp)
+            .size(80.dp)
     ) {
         Image(
-            painter = avatar,
+            painter = painterResource(R.drawable.face_0),
             contentDescription = "Avatar",
             contentScale = ContentScale.Crop,
             modifier = Modifier.wrapContentSize()
         )
+//        Text(
+//            text = userInitial.toString(),
+//            color = MaterialTheme.colorScheme.onTertiary
+//        )
     }
 }
 

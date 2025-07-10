@@ -1,6 +1,7 @@
 package com.at3nas.ludya.presentation.createCourse
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -36,6 +37,10 @@ class CreateCourseViewModel @Inject constructor(
     var listOfModules = mutableStateListOf<CourseModule>()
         private set
 
+    var _showDialog = mutableStateOf(false)
+    val showDialog: MutableState<Boolean>
+        get() = _showDialog
+
 
     // FUNCTIONS //
     fun createCourse() {
@@ -54,8 +59,13 @@ class CreateCourseViewModel @Inject constructor(
 
             if (course != null) {
                 courseRepository.addCourse(course)
+                updateShowDialog(true)
             }
         }
+    }
+
+    fun updateShowDialog(newValue: Boolean) {
+        _showDialog.value = newValue
     }
 
     // ADD //

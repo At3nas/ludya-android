@@ -94,6 +94,9 @@
     <string name="created_by">Creado por</string>
     <string name="enroll">Inscribirse</string>
 
+    <string name="course_created_dialog_title">Curso creado correctamente</string>
+    <string name="course_created_dialog_subtitle">Ahora estará visible en la lista de cursos y podrá ser completado por cualquier usuario.</string>
+
     <!-- MODULE -->
     <string name="module">Módulo</string>
     <string name="modules">Módulos</string>

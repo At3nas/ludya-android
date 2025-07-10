@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.at3nas.ludya.presentation.WelcomeView
 import com.at3nas.ludya.presentation.course.CourseView
+import com.at3nas.ludya.presentation.createCourse.CreateCourseView
 import com.at3nas.ludya.presentation.exploreCourses.ExploreCoursesView
 import com.at3nas.ludya.presentation.logIn.LoginView
 import com.at3nas.ludya.presentation.mainScaffold.MainScaffold
@@ -44,7 +45,8 @@ fun NavigationWrapper(
                 },
                 navigateToQuizView = { courseId, moduleId ->
                     navController.navigate("quiz/$courseId/$moduleId")
-                }
+                },
+                navigateBack = { navController.navigate(MainScaffold) }
             )
         }
 

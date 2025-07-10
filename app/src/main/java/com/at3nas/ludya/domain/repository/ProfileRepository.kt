@@ -1,6 +1,9 @@
 package com.at3nas.ludya.domain.repository
 
+import com.at3nas.ludya.domain.model.profile.Profile
+
 interface ProfileRepository {
+    suspend fun getProfileById(userId: String): Profile?
     suspend fun getUsername(): String?
     suspend fun getDisplayName(): String?
     suspend fun getCoins(): Long?

@@ -16,9 +16,6 @@ object Login
 object Home
 
 @Serializable
-object Explore
-
-@Serializable
 object Profile
 
 @Serializable

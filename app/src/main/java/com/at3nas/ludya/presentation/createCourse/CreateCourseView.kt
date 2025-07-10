@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.at3nas.ludya.R
 import com.at3nas.ludya.presentation.createCourse.components.CourseCategoryFormSelect
+import com.at3nas.ludya.presentation.createCourse.components.CourseCreatedDialog
 import com.at3nas.ludya.presentation.createCourse.components.ModuleCreationCard
 import com.at3nas.ludya.presentation.ui.components.ActionButton
 import com.at3nas.ludya.presentation.ui.components.ButtonType
@@ -27,7 +28,8 @@ import com.at3nas.ludya.presentation.ui.components.form.FormInput
 
 @Composable
 fun CreateCourseView(
-    innerPadding: PaddingValues,
+    innerPadding: PaddingValues = PaddingValues(vertical = 200.dp),
+    navigateBack: () -> Unit = {},
     createCourseViewModel: CreateCourseViewModel = hiltViewModel()
 ) {
     ColumnContainer(
@@ -39,15 +41,17 @@ fun CreateCourseView(
             .verticalScroll(rememberScrollState())
     ) {
         Column {
-            // TESTING //
-//            ActionButton(
-//                label = "listOfModules",
-//                type = ButtonType.FILLED,
-//                onClick = {
-//                    Log.d("listOfModules: ", "${createCourseViewModel.listOfModules}")
-//                }
-//            )
-            // END TESTING //
+            if (createCourseViewModel.showDialog.value) {
+                val confirmDialog = {
+                    createCourseViewModel.updateShowDialog(false)
+                    navigateBack.invoke()
+                }
+
+                CourseCreatedDialog(
+                    onConfirm = confirmDialog,
+                    onDismiss = confirmDialog
+                )
+            }
 
             Text(
                 text = stringResource(id = R.string.course),

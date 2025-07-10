@@ -66,6 +66,9 @@
     <string name="created_by">Created by</string>
     <string name="enroll">Enroll</string>
 
+    <string name="course_created_dialog_title">Course created successfully</string>
+    <string name="course_created_dialog_subtitle">It will now be visible in the course list and can be completed by any user.</string>
+
     <!-- MODULE -->
     <string name="module">Module</string>
     <string name="modules">Modules</string>

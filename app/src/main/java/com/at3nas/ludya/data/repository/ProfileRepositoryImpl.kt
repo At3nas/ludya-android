@@ -1,12 +1,14 @@
 package com.at3nas.ludya.data.repository
 
 import com.at3nas.ludya.data.network.service.ProfileService
+import com.at3nas.ludya.domain.model.profile.Profile
 import com.at3nas.ludya.domain.repository.ProfileRepository
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(
     private val profileService: ProfileService
 ) : ProfileRepository {
+    override suspend fun getProfileById(userId: String): Profile? = profileService.getProfileById(userId)
     override suspend fun getUsername(): String? = profileService.getUsername()
     override suspend fun getDisplayName(): String? = profileService.getDisplayName()
     override suspend fun getCoins(): Long? = profileService.getCoins()
